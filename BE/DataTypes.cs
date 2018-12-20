@@ -38,64 +38,46 @@ namespace BE
         ראשון, שני, שלישי, רביעי, חמישי, שישי, שבת
     }
 
+    /// <summary>
+    /// Period of time of Tester
+    /// </summary>
     [Serializable]
     public struct TimePeriod : IComparable<TimePeriod>
     {
-        public TimePeriod(DayOfWeek Day, TimeSpan Start, TimeSpan End)
+        public TimePeriod(TimeSpan Start, TimeSpan End)
         {
-            //if (Start.Hours < 7)
-            //    throw new Exception("זמן ההתחלה מוקדם מדי.");
-            //if (End.Hours > 21)
-            //    throw new Exception("זמן הסיום מאוחר מדי.");
+            if (Start.Days != End.Days)
+                throw new Exception("יש להוסיף זמנים לכל יום בנפרד.");
+            if (Start.Days > 5 || Start.Hours > 24 || End.Hours > 24 || Start.Minutes > 60 || End.Minutes > 60)
+                throw new Exception("זמן לא תקין.");
             if (Start > End)
                 throw new Exception("זמן סיום לא יכול להיות לפני זמן התחלה.");
-            this.Day = Day;
+            if (Start.Hours < Configuration.WorkStartHour || (Start.Days < 5 && End.Hours > Configuration.WorkEndHour) 
+                || (Start.Days == 5 && End.Hours > Configuration.FridayWorkEndHour))
+                throw new Exception("הזמן שנבחר הוא מחוץ לשעות העבודה של בית הספר.");
             this.Start = Start;
             this.End = End;
         }
-        public DayOfWeek Day { get; private set; }
-        //public WeekDays Day { get; private set; }
         public TimeSpan Start { get; private set; }
         public TimeSpan End { get; private set; }
 
         public override string ToString()
         {
-            return Day.ToString() + ' ' + Start + " עד " + End;
+            return ((BE.WeekDays)Start.Days).ToString() + ' ' + Start.ToString(@"hh\:mm") + " עד " + End.ToString(@"hh\:mm");
         }
 
         public int CompareTo(TimePeriod other)
         {
-            if (Day != other.Day)
-                return Day.CompareTo(other.Day);
             return this.Start.CompareTo(other.Start);
         }
     }
 
-    [Serializable]
-    public class Indices :IEnumerable
-    {
-
-        public Indices(Score DistanceKeeping, Score ReverseParking, Score mirrors, Score signals)
-        {
-            this.DistanceKeeping = DistanceKeeping;
-            this.ReverseParking = ReverseParking;
-            this.mirrors = mirrors;
-            this.signals = signals;
-        }
-        Score DistanceKeeping;
-        Score ReverseParking;
-        Score mirrors;
-        Score signals;
-
-        public IEnumerator GetEnumerator()
-        {
-            yield return DistanceKeeping;
-        }
-    }
-
+    /// <summary>
+    /// A possible score for a test
+    /// </summary>
     public enum Score
     {
-        עבר, רע, רע_מאוד, נכשל
+        נכשל, רע_מאוד, רע, עבר
     }
 
     public enum Gender
@@ -103,11 +85,17 @@ namespace BE
         זכר, נקבה
     }
 
+    /// <summary>
+    /// car type
+    /// </summary>
     public enum Vehicle
     {
         פרטי, דו_גלגלי, משאית_בינונית, משאית_כבדה
     }
 
+    /// <summary>
+    /// Gear Box Type
+    /// </summary>
     public enum GearBoxType
     {
         ידני, אוטומטי

@@ -4,12 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
+using System.ComponentModel;
 
 namespace BE
 {
+    /// <summary>
+    /// Driving student
+    /// </summary>
     [Serializable]
-    public class Trainee
+    public class Trainee // :INotifyPropertyChanged
     {
+        #region INotifyPropertyChanged Members
+        
+        //[field: NonSerialized]
+        //public event PropertyChangedEventHandler PropertyChanged;
+        ////public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
         private string id;
         public string ID
         {
@@ -29,7 +41,7 @@ namespace BE
             get { return firstName; }
             set
             {
-                Regex r = new Regex("^[a-zA-Zא-ת]{2,35}$");
+                Regex r = new Regex("^([^20]|[a-zA-Zא-ת]){2,35}$");
                 if (!r.IsMatch(value))
                     throw new Exception("שם צריך להכיל 2-35 אותיות.");
                 firstName = value;
@@ -42,7 +54,7 @@ namespace BE
             get { return lastName; }
             set
             {
-                Regex r = new Regex("^[a-zA-Zא-ת]{2,35}$");
+                Regex r = new Regex("^([^20]|[a-zA-Zא-ת]){2,35}$");
                 if (!r.IsMatch(value))
                     throw new Exception("שם צריך להכיל 2-35 אותיות.");
                 lastName = value;
@@ -76,36 +88,43 @@ namespace BE
             }
         }
 
-        public string MailAddress { get; set; }
-        //private MailAddress mailAddress;
-        //public MailAddress MailAddress
-        //{
-        //    get { return mailAddress; }
-        //    set
-        //    {
-        //        try
-        //        {
-        //            mailAddress = value;
-        //        }
-        //        catch (Exception)
-        //        {
-        //            throw new Exception("כתובת המייל לא תקינה.");
-        //        }
-        //    }
-        //}
+        private string mailAddress;
+        public string MailAddress
+        {
+            get { return mailAddress; }
+            set
+            {
+                try
+                {
+                    MailAddress m = new MailAddress(value);
+                }
+                catch (Exception)
+                {
+                    throw new Exception("כתובת המייל לא תקינה.");
+                }
+                mailAddress = value;
+            }
+        }
 
-        //public Address Address { get; set; }
         private string address;
         public string Address
         {
             get { return address; }
             set
             {
-                
+                // Note: Google Maps API is under development:
                 // @ not valid address or if not in the local country. maby define in configuration.
-                address = BE.Tools.Maps_GetPlaceAutoComplete(value)[0];
+                address = value;// = BE.Tools.Maps_GetPlaceAutoComplete(value)[0];
+                //this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AddressAutoComplite"));
             }
         }
+
+        //public List<string> AddressAutoComplite
+        //{
+        //    get { return BE.Tools.Maps_GetPlaceAutoComplete(address); }
+        //}
+
+        //public string TestItems = BE.Tools.Maps_GetPlaceAutoComplete(Address);
 
         public Vehicle Vehicle { get; set; }
         public GearBoxType gearBoxType { get; set; }
@@ -115,7 +134,7 @@ namespace BE
             get { return drivingSchoolName; }
             set
             {
-                Regex r = new Regex("^[a-zA-zא-ת]([a-zA-Z0-9]| ){1,34}$");
+                Regex r = new Regex("^[a-zA-Zא-ת]([a-z1-9A-Zא-ת]| ){1,33}$");
                 if (!r.IsMatch(value))
                     throw new Exception("שם בית הספר לא תקין.");
                 drivingSchoolName = value;
@@ -134,7 +153,6 @@ namespace BE
             }
         }
 
-        //public int NumOfDrivingLessons { get; set; }
         private int numOfDrivingLessons;
         public int NumOfDrivingLessons
         {
@@ -147,9 +165,14 @@ namespace BE
             }
         }
 
+        /// <summary>
+        /// The student ask to match his gender to the gender of the tester
+        /// </summary>
         public bool OnlyMyGender { get; set; }
+
         public Trainee(string ID, string FirstName, string LastName, DateTime birthDate, Gender Gender, string PhoneNumber,
-            string MailAddress, string Address, Vehicle Vehicle, GearBoxType gearBoxType, string DrivingSchoolName, string TeacherName, int NumOfDrivingLessons, bool OnlyMyGender = false)
+            string MailAddress, string Address, Vehicle Vehicle, GearBoxType gearBoxType, 
+            string DrivingSchoolName, string TeacherName, int NumOfDrivingLessons, bool OnlyMyGender = false)
         {
             this.ID = ID;
             this.FirstName = FirstName;
@@ -158,7 +181,6 @@ namespace BE
             this.Gender = Gender;
             this.PhoneNumber = PhoneNumber;
             this.MailAddress = MailAddress;
-            //this.MailAddress = new MailAddress(MailAddress);
             this.Address = Address;
             this.Vehicle = Vehicle;
             this.DrivingSchoolName = DrivingSchoolName;
@@ -166,18 +188,14 @@ namespace BE
             this.NumOfDrivingLessons = NumOfDrivingLessons;
             this.OnlyMyGender = OnlyMyGender;
         }
-        public override string ToString()   //@
-        {
-            //string result = "שם: " + FirstName + ' ' + LastName + ' ' + "תאריך לידה: " + BirthDate.ToString("MM/dd/yyyy HH:mm") + ' '
-            //    + "טלפון:" + PhoneNumber + ' ' + "כתובת: " + Address + ' ' + "שנות נסיון: " + Experience + ' ' + "מקסימום טסטים בשבוע: "
-            //    + MaxTestsInWeek + ' ' + "סוג רכב: " + Vehicle + ' ' + gearBoxType;
-            //foreach (var item in WorkHours)
-            //{
-            //    result += item.ToString() + ' ';
-            //}
-            //return result;
-            return null;
-        }
+        public Trainee() { }
 
+        public override string ToString()  
+        {
+            return "תעודת זהות: " + ID + " מין: " + Gender + " שם: " + FirstName + ' ' + LastName + ' ' + "תאריך לידה: " 
+                + BirthDate.ToString("MM/dd/yyyy HH:mm") + ' ' + "טלפון: " + PhoneNumber + ' ' + "כתובת: " + Address 
+                + ' ' + "סוג רכב: " + Vehicle + ' ' + gearBoxType + " בית ספר: "
+                 + DrivingSchoolName + " שם המורה: " + TeacherName + " מספר שיעורים: " + numOfDrivingLessons;
+        }
     }
 }

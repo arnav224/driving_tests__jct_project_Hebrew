@@ -5,10 +5,12 @@ using System.Text;
 
 namespace BL
 {
-    public class Factory
+    /// <summary>
+    /// get the singelton instance of BL
+    /// </summary>
+    public static class Factory
     {
-        protected Factory() { }
-        static IBL instance = null;
+        private static IBL instance = null;
         public static IBL GetInstance()
         {
             if (instance == null)

@@ -16,7 +16,7 @@ namespace DAL
 {
     public class Dal_imp : IDAL
     {
-        public Dal_imp()
+        internal Dal_imp()
         {
             DS.DataSource.Initializer();
         }
@@ -118,7 +118,7 @@ namespace DAL
             DS.DataSource.trainees.Remove(trainee);
         }
 
-        public void UpdateTest(BE.Test test)
+        public void UpdateTestResult(BE.Test test)
         {
             int indexTest = DS.DataSource.tests.FindIndex(t => t.TestID == test.TestID);
             if (indexTest == -1)
@@ -142,6 +142,12 @@ namespace DAL
             DS.DataSource.trainees[indexTrainee] = trainee.Clone();
         }
 
-
+        public void RemoveTest(int ID)
+        {
+            BE.Test test = GetTest(ID);
+            if (test == null)
+                throw new KeyNotFoundException("לא נמצא טסט שמספרו " + ID);
+            DS.DataSource.tests.Remove(test);
+        }
     }
 }

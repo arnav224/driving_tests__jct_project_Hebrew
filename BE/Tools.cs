@@ -9,14 +9,25 @@ using GoogleMapsApi;
 using GoogleMapsApi.Entities.Directions.Request;
 using GoogleMapsApi.Entities.Directions.Response;
 using GoogleMapsApi.Entities.PlaceAutocomplete.Request;
+using System.Windows.Controls;
 
 namespace BE
 {
     public static class Tools
     {
-
+        /// <summary>
+        /// AutoComplete to Address
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static List<string> Maps_GetPlaceAutoComplete(string str)
         {
+            if (str == null || str.Length == 0)
+               return new List<string>() { "" };
+            //@@ Currently disabled manually
+            return new List<string>() {  str /*+ "מושבת"*/ };
+            //@@
+
             List<string> result = new List<string>();
             PlaceAutocompleteRequest request = new PlaceAutocompleteRequest();
             request.ApiKey = "AIzaSyBzz5Hd1UJW7NKf27JvD4HB0nBfLM4qfJQ";
@@ -31,9 +42,20 @@ namespace BE
             return result;
         }
 
-        //https://github.com/maximn/google-maps/blob/master/README.md
+        /// <summary>
+        /// Distance road trip between two addresses
+        /// https://github.com/maximn/google-maps/blob/master/README.md
+        /// </summary>
+        /// <param name="sourceAddress"></param>
+        /// <param name="destinationAddress"></param>
+        /// <returns></returns>
         public static int Maps_DrivingDistance(string sourceAddress, string destinationAddress)
         {
+            //@@ Currently disabled manually
+            return new Random().Next(2000,3000);
+            //@@
+
+
             Leg leg = null;
             try
             {
@@ -55,6 +77,13 @@ namespace BE
             }
         }
 
+        /// <summary>
+        /// Send an email
+        /// </summary>
+        /// <param name="recipients"></param>
+        /// <param name="subject"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         public static bool SendingEmail(string recipients, string subject, string body)
         {
             try
@@ -74,9 +103,6 @@ namespace BE
                 return false;
             }
         }
-
-
-
 
     }
 }

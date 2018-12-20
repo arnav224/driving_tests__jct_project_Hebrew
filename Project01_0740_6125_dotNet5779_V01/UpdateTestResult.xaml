@@ -1,0 +1,71 @@
+﻿<Window x:Class="Project01_0740_6125_dotNet5779_V01.UpdateTestResult"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project01_0740_6125_dotNet5779_V01"
+        mc:Ignorable="d"
+        Title="טופס עדכון תוצאות טסט" Height="600" Width="300">
+    <Grid x:Name="MeinGrid" FlowDirection="RightToLeft">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="GridRow0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="הערכה" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+            <Label Content="עבר" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="7" FontWeight="Bold"/>
+            <Label Content="רע" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="7" FontWeight="Bold" />
+            <Label Content="רע מאוד" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="7" FontWeight="Bold"/>
+            <Label Content="נכשל" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="7" FontWeight="Bold"/>
+        </Grid>
+
+        <local:GridRow x:Name="GrudRow1" Grid.Row="1" />
+        <local:GridRow x:Name="GrudRow2" Grid.Row="2" />
+        <local:GridRow x:Name="GrudRow3" Grid.Row="3" />
+        <local:GridRow x:Name="GrudRow4" Grid.Row="4" />
+        <local:GridRow x:Name="GrudRow5" Grid.Row="5" />
+        <local:GridRow x:Name="GrudRow6" Grid.Row="6" />
+        <local:GridRow x:Name="GrudRow7" Grid.Row="7" />
+        <local:GridRow x:Name="GrudRow8" Grid.Row="8" />
+        <local:GridRow x:Name="GrudRow9" Grid.Row="9" />
+        <local:GridRow x:Name="GrudRow10" Grid.Row="10" />
+        <local:GridRow x:Name="GrudRow11" Grid.Row="11" />
+        <local:GridRow x:Name="GrudRow12" Grid.Row="12" />
+        <local:GridRow x:Name="GrudRow13" Grid.Row="13" />
+        <local:GridRow x:Name="GrudRow14" Grid.Row="14" />
+        <local:GridRow x:Name="GrudRow15" Grid.Row="15" />
+        <local:GridRow x:Name="GrudRow16" Grid.Row="16" />
+        <local:GridRow x:Name="GrudRow17" Grid.Row="17" />
+        <local:GridRow x:Name="GrudRow18" Grid.Row="18" />
+         <Label Content="הערות:" Grid.Row="19" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock x:Name="TesterNotesTextBlock" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="19" TextWrapping="Wrap" Text="TextBlock"  Width="240"/>
+       <Button Content="עדכן" HorizontalAlignment="Center" Margin="3" Grid.Row="20" VerticalAlignment="Center"  Width="75" Click="Button_Click"/>
+    </Grid>
+</Window>

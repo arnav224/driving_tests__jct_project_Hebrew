@@ -6,10 +6,13 @@ using System.Text.RegularExpressions;
 
 namespace BE
 {
+    /// <summary>
+    /// driving test
+    /// </summary>
     [Serializable]
     public class Test
     {
-        public int TestID { get; set; }
+        public int TestID { get; internal set; }
 
         private string testerID;
         public string TesterID
@@ -38,19 +41,6 @@ namespace BE
         }
 
         public DateTime Time { get; set; }
-        //public BE.TimePeriod Time { get; set; }
-        //public DateTime Time { get; set; }//@ + ctor + update func
-
-        //private Address address;
-        //public Address Address
-        //{
-        //    get { return address; }
-        //    set
-        //    {
-        //        // @ if not in the local country. maby define in configuration.
-        //        address = value;
-        //    }
-        //}
 
         private string address;
         public string Address
@@ -58,13 +48,12 @@ namespace BE
             get { return address; }
             set
             {
-                // @ not valid address or if not in the local country. maby define in configuration.
-                address = BE.Tools.Maps_GetPlaceAutoComplete(value)[0];
+                // @ google maps - not valid address or if not in the local country. maby define in configuration.
+                address = value;// BE.Tools.Maps_GetPlaceAutoComplete(value)[0];
             }
         }
 
-
-        public BE.Indices Indices { get; set; }
+        public Dictionary<string, BE.Score> Indices;
         public bool Passed { get; set; }
         public string TesterNotes { get; set; }
         /// <summary>
@@ -73,22 +62,10 @@ namespace BE
         public DateTime? RemeinderEmailSent { get; set; }
         public DateTime? SummaryEmailSent { get; set; }
 
-        public Test(string TesterID, string TraineeID, DateTime Time, string Address)
+        public Test()
         {
             TestID = BE.Configuration.NextTestID();
-            this.testerID = TesterID;
-            this.TraineeID = TraineeID;
-            this.Time = Time;
-            this.Address = Address;
-            this.Indices = null;
-            this.Passed = false;
-            this.TesterNotes = "";
-            RemeinderEmailSent = SummaryEmailSent = null;
+            Indices = Configuration.DefultIndices();
         }
-        public override string ToString()   //@
-        {
-            return null;
-        }
-
     }
 }

@@ -30,15 +30,12 @@ namespace UI_Console
             SortedSet<BE.TimePeriod> WorkHours;
             WorkHours = new SortedSet<BE.TimePeriod>
             {
-            new BE.TimePeriod(DayOfWeek.Sunday, new TimeSpan(09, 00, 00), new TimeSpan(18, 00, 00)),
-            new BE.TimePeriod(DayOfWeek.Thursday, new TimeSpan(09, 00, 00), new TimeSpan(18, 00, 00)),
-            //new BE.TimePeriod(DayOfWeek.Thursday, new TimeSpan(13, 00, 00), new TimeSpan(18, 00, 00)),
-            new BE.TimePeriod(DayOfWeek.Monday, new TimeSpan(09, 00, 00), new TimeSpan(18, 00, 00)),
-            new BE.TimePeriod(DayOfWeek.Tuesday, new TimeSpan(09, 00, 00), new TimeSpan(18, 00, 00)),
-            new BE.TimePeriod(DayOfWeek.Wednesday, new TimeSpan(09, 00, 00), new TimeSpan(18, 00, 00)),
-            new BE.TimePeriod(DayOfWeek.Friday, new TimeSpan(09, 00, 00), new TimeSpan(18, 00, 00)),
-            new BE.TimePeriod(DayOfWeek.Tuesday, new TimeSpan(09, 00, 00), new TimeSpan(18, 00, 00)),
-            new BE.TimePeriod(/*BE.WeekDays.ראשון*/ DayOfWeek.Monday, new TimeSpan(9, 00, 00), new TimeSpan(17, 00, 00))
+            new BE.TimePeriod(new TimeSpan(0, 09, 00, 00), new TimeSpan(0, 18, 00, 00)),
+            new BE.TimePeriod(new TimeSpan(1, 09, 00, 00), new TimeSpan(1, 18, 00, 00)),
+            new BE.TimePeriod(new TimeSpan(2, 09, 00, 00), new TimeSpan(2, 18, 00, 00)),
+            new BE.TimePeriod(new TimeSpan(3, 09, 00, 00), new TimeSpan(3, 18, 00, 00)),
+            new BE.TimePeriod(new TimeSpan(4, 09, 00, 00), new TimeSpan(4, 18, 00, 00)),
+            new BE.TimePeriod(new TimeSpan(5, 09, 00, 00), new TimeSpan(5, 13, 30, 00)),
             };
             WorkHours1 = WorkHours2 = WorkHours3 = WorkHours;
 
@@ -62,16 +59,16 @@ namespace UI_Console
             //bl.AddTrainee(new BE.Trainee("123272222", "av6raham1", "f6rankel1", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
             //    "avraham224@gmail.com", new BE.Address("Tal6 Hermon", 28, "Kedumim"), BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "fun driving", "Shmulik", 38));
             //DateTime dateTime =
-            try
-            {
-            bl.AddTest("12322222", DateTime.Now.AddHours(0) /*new DateTime(2018, 11, 23)*/, "ראש העין");
-            bl.AddTest("12322222", DateTime.Now.AddHours(0) /*new DateTime(2018, 11, 23)*/, "רחובות");
-            }
-            catch (Exception e)
-            {
+            //try
+            //{
+            //bl.AddTest( new Test("12322222", DateTime.Now.AddHours(0) /*new DateTime(2018, 11, 23)*/, "ראש העין");
+            //bl.AddTest("12322222", DateTime.Now.AddHours(0) /*new DateTime(2018, 11, 23)*/, "רחובות");
+            //}
+            //catch (Exception e)
+            //{
 
-                Console.WriteLine(e.Message);
-            }
+            //    Console.WriteLine(e.Message);
+            //}
 
 
 
@@ -146,7 +143,7 @@ o -
 
                 case 'h':
                     BE.Test test = bl.GetAllTests(t => t.TraineeID == "12322222").FirstOrDefault();
-                    bl.UpdateTestResult(test.TestID, new BE.Indices(Score.עבר, Score.עבר, Score.עבר, Score.עבר));
+                    //bl.UpdateTestResult(test.TestID, new BE.Indices(Score.עבר, Score.עבר, Score.עבר, Score.עבר));
                     break;
 
                 case 'i':

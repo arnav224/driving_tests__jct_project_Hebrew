@@ -5,9 +5,11 @@ using System.Text;
 
 namespace DAL
 {
-    public class Factory
+    /// <summary>
+    /// get the singelton instance of BL
+    /// </summary>
+    static public class Factory
     {
-        protected Factory() { }
         static IDAL instance = null;
         public static IDAL GetInstance()
         {

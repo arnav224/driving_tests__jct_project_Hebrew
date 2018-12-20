@@ -1,0 +1,113 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project01_0740_6125_dotNet5779_V01"
+        xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="Project01_0740_6125_dotNet5779_V01.UpdateTester"
+        Validation.Error="validation_Error"
+        mc:Ignorable="d"
+        Title="UpdateTester" Height="820" Width="350" >
+    <Grid>
+
+        <Grid x:Name="grid1" VerticalAlignment="Top" Margin="10"  HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label VerticalAlignment="Center" Grid.Row="0" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Address:"/>
+            <TextBox x:Name="addressTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Address, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="1" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Birth Date:"/>
+            <DatePicker x:Name="birthDateDatePicker" VerticalAlignment="Center" IsEnabled="False" SelectedDate="{Binding BirthDate, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="3" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="2" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Experience:"/>
+            <TextBox x:Name="experienceTextBox" Width="120" VerticalAlignment="Center" IsEnabled="False" Text="{Binding Experience, Mode=OneWay}" Grid.Row="2" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="3" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="First Name:"/>
+            <TextBox x:Name="firstNameTextBox" Width="120" VerticalAlignment="Center" IsEnabled="False" Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="gear Box Type:"/>
+            <ComboBox x:Name="gearBoxTypeComboBox" Width="120" VerticalAlignment="Center" Grid.Row="4" Margin="3" IsEnabled="False" SelectedItem="{Binding gearBoxType}" Height="Auto" HorizontalAlignment="Left" Grid.Column="1">
+            </ComboBox>
+            <Label VerticalAlignment="Center" Grid.Row="5" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Gender:"/>
+            <ComboBox x:Name="genderComboBox" Width="120" VerticalAlignment="Center" Grid.Row="5" Margin="3" IsEnabled="False" SelectedItem="{Binding BE.Gender}" Height="Auto" HorizontalAlignment="Left" Grid.Column="1">
+            </ComboBox>
+            <Label VerticalAlignment="Center" Grid.Row="6" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="ID:"/>
+            <TextBox x:Name="iDTextBox" Width="120" VerticalAlignment="Center" IsEnabled="False" Text="{Binding ID, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="7" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Last Name:"/>
+            <TextBox x:Name="lastNameTextBox" Width="120" VerticalAlignment="Center" IsEnabled="False" Text="{Binding LastName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="8" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Mail Address:"/>
+            <TextBox x:Name="mailAddressTextBox" Width="120" VerticalAlignment="Center" Text="{Binding MailAddress, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="8" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="9" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Max Distance In Meters:"/>
+            <TextBox x:Name="maxDistanceInMetersTextBox" Width="120" VerticalAlignment="Center" Text="{Binding MaxDistanceInMeters, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="9" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="10" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Max Tests In Week:"/>
+            <TextBox x:Name="maxTestsInWeekTextBox" Width="120" VerticalAlignment="Center" Text="{Binding MaxTestsInWeek, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="10" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="11" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Phone Number:"/>
+            <TextBox x:Name="phoneNumberTextBox" Width="120" VerticalAlignment="Center" Text="{Binding PhoneNumber, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="11" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="12" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Vehicle:"/>
+            <ComboBox x:Name="vehicleComboBox" Width="120" VerticalAlignment="Center" Grid.Row="12" Margin="3" IsEnabled="False" SelectedItem="{Binding Vehicle}" Height="Auto" HorizontalAlignment="Left" Grid.Column="1">
+            </ComboBox>
+            <Grid x:Name="WorkHoursGrid" Grid.Row="13" Grid.ColumnSpan="2" Height="125">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Label VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Content=":הוספת זמן עבודה" HorizontalAlignment="Right" FontWeight="DemiBold" />
+
+                <Label VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Content=":ביום"   />
+                <ComboBox x:Name="DayComboBox" Width="120" VerticalAlignment="Center" Grid.Row="1"   Height="Auto" HorizontalAlignment="Left" SelectedItem="{Binding BE.WeekDays, Mode=TwoWay}" >
+                </ComboBox>
+
+                <Label VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Content=":משעה"   />
+                <Grid Grid.Column="0" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="Time_hourStart" Text="{Binding HourStart, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="5"/>
+                    <TextBox x:Name="Time_minutesStart" Grid.Column="1" Text="{Binding MinuteStart, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="5"/>
+                </Grid>
+
+                <Label VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Content=":עד שעה"   />
+                <Grid Grid.Column="0" Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="Time_hourEnd" Text="{Binding HourEnd, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="5"/>
+                    <TextBox x:Name="Time_minutesEnd" Grid.Column="1" Text="{Binding MinuteEnd, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="5"/>
+                </Grid>
+                <Button x:Name="AddTimePeriodButton" Content="הוסף" Grid.Column="0" Grid.Row="4" Width="40" HorizontalAlignment="Left"/>
+
+
+            </Grid>
+
+        </Grid>
+        <Button Content="עדכן" HorizontalAlignment="Left" Margin="10,690,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <DataGrid x:Name="WorkHoursDataGrid" HorizontalAlignment="Left" Height="251" Margin="132,519,0,-0.222" VerticalAlignment="Top" Width="155" AutoGenerateColumns="True" AutoGeneratingColumn="WorkHoursDataGrid_AutoGeneratingColumn" SelectionChanged="WorkHoursDataGrid_SelectionChanged"/>
+        <Button x:Name="RemoveTimePeriod" Content="הסר" HorizontalAlignment="Left" Margin="132,750,0,-0.222" VerticalAlignment="Top" Width="75" Click="RemoveTimePeriod_Click"/>
+
+    </Grid>
+</Window>
