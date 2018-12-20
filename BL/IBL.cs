@@ -79,6 +79,8 @@ namespace BL
         /// <param name="address">The location of the test</param>
         /// <returns></returns>
         IEnumerable<BE.Tester> GetAllTesters(string address);
+        IEnumerable<BE.Tester> GetAllTesters(string searchString, BE.Gender? gender, BE.GearBoxType? gearBoxType,
+                                             BE.Vehicle? vahicle, DateTime? FromTime, DateTime? ToTime);
         /// <summary>
         /// Get All Tests
         /// </summary>
@@ -91,6 +93,8 @@ namespace BL
         /// <param name="dateTime">Time of the test</param>
         /// <returns></returns>
         IEnumerable<BE.Test> GetAllTests(DateTime dateTime);
+        //IEnumerable<BE.Test> GetAllTests(string searchString, BE.GearBoxType? gearBoxType,
+        //                                                BE.Vehicle? vahicle, DateTime? FromTime, DateTime? ToTime, bool? passed);
         /// <summary>
         /// Get All Trainees
         /// </summary>

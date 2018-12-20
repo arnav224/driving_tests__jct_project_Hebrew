@@ -20,12 +20,11 @@ namespace Project01_0740_6125_dotNet5779_V01
     public partial class UpdateTestResult : Window
     {
         BL.IBL bl = BL.Factory.GetInstance();
-        BE.Test test;
+        BE.Test test = ((MainWindow)System.Windows.Application.Current.MainWindow).selectedTests[0];
         List<string> errorMessages = new List<string>();
         public UpdateTestResult()
         {
             InitializeComponent();
-            test = bl.GetAllTests(t => t.TestID == Convert.ToInt32(((MainWindow)System.Windows.Application.Current.MainWindow).TestsTabUserControl.Update_IdTextBox.Text)).FirstOrDefault();
             this.DataContext = test;
             if (test.Indices == null)
                 test.Indices = BE.Configuration.DefultIndices();

@@ -240,7 +240,7 @@ namespace BL
         /// <param name="test"></param>
         public void UpdateTestResult(BE.Test test)
         {
-            if (test.Time > DateTime.Now) // @@ להוציא מהערה
+            if (test.Time > DateTime.Now) 
                 throw new Exception("לא ניתן לעדכן תוצאות לטסט שעדיין לא התבצע.");
             int sum = 0;
             foreach (var pair in test.Indices)
@@ -259,6 +259,8 @@ namespace BL
         /// <param name="test"></param>
         public void UpdateTest(Test test)
         {
+            if (test.Time < DateTime.Now)
+                throw new Exception("לא ניתן לעדכן פרטי טסט שכבר התבצע.");
             BE.Test ExistTest = IDAL.GetTestCopy(test.TestID);
                 AddTest(test);
                 RemoveTest(ExistTest.TestID);
@@ -304,6 +306,25 @@ namespace BL
         public IEnumerable<Tester> GetAllTesters(string address)
         {
             return IDAL.GetAllTesters(t => BE.Tools.Maps_DrivingDistance(t.Address, address) < t.MaxDistanceInMeters);
+        }
+
+        public IEnumerable<Tester> GetAllTesters(string searchString, Gender? gender, GearBoxType? 
+                                                 gearBoxType, Vehicle? vahicle, DateTime? FromTime, DateTime? ToTime)
+        {
+            return IDAL.GetAllTesters(t =>
+                (t.FirstName.Contains(searchString) || t.LastName.Contains(searchString) || (t.FirstName + ' ' + t.LastName).Contains(searchString)
+                || (t.LastName + ' ' + t.FirstName).Contains(searchString) || t.ID.Contains(searchString) || t.Address.Contains(searchString)
+                || t.MailAddress.Contains(searchString))
+
+                && (gender == null || gender == t.Gender)
+
+                && (gearBoxType == null || gearBoxType == t.gearBoxType)
+
+                && (vahicle == null || vahicle == t.Vehicle)
+
+                && (FromTime == null || t.BirthDate >= FromTime)
+
+                && (ToTime == null || t.BirthDate <= ToTime));
         }
 
         /// <summary>
@@ -414,5 +435,6 @@ namespace BL
                 throw new KeyNotFoundException("לא נמצא מבחן שמספרו " + ID);
             IDAL.RemoveTest(ID);
         }
+
     }
 }

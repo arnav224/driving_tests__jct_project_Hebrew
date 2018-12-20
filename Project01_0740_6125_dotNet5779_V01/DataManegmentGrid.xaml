@@ -60,7 +60,7 @@
                 <Label Content="הילוכים" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <ComboBox x:Name="gearBoxTypeComboBox" Grid.Column="5" Width="60" HorizontalAlignment="Center"  Margin="5" Grid.Row="1" VerticalAlignment="Center" />
 
-                <Label Content="עבר טסט" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Label x:Name="passedLable" Content="עבר טסט" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <ComboBox x:Name="passedComboBox" Grid.Column="7" HorizontalAlignment="Center" Width="55" Margin="5" Grid.Row="1" VerticalAlignment="Center">
                     <ComboBoxItem Content="עבר" />
                     <ComboBoxItem Content="לא עבר"/>
@@ -78,16 +78,14 @@
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*" MinWidth="130"/>
+                <ColumnDefinition Width="7*" MinWidth="95"/>
+                <ColumnDefinition Width="8*" MinWidth="95"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="Update_IdTextBox" Grid.Column="0" Height="23"  TextWrapping="Wrap" Text="" />
-            <Label x:Name="TextBoxDescriptionLable" Content=":הכנס מספר לעדכון או מחיקה" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="70.333,1,33.333,1"/>
-            <Button x:Name="UpdateTestResultButton"  Content="עדכון תוצאות טסט" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="123" Grid.Column="3"  />
-            <Button x:Name="UpdateButton" Content="עדכן" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand"/>
-            <Button x:Name="DeleteButton" Content="מחק" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" />
+            <Button x:Name="UpdateTestResultButton"  Content="עדכון תוצאות טסט" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" />
+            <Button x:Name="UpdateButton" Content="עדכן" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False"/>
+            <Button x:Name="DeleteButton" Content="מחק" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False"/>
 
         </Grid>
 

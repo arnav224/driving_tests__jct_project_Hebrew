@@ -20,7 +20,7 @@ namespace Project01_0740_6125_dotNet5779_V01
     public partial class UpdateTest : Window
     {
         BL.IBL bl = BL.Factory.GetInstance();
-        BE.Test test;
+        BE.Test test = ((MainWindow)Application.Current.MainWindow).selectedTests[0];
         List<string> errorMessages = new List<string>();
         private int hout;
         public int Hour
@@ -48,14 +48,11 @@ namespace Project01_0740_6125_dotNet5779_V01
         public UpdateTest()
         {
             InitializeComponent();
-            test = bl.GetAllTests(t => t.TestID == Convert.ToInt32(((MainWindow)Application.Current.MainWindow).TestsTabUserControl.Update_IdTextBox.Text)).FirstOrDefault();
             Hour = test.Time.Hour;
             Minute = test.Time.Minute;
             this.DataContext = test;
             this.Time_hour.DataContext = this;
             this.Time_minutes.DataContext = this;
-
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
