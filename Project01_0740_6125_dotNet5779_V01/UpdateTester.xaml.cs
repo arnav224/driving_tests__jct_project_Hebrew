@@ -21,10 +21,19 @@ namespace Project01_0740_6125_dotNet5779_V01
     {
         BL.IBL bl = BL.Factory.GetInstance();
         List<string> errorMessages = new List<string>();
-        BE.Tester tester = ((MainWindow)Application.Current.MainWindow).selectedTesters[0];
+        BE.Tester tester;
         List<BE.TimePeriod> timePeriodsToRemove = new List<BE.TimePeriod>();
         public UpdateTester()
         {
+            try
+            {
+            tester = ((MainWindow)Application.Current.MainWindow).selectedTesters[0];
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("לא נבחר בוחן");
+                this.Close();
+            }
             InitializeComponent();
             this.gearBoxTypeComboBox.ItemsSource = Enum.GetValues(typeof(BE.GearBoxType));
             this.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender));

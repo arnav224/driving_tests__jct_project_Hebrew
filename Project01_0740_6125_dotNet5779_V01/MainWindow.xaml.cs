@@ -33,9 +33,9 @@ namespace Project01_0740_6125_dotNet5779_V01
             InitializeComponent();
             bl = BL.Factory.GetInstance();
 
-            this.TraineesTabUserControl.AddButton.Content = "הוספת תלמיד";
-            this.TraineesTabUserControl.DeleteButton.Content = "מחיקת תלמיד";
-            this.TraineesTabUserControl.UpdateButton.Content = "עדכון תלמיד";
+            this.TraineesTabUserControl.AddButton.Content = "הוסף תלמיד";
+            this.TraineesTabUserControl.DeleteButton.Content = "מחק תלמיד";
+            this.TraineesTabUserControl.UpdateButton.Content = "ערוך תלמיד";
             this.TraineesTabUserControl.AddButton.Click += AddTraineeButton_Click;
             this.TraineesTabUserControl.UpdateButton.Click += UpdateTraineeButton_Click;
             this.TraineesTabUserControl.DeleteButton.Click += DeleteTraineeButton_Click;
@@ -57,9 +57,9 @@ namespace Project01_0740_6125_dotNet5779_V01
 
 
 
-            this.TestersTabUserControl.AddButton.Content = "הוספת בוחן";
-            this.TestersTabUserControl.DeleteButton.Content = "מחיקת בוחן";
-            this.TestersTabUserControl.UpdateButton.Content = "עדכון בוחן";
+            this.TestersTabUserControl.AddButton.Content = "הוסף בוחן";
+            this.TestersTabUserControl.DeleteButton.Content = "מחק בוחן";
+            this.TestersTabUserControl.UpdateButton.Content = "ערוך בוחן";
             this.TestersTabUserControl.AddButton.Click += AddTesterButton_Click;
             this.TestersTabUserControl.UpdateButton.Click += UpdateTesterButton_Click;
             this.TestersTabUserControl.DeleteButton.Click += DeleteTesterButton_Click;
@@ -78,13 +78,13 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestersTabUserControl.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender));
             this.TestersTabUserControl.vehicleComboBox.ItemsSource = Enum.GetValues(typeof(BE.Vehicle));
             this.TestersTabUserControl.passedComboBox.Visibility = Visibility.Collapsed;
-            this.TestersTabUserControl.passedComboBox.Visibility = Visibility.Collapsed;
+            this.TestersTabUserControl.passedLable.Visibility = Visibility.Collapsed;
 
 
 
-            this.TestsTabUserControl.AddButton.Content = "הוספת טסט";
-            this.TestsTabUserControl.DeleteButton.Content = "מחיקת טסט";
-            this.TestsTabUserControl.UpdateButton.Content = "עדכון טסט";
+            this.TestsTabUserControl.AddButton.Content = "הוסף טסט";
+            this.TestsTabUserControl.DeleteButton.Content = "מחק טסט";
+            this.TestsTabUserControl.UpdateButton.Content = "ערוך טסט";
             this.TestsTabUserControl.passedLable.Content = "עבר";
             this.TestsTabUserControl.AddButton.Click += AddTestButton_Click;
             this.TestsTabUserControl.UpdateButton.Click += UpdateTestButton_Click;
@@ -92,17 +92,18 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestsTabUserControl.DeleteButton.Click += DeleteTestButton_Click;
             this.TestsTabUserControl.DataGrid.ItemsSource = bl.GetAllTests();
             this.TestsTabUserControl.SearchTextBox.TextChanged += ApplyTestsFiltering;
-            this.TestsTabUserControl.genderComboBox.SelectionChanged += ApplyTestsFiltering;
-            this.TestsTabUserControl.gearBoxTypeComboBox.SelectionChanged += ApplyTestsFiltering;
-            this.TestsTabUserControl.vehicleComboBox.SelectionChanged += ApplyTestsFiltering;
+            this.TestsTabUserControl.passedComboBox.SelectionChanged += ApplyTestsFiltering;
             this.TestsTabUserControl.FromTimeDatePicker.LostFocus += ApplyTestsFiltering;
             this.TestsTabUserControl.ToTimeDatePicker.LostFocus += ApplyTestsFiltering;
             this.TestsTabUserControl.DataGrid.AutoGeneratingColumn += TraineesDataGrid_AutoGeneratingColumn;
             this.TestsTabUserControl.ResetFiltersButton.Click += TestsResetFilters;
             this.TestsTabUserControl.DataGrid.SelectionChanged += TestsDataGrid_SelectionChanged;
-            this.TestsTabUserControl.gearBoxTypeComboBox.ItemsSource = Enum.GetValues(typeof(BE.GearBoxType));
-            this.TestsTabUserControl.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender));
-            this.TestsTabUserControl.vehicleComboBox.ItemsSource = Enum.GetValues(typeof(BE.Vehicle));
+            this.TestsTabUserControl.gearBoxTypeComboBox.Visibility = Visibility.Collapsed;
+            this.TestsTabUserControl.gearBoxTypeLabel.Visibility = Visibility.Collapsed;
+            this.TestsTabUserControl.genderComboBox.Visibility = Visibility.Collapsed;
+            this.TestsTabUserControl.genderLabel.Visibility = Visibility.Collapsed;
+            this.TestsTabUserControl.vehicleComboBox.Visibility = Visibility.Collapsed;
+            this.TestsTabUserControl.vehicleLabel.Visibility = Visibility.Collapsed;
         }
 
 
@@ -268,19 +269,25 @@ namespace Project01_0740_6125_dotNet5779_V01
         private void AddTestButton_Click(object sender, RoutedEventArgs e)
         {
             new AddTest().ShowDialog();
-            ApplyTestsFiltering(this, new RoutedEventArgs());
+            ApplyTestsFiltering(this, e);
         }
 
         private void UpdateTestButton_Click(object sender, RoutedEventArgs e)
         {
             new UpdateTest().ShowDialog();
-            ApplyTestsFiltering(this, new RoutedEventArgs());
+            ApplyTestsFiltering(this, e);
+            this.TestsTabUserControl.DeleteButton.IsEnabled = false;
+            this.TestsTabUserControl.UpdateButton.IsEnabled = false;
+            this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
         }
 
         private void UpdateTestResultButton_Click(object sender, RoutedEventArgs e)
         {
             new UpdateTestResult().ShowDialog();
-            ApplyTestsFiltering(this, new RoutedEventArgs());
+            ApplyTestsFiltering(this, e);
+            this.TestsTabUserControl.DeleteButton.IsEnabled = false;
+            this.TestsTabUserControl.UpdateButton.IsEnabled = false;
+            this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
         }
 
         private void DeleteTestButton_Click(object sender, RoutedEventArgs e)
@@ -295,26 +302,22 @@ namespace Project01_0740_6125_dotNet5779_V01
             {
                 foreach (var item in selectedTests)
                     bl.RemoveTest(item.TestID);
-                ApplyTestsFiltering(this, new RoutedEventArgs());
+                ApplyTestsFiltering(this, e);
+                this.TestsTabUserControl.DeleteButton.IsEnabled = false;
+                this.TestsTabUserControl.UpdateButton.IsEnabled = false;
+                this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
             }
         }
 
         private void ApplyTestsFiltering(object sender, RoutedEventArgs e)
         {
-
-
-
-            DateTime? FromTime = this.TestsTabUserControl.FromTimeDatePicker.SelectedDate;
-            DateTime? ToTime = this.TestsTabUserControl.ToTimeDatePicker.SelectedDate;
-            string searchString = this.TestsTabUserControl.SearchTextBox.Text;
             this.TestsTabUserControl.DataGrid.ItemsSource = null;
-            int parsResult;
-            bool isNumber = int.TryParse(searchString, out parsResult);
-            this.TestsTabUserControl.DataGrid.ItemsSource = bl.GetAllTests(t =>
-                                                            (FromTime == null || t.Time >= FromTime) && (ToTime == null || t.Time <= ToTime)
-                                                            && (searchString == null || t.TestID == parsResult
-                                                            || t.TesterID.Contains(searchString) || t.TraineeID.Contains(searchString)
-                                                            || t.Address.Contains(searchString)));
+            this.TestsTabUserControl.DataGrid.ItemsSource = bl.GetAllTests(this.TestsTabUserControl.SearchTextBox.Text,
+                                                                           this.TestsTabUserControl.FromTimeDatePicker.SelectedDate,
+                                                                           this.TestsTabUserControl.ToTimeDatePicker.SelectedDate,
+                                                                           (this.TestsTabUserControl.passedComboBox.SelectedIndex == -1 ? (bool?)null
+                                                                                : (this.TestsTabUserControl.passedComboBox.SelectedIndex == 0 ? true : false)));
+
         }
 
         private void TestsResetFilters(object sender, RoutedEventArgs e)
@@ -322,14 +325,14 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestsTabUserControl.FromTimeDatePicker.SelectedDate = null;
             this.TestsTabUserControl.ToTimeDatePicker.SelectedDate = null;
             this.TestsTabUserControl.SearchTextBox.Text = "";
-            ApplyTestsFiltering(this, new RoutedEventArgs());
+            this.TestsTabUserControl.passedComboBox.SelectedItem = null;
+            ApplyTestsFiltering(this, e);
         }
         private void TestsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.OriginalSource != null)
             {
-                Type type = e.OriginalSource.GetType();
-                if (type == typeof(DataGrid))
+                if (e.OriginalSource.GetType() == typeof(DataGrid))
                 {
                     foreach (Test item in e.AddedItems)
                     {
@@ -347,16 +350,12 @@ namespace Project01_0740_6125_dotNet5779_V01
                     if (selectedTests[0].Time < DateTime.Now)
                     {
                         this.TestsTabUserControl.UpdateButton.IsEnabled = false;
-                        //this.TestsTabUserControl.UpdateButton.ToolTip = "לא ניתן לעדכן פרטי טסט שכבר התבצע.";
                         this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = true;
-                        //this.TestsTabUserControl.UpdateTestResultButton.ToolTip = "";
                     }
                     else
                     {
                         this.TestsTabUserControl.UpdateButton.IsEnabled = true;
-                        //this.TestsTabUserControl.UpdateButton.ToolTip = "";
                         this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
-                        //this.TestsTabUserControl.UpdateTestResultButton.ToolTip = "לא ניתן לעדכן תוצאות לטסט שעדיין לא התבצע.";
                     }
                 }
             }

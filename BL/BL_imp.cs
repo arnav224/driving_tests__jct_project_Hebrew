@@ -173,6 +173,20 @@ namespace BL
             return IDAL.GetAllTests(predicate);
         }
 
+        public IEnumerable<Test> GetAllTests(string searchString, DateTime? FromTime, DateTime? ToTime, bool? passed)
+        {
+            int parsResult;
+            int.TryParse(searchString, out parsResult);
+            return IDAL.GetAllTests(t =>
+                                    (FromTime == null || t.Time >= FromTime)
+                                    && (ToTime == null || t.Time <= ToTime)
+                                    && (searchString == null || t.TestID == parsResult
+                                    || t.TesterID.Contains(searchString) || t.TraineeID.Contains(searchString)
+                                    || t.Address.Contains(searchString))
+                                    && (passed == null || passed == t.Passed));
+
+        }
+
         /// <summary>
         /// Get All Trainees
         /// </summary>
