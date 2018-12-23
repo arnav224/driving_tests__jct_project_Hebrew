@@ -217,7 +217,7 @@ namespace BE
 
         public override string ToString()
         {
-            string result = "שם: " + FirstName + ' ' + LastName + ", תאריך לידה: " + BirthDate.ToString("MM/dd/yyyy")
+            string result = "שם: " + FirstName + ' ' + LastName +  ", ת\"ז:" + ID + ", תאריך לידה: " + BirthDate.ToString("MM/dd/yyyy")
                 + ", מין: " + Gender + ", טלפון: " + PhoneNumber + ", כתובת מייל: " + MailAddress + ", כתובת: " + Address
                 + ", שנות נסיון: " + Experience + ", מקסימום טסטים בשבוע: "
                 + MaxTestsInWeek + ", סוג רכב: " + Vehicle + '-' + gearBoxType + ", שעות עבודה: ";

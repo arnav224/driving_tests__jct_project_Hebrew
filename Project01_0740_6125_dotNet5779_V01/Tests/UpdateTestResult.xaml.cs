@@ -70,15 +70,19 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
             test.TesterNotes = this.TesterNotesTextBlock.Text;
             bl.UpdateTestResult(test);
+            this.Closing -= Window_Closing;
             this.Close();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("?לצאת בלי לשמור שינויים", "", MessageBoxButton.YesNo,
+            if (this.test != bl.GetAllTests(t => t.TestID == test.TestID).FirstOrDefault())//@@יש למצוא דרך להשוות בלי tostring
+            {
+                MessageBoxResult result = MessageBox.Show("?לצאת בלי לשמור שינויים", "", MessageBoxButton.YesNo,
                                           MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
-            if (result == MessageBoxResult.No)
-                e.Cancel = true;
+                if (result == MessageBoxResult.No)
+                    e.Cancel = true;
+            }
         }
     }
 }

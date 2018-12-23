@@ -47,6 +47,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             try
             {
                 bl.UpdateTrainee(trainee);
+                this.Closing -= Window_Closing;
                 this.Close();
             }
             catch (Exception ex)
@@ -65,10 +66,13 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("?לצאת בלי לשמור שינויים", "", MessageBoxButton.YesNo,
+            if (this.trainee.ToString() != bl.GetAllTrainees(t => t.ID == trainee.ID).FirstOrDefault().ToString())
+            {
+                MessageBoxResult result = MessageBox.Show("?לצאת בלי לשמור שינויים", "", MessageBoxButton.YesNo,
                                           MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
-            if (result == MessageBoxResult.No)
-                e.Cancel = true;
+                if (result == MessageBoxResult.No)
+                    e.Cancel = true;
+            }
         }
     }
 }

@@ -46,6 +46,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             try
             {
                 bl.AddTrainee(trainee);
+                this.Closing -= Window_Closing;
                 this.Close();
             }
             catch (Exception ex)
@@ -59,6 +60,16 @@ namespace Project01_0740_6125_dotNet5779_V01
             if (e.Action == ValidationErrorEventAction.Added)
                 errorMessages.Add(e.Error.Exception.Message);
             else errorMessages.Remove(e.Error.Exception.Message);
+        }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (this.trainee.ToString() != new BE.Trainee().ToString())
+            {
+                MessageBoxResult result = MessageBox.Show("?לצאת בלי לשמור שינויים", "", MessageBoxButton.YesNo,
+                                              MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
+                if (result == MessageBoxResult.No)
+                    e.Cancel = true;
+            }
         }
     }
 }

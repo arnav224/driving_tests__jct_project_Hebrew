@@ -51,6 +51,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             try
             {
                 bl.AddTester(tester);
+                this.Closing -= Window_Closing;
                 this.Close();
             }
             catch (Exception ex)
@@ -200,7 +201,7 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (true)   //@
+            if (this.tester.ToString() != new BE.Tester().ToString())
             {
                 MessageBoxResult result = MessageBox.Show("?לצאת בלי לשמור שינויים", "", MessageBoxButton.YesNo,
                                               MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
