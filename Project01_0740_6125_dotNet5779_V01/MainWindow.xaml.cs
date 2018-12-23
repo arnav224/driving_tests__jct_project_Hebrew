@@ -132,7 +132,8 @@ namespace Project01_0740_6125_dotNet5779_V01
             {
                 foreach (var item in selectedTrainees)
                     bl.RemoveTrainee(item.ID);
-                ApplyTraineesFiltering(this, new RoutedEventArgs());
+                ApplyTraineesFiltering(this, e);
+                ApplyTestsFiltering(this, new RoutedEventArgs());
             }
         }
 

@@ -21,6 +21,7 @@ namespace Project01_0740_6125_dotNet5779_V01
     {
         BL.IBL bl = BL.Factory.GetInstance();
         List<string> errorMessages = new List<string>();
+        List<string> timeErrorMessages = new List<string>();
         BE.Tester tester;
         List<BE.TimePeriod> timePeriodsToRemove = new List<BE.TimePeriod>();
         public UpdateTester()
@@ -41,10 +42,8 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.DataContext = tester;
             this.WorkHoursGrid.DataContext = this;
             this.DayComboBox.ItemsSource = Enum.GetValues(typeof(BE.WeekDays));
-            this.AddTimePeriodButton.Click += AddTimePeriodButton_Click;
             List<string> worsHours = (from item in tester.WorkHours select item.ToString()).ToList();
             this.WorkHoursDataGrid.ItemsSource = (from item in tester.WorkHours select new { OnetimePeriod = item.ToString() });
-                //List<string>( tester.WorkHours;// (IEnumerable<string>)from item in tester.WorkHours select item.ToString();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -135,6 +134,14 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void AddTimePeriodButton_Click(object sender, RoutedEventArgs e)
         {
+            if (timeErrorMessages.Any())
+            {
+                string err = "Exception:";
+                foreach (var item in timeErrorMessages)
+                    err += "\n" + item;
+                MessageBox.Show(err);
+                return;
+            }
             try
             {
                 Day = (BE.WeekDays)this.DayComboBox.SelectedItem;
@@ -201,6 +208,14 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.WorkHoursDataGrid.ItemsSource = null;
             this.WorkHoursDataGrid.ItemsSource = (from item in tester.WorkHours select new { OnetimePeriod = item.ToString() });
         }
+
+        private void time_validation_Error(object sender, ValidationErrorEventArgs e)
+        {
+            if (e.Action == ValidationErrorEventAction.Added && e.Error.Exception != null)
+                timeErrorMessages.Add(e.Error.Exception.Message);
+            else timeErrorMessages.Remove(e.Error.Exception.Message);
+        }
+
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

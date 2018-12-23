@@ -89,7 +89,7 @@ namespace BE
             }
         }
 
-        public bool Passed { get; set; }
+        public bool? Passed { get; set; }
         public string TesterNotes { get; set; }
         /// <summary>
         /// time of last Remeinder Email sending

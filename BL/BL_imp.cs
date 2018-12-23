@@ -245,6 +245,11 @@ namespace BL
             if (trainee == null)
                 throw new KeyNotFoundException("לא נמצא תלמיד שמספרו " + ID);
             IDAL.RemoveTrainee(ID);
+            var listToRemove = IDAL.GetAllTests(t => t.TraineeID == ID && t.Time > DateTime.Now).Select(t => t.TestID).ToArray();
+            foreach (var item in listToRemove)
+            {
+                IDAL.RemoveTest(item);
+            }
         }
 
 
@@ -276,8 +281,16 @@ namespace BL
             if (test.Time < DateTime.Now)
                 throw new Exception("לא ניתן לעדכן פרטי טסט שכבר התבצע.");
             BE.Test ExistTest = IDAL.GetTestCopy(test.TestID);
-                AddTest(test);
                 RemoveTest(ExistTest.TestID);
+            try
+            {
+                AddTest(test);
+            }
+            catch (Exception ex)
+            {
+                IDAL.AddTest(ExistTest);
+                throw ex;
+            }
         }
 
         /// <summary>
