@@ -101,5 +101,12 @@ namespace BE
         {
             TestID = BE.Configuration.NextTestID();
         }
+        public override string ToString()
+        {
+            return "מספר סידורי: " + TestID + ", מספר בוחן: " + TesterID + ", מספר תלמיד: " + TraineeID 
+                + ", מקום: " + Address + ", תאריך ושעה: " + Time.ToString("MM/dd/yyyy HH:mm") + ',' 
+                + (Time > DateTime.Now ? " טרם התבצע הטסט." : (indices != null && indices.Any(t=> t.Value != Score.עבר) ?
+                " תוצאה: " + (Passed? "עבר":"לא עבר") + ", הערות: " + TesterNotes + '.': ""));
+        }
     }
 }
