@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Project01_0740_6125_dotNet5779_V01"
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="Project01_0740_6125_dotNet5779_V01.UpdateTest"
         mc:Ignorable="d"
+        Closing="Window_Closing"
         Title="UpdateTest" Height="300" Width="250" >
     <Grid>
 

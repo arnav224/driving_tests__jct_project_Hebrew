@@ -58,10 +58,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddTest.xaml.cs">
+    <Compile Include="Tests\AddTest.xaml.cs">
       <DependentUpon>AddTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddTester.xaml.cs">
+    <Compile Include="Testers\AddTester.xaml.cs">
       <DependentUpon>AddTester.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataManegmentGrid.xaml.cs">
@@ -70,27 +70,27 @@
     <Compile Include="GridRow.xaml.cs">
       <DependentUpon>GridRow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UpdateTest.xaml.cs">
+    <Compile Include="Tests\UpdateTest.xaml.cs">
       <DependentUpon>UpdateTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UpdateTester.xaml.cs">
+    <Compile Include="Testers\UpdateTester.xaml.cs">
       <DependentUpon>UpdateTester.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UpdateTestResult.xaml.cs">
+    <Compile Include="Tests\UpdateTestResult.xaml.cs">
       <DependentUpon>UpdateTestResult.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UpdateTrainee.xaml.cs">
+    <Compile Include="Trainees\UpdateTrainee.xaml.cs">
       <DependentUpon>UpdateTrainee.xaml</DependentUpon>
     </Compile>
-    <Page Include="AddTest.xaml">
+    <Page Include="Tests\AddTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddTester.xaml">
+    <Page Include="Testers\AddTester.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddTrainee.xaml">
+    <Page Include="Trainees\AddTrainee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -106,7 +106,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AddTrainee.xaml.cs">
+    <Compile Include="Trainees\AddTrainee.xaml.cs">
       <DependentUpon>AddTrainee.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
@@ -117,19 +117,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UpdateTest.xaml">
+    <Page Include="Tests\UpdateTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UpdateTester.xaml">
+    <Page Include="Testers\UpdateTester.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UpdateTestResult.xaml">
+    <Page Include="Tests\UpdateTestResult.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UpdateTrainee.xaml">
+    <Page Include="Trainees\UpdateTrainee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

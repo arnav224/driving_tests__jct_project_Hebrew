@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project01_0740_6125_dotNet5779_V01"
         mc:Ignorable="d"
+        Closing="Window_Closing"
         Title="טופס עדכון תוצאות טסט" Height="600" Width="300">
     <Grid x:Name="MeinGrid" FlowDirection="RightToLeft">
         <Grid.RowDefinitions>

@@ -147,15 +147,14 @@ namespace Project01_0740_6125_dotNet5779_V01
             try
             {
                 tester.WorkHours.Add(new BE.TimePeriod(StartTime, EndTime));
-                this.WorkHoursDataGrid.ItemsSource = null;
-                this.WorkHoursDataGrid.ItemsSource = (from item in tester.WorkHours select new { OnetimePeriod = item.ToString() });
+                tester.WorkHours = tester.WorkHours;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "שגיאה בהזנת זמן העבודה", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
             }
-
+            this.WorkHoursDataGrid.ItemsSource = null;
+            this.WorkHoursDataGrid.ItemsSource = (from item in tester.WorkHours select new { OnetimePeriod = item.ToString() });
         }
 
 
@@ -182,7 +181,6 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
             catch (Exception)   //@
             {}
-
         }
 
         private void RemoveTimePeriod_Click(object sender, RoutedEventArgs e)
@@ -196,14 +194,20 @@ namespace Project01_0740_6125_dotNet5779_V01
                 return;
             }
 
-
-
             foreach (var item in timePeriodsToRemove)
             {
                 tester.WorkHours.Remove(item);
             }
             this.WorkHoursDataGrid.ItemsSource = null;
             this.WorkHoursDataGrid.ItemsSource = (from item in tester.WorkHours select new { OnetimePeriod = item.ToString() });
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("?לצאת בלי לשמור שינויים", "", MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
+            if (result == MessageBoxResult.No)
+                e.Cancel = true;
         }
     }
 }

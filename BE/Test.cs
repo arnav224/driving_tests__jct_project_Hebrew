@@ -53,7 +53,42 @@ namespace BE
             }
         }
 
-        public Dictionary<string, BE.Score> Indices;
+        private Dictionary<string, BE.Score> indices;
+
+        public Dictionary<string, BE.Score> Indices
+        {
+            get
+            {
+                if (indices == null)
+                {
+                    indices = new Dictionary<string, Score>();
+                    indices.Add("בטיחות", Score.עבר);
+                    indices.Add("שליטה בהגה", Score.עבר);
+                    indices.Add("שליטה בהילוכים", Score.עבר);
+                    indices.Add("הסתכלות במראות", Score.עבר);
+                    indices.Add("מתן זכות קדימה", Score.עבר);
+                    indices.Add("מהירות", Score.עבר);
+                    indices.Add("איתות", Score.עבר);
+                    indices.Add("האצה והאטה בבטחה", Score.עבר);
+                    indices.Add("ציות לתמרורים", Score.עבר);
+                    indices.Add("שמירה רווח", Score.עבר);
+                    indices.Add("בטיחות הולכי רגל", Score.עבר);
+                    indices.Add("עקיפות", Score.עבר);
+                    indices.Add("חנייה", Score.עבר);
+                    indices.Add("פניות", Score.עבר);
+                    indices.Add("השתלבות בתנועה", Score.עבר);
+                    indices.Add("אביזרי בטיחות", Score.עבר);
+                    indices.Add("נסיעה לאחור", Score.עבר);
+                    indices.Add("שמירה על הימין", Score.עבר);
+                }
+                return indices;
+            }
+            set
+            {
+                indices = value;
+            }
+        }
+
         public bool Passed { get; set; }
         public string TesterNotes { get; set; }
         /// <summary>
@@ -65,7 +100,6 @@ namespace BE
         public Test()
         {
             TestID = BE.Configuration.NextTestID();
-            Indices = Configuration.DefultIndices();
         }
     }
 }

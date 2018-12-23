@@ -142,7 +142,42 @@ namespace BE
 
         public Vehicle Vehicle { get; set; }
         public GearBoxType gearBoxType { get; set; }
-        public readonly SortedSet<TimePeriod> WorkHours;
+
+        private SortedSet<TimePeriod> workHours;
+        public SortedSet<TimePeriod> WorkHours
+        {
+            get
+            {
+                if (workHours == null)
+                    workHours = new SortedSet<TimePeriod>();
+                return workHours;
+            }
+            set
+            {
+                if (value.Count != 0)
+                {
+                    SortedSet<BE.TimePeriod> tempTimePeriods = new SortedSet<TimePeriod>();
+                    TimeSpan previousStart = value.ElementAt(0).Start;
+                    TimeSpan previousEnd = value.ElementAt(0).End;
+                    foreach (var item in value)
+                    {
+                        if (item.Start.CompareTo(previousEnd) <= 0)
+                        {
+                            if (item.End.CompareTo(previousEnd) > 0)
+                                previousEnd = item.End;
+                        }
+                        else
+                        {
+                            tempTimePeriods.Add(new TimePeriod(previousStart, previousEnd));
+                            previousStart = item.Start;
+                            previousEnd = item.End;
+                        }
+                    }
+                    tempTimePeriods.Add(new TimePeriod(previousStart, previousEnd));
+                    workHours = tempTimePeriods;
+                }
+            }
+        }
 
         /// <summary>
         /// Maximum distance the Tester agrees to move from his home to the Test

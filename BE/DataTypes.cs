@@ -48,13 +48,16 @@ namespace BE
         {
             if (Start.Days != End.Days)
                 throw new Exception("יש להוסיף זמנים לכל יום בנפרד.");
-            if (Start.Days > 5 || Start.Hours > 24 || End.Hours > 24 || Start.Minutes > 60 || End.Minutes > 60)
+            if (Start.Days > 5 || Start.Hours > 24 || End.Hours > 24 || Start.Minutes > 60 || End.Minutes > 60 || Start == End)
                 throw new Exception("זמן לא תקין.");
             if (Start > End)
                 throw new Exception("זמן סיום לא יכול להיות לפני זמן התחלה.");
-            if (Start.Hours < Configuration.WorkStartHour || (Start.Days < 5 && End.Hours > Configuration.WorkEndHour) 
-                || (Start.Days == 5 && End.Hours > Configuration.FridayWorkEndHour))
-                throw new Exception("הזמן שנבחר הוא מחוץ לשעות העבודה של בית הספר.");
+            if (Start.Hours < Configuration.WorkStartHour)
+                throw new Exception("זמן תחילת העבודה לא יכול להיות לפני השעה " + Configuration.WorkStartHour);
+            if (Start.Days < 5 && End.Hours > Configuration.WorkEndHour)
+                throw new Exception("זמן סיום העבודה לא יכול להיות אחרי השעה " + Configuration.WorkEndHour);
+            if (Start.Days == 5 && End.Hours > Configuration.FridayWorkEndHour)
+                throw new Exception("ביום שישי זמן סיום העבודה לא יכול להיות אחרי השעה " + Configuration.FridayWorkEndHour);
             this.Start = Start;
             this.End = End;
         }
@@ -68,7 +71,11 @@ namespace BE
 
         public int CompareTo(TimePeriod other)
         {
-            return this.Start.CompareTo(other.Start);
+            if (this.Start != other.Start)
+                return this.Start.CompareTo(other.Start);
+            if (this.End != other.End)
+                return this.End.CompareTo(other.End);
+            return 0;
         }
     }
 

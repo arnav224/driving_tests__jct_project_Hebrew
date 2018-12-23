@@ -26,8 +26,6 @@ namespace Project01_0740_6125_dotNet5779_V01
         {
             InitializeComponent();
             this.DataContext = test;
-            if (test.Indices == null)
-                test.Indices = BE.Configuration.DefultIndices();
             int index = 0;
             var indicesInumerator = test.Indices.GetEnumerator();
             foreach (dynamic item in (from UIElement item in this.MeinGrid.Children where item is GridRow select item as GridRow))
@@ -73,6 +71,14 @@ namespace Project01_0740_6125_dotNet5779_V01
             test.TesterNotes = this.TesterNotesTextBlock.Text;
             bl.UpdateTestResult(test);
             this.Close();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("?לצאת בלי לשמור שינויים", "", MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
+            if (result == MessageBoxResult.No)
+                e.Cancel = true;
         }
     }
 }

@@ -22,19 +22,6 @@ namespace BE
 
         #endregion
 
-        private string id;
-        public string ID
-        {
-            get { return id; }
-            set
-            {
-                Regex r = new Regex("^[0-9]{8,10}$");
-                if (!r.IsMatch(value))
-                    throw new Exception("תעודת זהות צריכה להכיל 8-10 ספרות.");
-                id = value;
-            }
-        }
-
         private string firstName;
         public string FirstName
         {
@@ -61,6 +48,21 @@ namespace BE
             }
         }
 
+        private string id;
+        public string ID
+        {
+            get { return id; }
+            set
+            {
+                Regex r = new Regex("^[0-9]{8,10}$");
+                if (!r.IsMatch(value))
+                    throw new Exception("תעודת זהות צריכה להכיל 8-10 ספרות.");
+                id = value;
+            }
+        }
+
+        public Gender Gender { get; set; }
+
         private DateTime birthDate;
         public DateTime BirthDate
         {
@@ -73,8 +75,6 @@ namespace BE
             }
         }
 
-        public Gender Gender { get; set; }
-
         private string phoneNumber;
         public string PhoneNumber
         {
@@ -85,6 +85,19 @@ namespace BE
                 if (!r.IsMatch(value))
                     throw new Exception("מספר הטלפון לא תקין.");
                 phoneNumber = value;
+            }
+        }
+
+        private string address;
+        public string Address
+        {
+            get { return address; }
+            set
+            {
+                // Note: Google Maps API is under development:
+                // @ not valid address or if not in the local country. maby define in configuration.
+                address = value;// = BE.Tools.Maps_GetPlaceAutoComplete(value)[0];
+                //this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AddressAutoComplite"));
             }
         }
 
@@ -103,19 +116,6 @@ namespace BE
                     throw new Exception("כתובת המייל לא תקינה.");
                 }
                 mailAddress = value;
-            }
-        }
-
-        private string address;
-        public string Address
-        {
-            get { return address; }
-            set
-            {
-                // Note: Google Maps API is under development:
-                // @ not valid address or if not in the local country. maby define in configuration.
-                address = value;// = BE.Tools.Maps_GetPlaceAutoComplete(value)[0];
-                //this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AddressAutoComplite"));
             }
         }
 

@@ -350,13 +350,25 @@ namespace Project01_0740_6125_dotNet5779_V01
                     if (selectedTests[0].Time < DateTime.Now)
                     {
                         this.TestsTabUserControl.UpdateButton.IsEnabled = false;
+                        this.TestsTabUserControl.UpdateButton.ToolTip = "לא ניתן לערוך פרטים לטסט שכבר נעשה";
                         this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = true;
+                        this.TestsTabUserControl.UpdateTestResultButton.ToolTip = null;
                     }
                     else
                     {
                         this.TestsTabUserControl.UpdateButton.IsEnabled = true;
+                        this.TestsTabUserControl.UpdateButton.ToolTip = null;
                         this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
+                        this.TestsTabUserControl.UpdateTestResultButton.ToolTip = "לא ניתן לעדכן תוצאות לטסט שעדיין לא בוצע";
                     }
+                }
+                else
+                {
+                    this.TestsTabUserControl.UpdateButton.IsEnabled = false;
+                    this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
+                    this.TestsTabUserControl.UpdateTestResultButton.ToolTip = null;
+                    this.TestsTabUserControl.UpdateButton.ToolTip = null;
+                    this.TestsTabUserControl.UpdateButton.ToolTip = this.TestsTabUserControl.UpdateTestResultButton.ToolTip = "בחר טסט לעריכה";
                 }
             }
         }
@@ -405,6 +417,42 @@ namespace Project01_0740_6125_dotNet5779_V01
                     break;
                 case "NumOfDrivingLessons":
                     e.Column.Header = "מספר\nשיעורים";
+                    break;
+                case "Experience":
+                    e.Column.Header = "שנות נסיון";
+                    break;
+                case "MaxTestsInWeek":
+                    e.Column.Header = "מסקסימום\nטסטים לשבוע";
+                    break;
+                case "MaxDistanceInMeters":
+                    e.Column.Header = "מרחק\nמקסימלי";
+                    break;
+                case "TestID":
+                    e.Column.Header = "מספר טסט";
+                    break;
+                case "TesterID":
+                    e.Column.Header = "תעודת זהות\nבוחן";
+                    break;
+                case "TraineeID":
+                    e.Column.Header = "תעודת זהות\nתלמיד";
+                    break;
+                case "Passed":
+                    e.Column.Header = "עבר";
+                    break;
+                case "WorkHours":
+                    e.Cancel = true;
+                    break;
+                case "Time":
+                    e.Column.Header = "זמן";
+                    break;
+                case "TesterNotes":
+                    e.Column.Header = "הערות הבוחן";
+                    break;
+                case "RemeinderEmailSent":
+                    e.Cancel = true;
+                    break;
+                case "SummaryEmailSent":
+                    e.Cancel = true;
                     break;
                 case "OnlyMyGender":
                     e.Cancel = true;

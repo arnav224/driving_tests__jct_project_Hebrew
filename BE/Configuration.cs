@@ -37,34 +37,6 @@ namespace BE
         static public int WorkEndHour = 19;
         static public int FridayWorkEndHour = 14;
 
-        /// <summary>
-        /// Default collection of test scores
-        /// </summary>
-        /// <returns></returns>
-        public static Dictionary<string, BE.Score> DefultIndices()
-        {
-            Dictionary<string, BE.Score> Indices = new Dictionary<string, Score>();
-            Indices.Add("בטיחות", Score.עבר);
-            Indices.Add("שליטה בהגה", Score.עבר);
-            Indices.Add("שליטה בהילוכים", Score.עבר);
-            Indices.Add("הסתכלות במראות", Score.עבר);
-            Indices.Add("מתן זכות קדימה", Score.עבר);
-            Indices.Add("מהירות", Score.עבר);
-            Indices.Add("איתות", Score.עבר);
-            Indices.Add("האצה והאטה בבטחה", Score.עבר);
-            Indices.Add("ציות לתמרורים", Score.עבר);
-            Indices.Add("שמירה רווח", Score.עבר);
-            Indices.Add("בטיחות הולכי רגל", Score.עבר);
-            Indices.Add("עקיפות", Score.עבר);
-            Indices.Add("חנייה", Score.עבר);
-            Indices.Add("פניות", Score.עבר);
-            Indices.Add("השתלבות בתנועה", Score.עבר);
-            Indices.Add("אביזרי בטיחות", Score.עבר);
-            Indices.Add("נסיעה לאחור", Score.עבר);
-            Indices.Add("שמירה על הימין", Score.עבר);
-            return Indices.Clone();
-        }
-
 
         //Email Configuration:
         public static readonly MailAddress SenderEmailAddress = new MailAddress("avraham224@gmail.com", "Y&A בית ספר לנהיגה");
