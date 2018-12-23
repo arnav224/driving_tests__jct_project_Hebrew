@@ -192,10 +192,10 @@ namespace BE
 
         public override string ToString()  
         {
-            return "תעודת זהות: " + ID + " מין: " + Gender + " שם: " + FirstName + ' ' + LastName + ' ' + "תאריך לידה: " 
-                + BirthDate.ToString("MM/dd/yyyy HH:mm") + ' ' + "טלפון: " + PhoneNumber + ' ' + "כתובת: " + Address 
-                + ' ' + "סוג רכב: " + Vehicle + ' ' + gearBoxType + " בית ספר: "
-                 + DrivingSchoolName + " שם המורה: " + TeacherName + " מספר שיעורים: " + numOfDrivingLessons;
+            return "תעודת זהות: " + ID + ", מין: " + Gender + ", שם: " + FirstName + ' ' + LastName + ", " + "תאריך לידה: " 
+                + BirthDate.ToString("MM/dd/yyyy") + ", " + "טלפון: " + PhoneNumber + ", כתובת: " + Address 
+                + ", סוג רכב: " + Vehicle + "-" + gearBoxType + ", בית ספר: "
+                 + DrivingSchoolName + ", שם המורה: " + TeacherName + ", מספר שיעורים: " + numOfDrivingLessons + '.';
         }
     }
 }
