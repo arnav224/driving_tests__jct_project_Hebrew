@@ -58,7 +58,7 @@
                 </ComboBox>
 
                 <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="תאריך לידה:"/>
-                <DatePicker x:Name="birthDateDatePicker" VerticalAlignment="Center"  SelectedDate="{Binding BirthDate, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="1"/>
+                <DatePicker x:Name="birthDateDatePicker" VerticalAlignment="Center"  SelectedDate="{Binding BirthDate, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Margin="3" HorizontalAlignment="Stretch"  Grid.Column="1"/>
 
                 <Label VerticalAlignment="Center" Grid.Row="5" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="כתובת:"/>
                 <TextBox x:Name="addressTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Address, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
@@ -78,7 +78,7 @@
                 </ComboBox>
 
                 <Label VerticalAlignment="Center" Grid.Row="10" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="תחילת צבירת נסיון:"/>
-                <DatePicker x:Name="experiencedSinceDatePicker" VerticalAlignment="Center" SelectedDate="{Binding ExperiencedSince, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="10" Margin="3" HorizontalAlignment="Left" Grid.Column="1"/>
+                <DatePicker x:Name="experiencedSinceDatePicker" VerticalAlignment="Center" SelectedDate="{Binding ExperiencedSince, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="10" Margin="3" HorizontalAlignment="Stretch"  Grid.Column="1"/>
 
                 <Label VerticalAlignment="Center" Grid.Row="11" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="מרחק מקסימלי (במטרים):"/>
                 <TextBox x:Name="maxDistanceInMetersTextBox" Width="120" VerticalAlignment="Center" Text="{Binding MaxDistanceInMeters, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="11" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
@@ -104,11 +104,11 @@
 
                 <Label VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="זמני עבודה:" FontWeight="DemiBold" />
 
-                <Label VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Content=":ביום"   />
+                <Label VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Content="ביום:"   />
                 <ComboBox x:Name="DayComboBox" Grid.Column="1" VerticalAlignment="Center" Grid.Row="1"   Height="Auto" HorizontalAlignment="Stretch" Margin="5" SelectedItem="{Binding BE.WeekDays, Mode=TwoWay}" >
                 </ComboBox>
 
-                <Label VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Content=":משעה"   />
+                <Label VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Content="משעה:"   />
                 <Grid Grid.Column="1" Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
@@ -118,7 +118,7 @@
                     <TextBox x:Name="Time_minutesStart" Grid.Column="0" Text="{Binding MinuteStart, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="5"/>
                 </Grid>
 
-                <Label VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Content=":עד שעה"   />
+                <Label VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Content="עד שעה:"   />
                 <Grid Grid.Column="1" Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
