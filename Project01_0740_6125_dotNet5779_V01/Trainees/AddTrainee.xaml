@@ -7,6 +7,7 @@
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="Project01_0740_6125_dotNet5779_V01.AddTrainee"
         xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
         mc:Ignorable="d"
+        Closing="Window_Closing"
         Validation.Error="validation_Error"  
         Title="הוספת תלמיד" Height="530" MinHeight="520" Width="300" MinWidth="280">
     <Grid >

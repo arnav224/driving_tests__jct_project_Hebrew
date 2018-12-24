@@ -72,6 +72,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                 test.Time = test.Time.AddHours(-test.Time.Hour);
                 test.Time = test.Time.AddHours(Hour);
                 bl.AddTest(test);
+                this.Closing -= Window_Closing;
                 this.Close();
             }
             catch (Exception ex)
@@ -89,5 +90,15 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (this.test.Address != null || this.test.Time != new DateTime() || this.test.TraineeID != null)
+            {
+                MessageBoxResult result = MessageBox.Show("?לצאת בלי לשמור שינויים", "", MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
+                if (result == MessageBoxResult.No)
+                    e.Cancel = true;
+            }
+        }
     }
 }
