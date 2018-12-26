@@ -79,6 +79,20 @@ namespace BE
         }
     }
 
+    public class AppealTest
+    {
+        public DateTime RequestTime;
+        public DateTime DecisionTime;
+        public AppealStatus appealStatus;
+        public string TraineeNotes;
+        public string Decision;
+    }
+
+    public enum AppealStatus
+    {
+        ממתין, התקבל, נדחה
+    }
+
     /// <summary>
     /// A possible score for a test
     /// </summary>

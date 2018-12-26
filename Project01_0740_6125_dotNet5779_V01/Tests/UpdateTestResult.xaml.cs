@@ -68,7 +68,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                 else if((bool)gridRow.RowScore3.IsChecked)
                     test.Indices[(string)gridRow.LableRow.Content] = (BE.Score)3;
             }
-            test.TesterNotes = this.TesterNotesTextBlock.Text;
+            test.TesterNotes = this.TesterNotesTextBox.Text;
             bl.UpdateTestResult(test);
             this.Closing -= Window_Closing;
             this.Close();

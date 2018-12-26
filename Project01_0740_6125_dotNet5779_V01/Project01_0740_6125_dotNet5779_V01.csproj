@@ -58,6 +58,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Appeals\AppealDecision.xaml.cs">
+      <DependentUpon>AppealDecision.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Appeals\AppealRequest.xaml.cs">
+      <DependentUpon>AppealRequest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Appeals\AppeaTests.xaml.cs">
+      <DependentUpon>AppeaTests.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tests\AddTest.xaml.cs">
       <DependentUpon>AddTest.xaml</DependentUpon>
     </Compile>
@@ -82,6 +91,18 @@
     <Compile Include="Trainees\UpdateTrainee.xaml.cs">
       <DependentUpon>UpdateTrainee.xaml</DependentUpon>
     </Compile>
+    <Page Include="Appeals\AppealDecision.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Appeals\AppealRequest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Appeals\AppeaTests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tests\AddTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

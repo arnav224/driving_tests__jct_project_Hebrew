@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Project01_0740_6125_dotNet5779_V01"
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="Project01_0740_6125_dotNet5779_V01.MainWindow"
         mc:Ignorable="d"
-        Title="AY " MinWidth="700" MinHeight="400" Height="600" Width="1000" SizeChanged="Window_SizeChanged" >
+        Title="AY " MinWidth="760" MinHeight="400" Height="600" Width="1000" SizeChanged="Window_SizeChanged" >
     <Grid>
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="RightToLeft">
             <TabItem Header="תלמידים" Width="80" >

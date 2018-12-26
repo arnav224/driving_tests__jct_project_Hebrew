@@ -53,6 +53,13 @@ namespace BE
             }
         }
 
+        private BE.AppealTest appealTest;
+        public BE.AppealTest AppealTest
+        {
+            get { return appealTest; }
+            set { appealTest = value; }
+        }
+
         private Dictionary<string, BE.Score> indices;
 
         public Dictionary<string, BE.Score> Indices
@@ -89,7 +96,7 @@ namespace BE
             }
         }
 
-        public bool? Passed { get; set; }
+        public bool Passed { get; set; }
         public string TesterNotes { get; set; }
         /// <summary>
         /// time of last Remeinder Email sending

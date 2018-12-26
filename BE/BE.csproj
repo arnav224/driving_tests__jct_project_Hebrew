@@ -34,7 +34,6 @@
     <Reference Include="GoogleMapsApi, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GoogleMapsApi.0.77.0\lib\net40\GoogleMapsApi.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

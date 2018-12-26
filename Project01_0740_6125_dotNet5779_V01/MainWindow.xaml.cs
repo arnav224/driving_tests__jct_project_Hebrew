@@ -104,6 +104,14 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestsTabUserControl.genderLabel.Visibility = Visibility.Collapsed;
             this.TestsTabUserControl.vehicleComboBox.Visibility = Visibility.Collapsed;
             this.TestsTabUserControl.vehicleLabel.Visibility = Visibility.Collapsed;
+            this.TestsTabUserControl.ApealsWondow.Visibility = Visibility.Visible;
+            this.TestsTabUserControl.ApealsWondow.Click += ApealsWondow_Click;
+        }
+
+        private void ApealsWondow_Click(object sender, RoutedEventArgs e)
+        {
+            new AppeaTests().ShowDialog();
+            ApplyTestsFiltering(this, new RoutedEventArgs());
         }
 
 
