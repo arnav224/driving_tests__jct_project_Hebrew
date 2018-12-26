@@ -86,8 +86,8 @@
                 <ColumnDefinition Width="8*" MinWidth="95"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="UpdateTestResultButton"  Content="עדכון תוצאות טסט" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" ToolTipService.ShowOnDisabled="True" />
-            <Button x:Name="UpdateButton" Content="עדכן" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" ToolTipService.ShowOnDisabled="True" />
+            <Button x:Name="UpdateTestResultButton"  Content="עדכון תוצאות טסט" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" ToolTipService.ShowOnDisabled="True" ToolTip="בחר טסט כדי לעדכן תוצאות"/>
+            <Button x:Name="UpdateButton" Content="עדכן" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" ToolTipService.ShowOnDisabled="True" ToolTip="בחר רשומות כדי לערוך"/>
             <Button x:Name="DeleteButton" Content="מחק" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" ToolTipService.ShowOnDisabled="True" ToolTip="בחר רשומות כדי למחוק"/>
 
         </Grid>

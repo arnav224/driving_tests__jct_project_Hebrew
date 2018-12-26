@@ -79,6 +79,7 @@ namespace BE
         }
     }
 
+    [Serializable]
     public class AppealTest
     {
         public DateTime RequestTime;
