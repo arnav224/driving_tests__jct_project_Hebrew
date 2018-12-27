@@ -39,7 +39,6 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TraineesTabUserControl.AddButton.Click += AddTraineeButton_Click;
             this.TraineesTabUserControl.UpdateButton.Click += UpdateTraineeButton_Click;
             this.TraineesTabUserControl.DeleteButton.Click += DeleteTraineeButton_Click;
-            this.TraineesTabUserControl.DataGrid.ItemsSource = bl.GetAllTrainees();
             this.TraineesTabUserControl.SearchTextBox.TextChanged += ApplyTraineesFiltering;
             this.TraineesTabUserControl.genderComboBox.SelectionChanged += ApplyTraineesFiltering;
             this.TraineesTabUserControl.gearBoxTypeComboBox.SelectionChanged += ApplyTraineesFiltering;
@@ -54,7 +53,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TraineesTabUserControl.gearBoxTypeComboBox.ItemsSource = Enum.GetValues(typeof(BE.GearBoxType));
             this.TraineesTabUserControl.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender));
             this.TraineesTabUserControl.vehicleComboBox.ItemsSource = Enum.GetValues(typeof(BE.Vehicle));
-
+            ApplyTraineesFiltering(this, new RoutedEventArgs());
 
 
             this.TestersTabUserControl.AddButton.Content = "הוסף בוחן";
@@ -63,7 +62,6 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestersTabUserControl.AddButton.Click += AddTesterButton_Click;
             this.TestersTabUserControl.UpdateButton.Click += UpdateTesterButton_Click;
             this.TestersTabUserControl.DeleteButton.Click += DeleteTesterButton_Click;
-            this.TestersTabUserControl.DataGrid.ItemsSource = bl.GetAllTesters();
             this.TestersTabUserControl.SearchTextBox.TextChanged += ApplyTestersFiltering;
             this.TestersTabUserControl.genderComboBox.SelectionChanged += ApplyTestersFiltering;
             this.TestersTabUserControl.gearBoxTypeComboBox.SelectionChanged += ApplyTestersFiltering;
@@ -79,7 +77,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestersTabUserControl.vehicleComboBox.ItemsSource = Enum.GetValues(typeof(BE.Vehicle));
             this.TestersTabUserControl.passedComboBox.Visibility = Visibility.Collapsed;
             this.TestersTabUserControl.passedLable.Visibility = Visibility.Collapsed;
-
+            ApplyTestersFiltering(this, new RoutedEventArgs());
 
 
             this.TestsTabUserControl.AddButton.Content = "הוסף טסט";
@@ -152,15 +150,31 @@ namespace Project01_0740_6125_dotNet5779_V01
                 passed = null;
             else
                 passed = ((ComboBoxItem)this.TraineesTabUserControl.passedComboBox.SelectedItem).Content.ToString() == "עבר" ? true : false;
-            this.TraineesTabUserControl.DataGrid.ItemsSource = null;
-            this.TraineesTabUserControl.DataGrid.ItemsSource = bl.GetAllTrainees(
+            this.TraineesTabUserControl.DataGrid.ItemsSource = from item in bl.GetAllTrainees(
                                         this.TraineesTabUserControl.SearchTextBox.Text,
                                         this.TraineesTabUserControl.genderComboBox.SelectedItem as BE.Gender?,
                                         this.TraineesTabUserControl.gearBoxTypeComboBox.SelectedItem as BE.GearBoxType?,
                                         this.TraineesTabUserControl.vehicleComboBox.SelectedItem as BE.Vehicle?,
                                         this.TraineesTabUserControl.FromTimeDatePicker.SelectedDate,
                                         this.TraineesTabUserControl.ToTimeDatePicker.SelectedDate,
-                                        passed); 
+                                        passed)
+                                        select new
+                                        {
+                                            FirstName = item.FirstName,
+                                            LastName = item.LastName,
+                                            ID = item.ID,
+                                            Gender = item.Gender,
+                                            BirthDate = item.BirthDate.ToString("dd/MM/yyyy"),
+                                            PhoneNumber = item.PhoneNumber,
+                                            Address = item.Address,
+                                            MailAddress = item.MailAddress,
+                                            Vehicle = item.Vehicle,
+                                            gearBoxType = item.gearBoxType,
+                                            DrivingSchoolName = item.DrivingSchoolName,
+                                            TeacherName = item.TeacherName,
+                                            NumOfDrivingLessons = item.NumOfDrivingLessons,
+                                            OnlyMyGender = item.OnlyMyGender
+                                        }; 
         }
 
         private void TraineesResetFilters(object sender, RoutedEventArgs e)
@@ -183,13 +197,13 @@ namespace Project01_0740_6125_dotNet5779_V01
                 Type type = e.OriginalSource.GetType();
                 if (type == typeof(DataGrid))
                 {
-                    foreach (Trainee item in e.AddedItems)
+                    foreach (dynamic item in e.AddedItems)
                     {
-                        selectedTrainees.Add(item);
+                        selectedTrainees.Add((Trainee)bl.GetAllTrainees(t=> t.ID == item.ID).First());
                     }
-                    foreach (Trainee item in e.RemovedItems)
+                    foreach (dynamic item in e.RemovedItems)
                     {
-                        selectedTrainees.Remove(item);
+                        selectedTrainees.RemoveAll(t => t.ID == item.ID);
                     }
                 }
                 this.TraineesTabUserControl.UpdateButton.IsEnabled = selectedTrainees.Count == 1;
@@ -231,14 +245,30 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void ApplyTestersFiltering(object sender, RoutedEventArgs e)
         {
-            this.TestersTabUserControl.DataGrid.ItemsSource = null;
-            this.TestersTabUserControl.DataGrid.ItemsSource = bl.GetAllTesters(
+            this.TestersTabUserControl.DataGrid.ItemsSource = from item in bl.GetAllTesters(
                                         this.TestersTabUserControl.SearchTextBox.Text,
                                         this.TestersTabUserControl.genderComboBox.SelectedItem as BE.Gender?,
                                         this.TestersTabUserControl.gearBoxTypeComboBox.SelectedItem as BE.GearBoxType?,
                                         this.TestersTabUserControl.vehicleComboBox.SelectedItem as BE.Vehicle?,
                                         this.TestersTabUserControl.FromTimeDatePicker.SelectedDate,
-                                        this.TestersTabUserControl.ToTimeDatePicker.SelectedDate);
+                                        this.TestersTabUserControl.ToTimeDatePicker.SelectedDate)
+                                        select new
+                                        {
+                                            FirstName = item.FirstName,
+                                            LastName = item.LastName,
+                                            ID = item.ID,
+                                            Gender = item.Gender,
+                                            BirthDate = item.BirthDate.ToString("dd/MM/yyyy"),
+                                            PhoneNumber = item.PhoneNumber,
+                                            Address = item.Address,
+                                            MailAddress = item.MailAddress,
+                                            Vehicle = item.Vehicle,
+                                            gearBoxType = item.gearBoxType,
+                                            Experience = item.Experience,
+                                            MaxTestsInWeek = item.MaxTestsInWeek,
+                                            WorkHours = item.WorkHours,
+                                            MaxDistanceInMeters = item.MaxDistanceInMeters
+                                        };
         }
 
         private void TestersResetFilters(object sender, RoutedEventArgs e)
@@ -258,13 +288,13 @@ namespace Project01_0740_6125_dotNet5779_V01
             Type type = e.OriginalSource.GetType();
             if (type == typeof(DataGrid))
             {
-                foreach (Tester item in e.AddedItems)
+                foreach (dynamic item in e.AddedItems)
                 {
-                    selectedTesters.Add(item);
+                    selectedTesters.Add(bl.GetAllTesters(t => t.ID == item.ID).First());
                 }
-                foreach (Tester item in e.RemovedItems)
+                foreach (dynamic item in e.RemovedItems)
                 {
-                    selectedTesters.Remove(item);
+                    selectedTesters.RemoveAll(t=> t.ID == item.ID);
                 }
             this.TestersTabUserControl.UpdateButton.IsEnabled = selectedTesters.Count == 1;
             this.TestersTabUserControl.DeleteButton.IsEnabled = selectedTesters.Count >= 1;
@@ -320,7 +350,6 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void ApplyTestsFiltering(object sender, RoutedEventArgs e)
         {
-            this.TestsTabUserControl.DataGrid.ItemsSource = null;
             this.TestsTabUserControl.DataGrid.ItemsSource = bl.GetAllTests(this.TestsTabUserControl.SearchTextBox.Text,
                                                                            this.TestsTabUserControl.FromTimeDatePicker.SelectedDate,
                                                                            this.TestsTabUserControl.ToTimeDatePicker.SelectedDate,
@@ -352,7 +381,12 @@ namespace Project01_0740_6125_dotNet5779_V01
                         selectedTests.Remove(item);
                     }
                 }
-                this.TestsTabUserControl.DeleteButton.IsEnabled = selectedTests.Count >= 1;
+                bool ExistOldTest = selectedTests.Any(t => t.Time < DateTime.Now);
+                this.TestsTabUserControl.DeleteButton.IsEnabled = selectedTests.Count >= 1 && !ExistOldTest;
+                if (ExistOldTest)
+                    this.TestsTabUserControl.DeleteButton.ToolTip = "לא ניתן למחוק טסט שזמנו עבר";
+                else
+                    this.TestsTabUserControl.DeleteButton.ToolTip = null;
                 this.TestsTabUserControl.DeleteButton.Content = selectedTests.Count > 1 ? "מחק טסטים" : "מחק טסט";
                 if (selectedTests.Count == 1)
                 {
@@ -375,9 +409,8 @@ namespace Project01_0740_6125_dotNet5779_V01
                 {
                     this.TestsTabUserControl.UpdateButton.IsEnabled = false;
                     this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
-                    this.TestsTabUserControl.UpdateTestResultButton.ToolTip = null;
-                    this.TestsTabUserControl.UpdateButton.ToolTip = null;
-                    this.TestsTabUserControl.UpdateButton.ToolTip = this.TestsTabUserControl.UpdateTestResultButton.ToolTip = "בחר טסט לעריכה";
+                    this.TestsTabUserControl.UpdateTestResultButton.ToolTip = "יש לבחור פריט אחד לעדכון";
+                    this.TestsTabUserControl.UpdateButton.ToolTip = "יש לבחור פריט אחד לעריכה";
                 }
             }
         }
