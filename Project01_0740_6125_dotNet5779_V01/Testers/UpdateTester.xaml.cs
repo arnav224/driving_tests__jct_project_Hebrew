@@ -44,6 +44,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.DayComboBox.ItemsSource = Enum.GetValues(typeof(BE.WeekDays));
             List<string> worsHours = (from item in tester.WorkHours select item.ToString()).ToList();
             this.WorkHoursDataGrid.ItemsSource = (from item in tester.WorkHours select new { OnetimePeriod = item.ToString() });
+            this.addressPicker.Address = tester.Address;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -228,5 +229,11 @@ namespace Project01_0740_6125_dotNet5779_V01
                     e.Cancel = true;
             }
         }
+
+        private void AddressPicker_TextChanged(object sender, EventArgs e)
+        {
+            tester.Address = this.addressPicker.Address;
+        }
+
     }
 }

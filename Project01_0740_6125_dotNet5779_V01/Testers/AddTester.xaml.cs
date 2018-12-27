@@ -210,5 +210,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        private void AddressPicker_TextChanged(object sender, EventArgs e)
+        {
+            tester.Address = this.addressPicker.Address;
+        }
+
+
     }
 }

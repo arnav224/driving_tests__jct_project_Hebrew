@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PLWPF.UserControls
+namespace Project01_0740_6125_dotNet5779_V01
 {
     /// <summary>
     /// Interaction logic for AddressPicker.xaml
@@ -107,6 +107,18 @@ namespace PLWPF.UserControls
         private void UserControl_LostFocus(object sender, RoutedEventArgs e)
         {
             ListBoxSuggestions.Visibility = Visibility.Collapsed;
+            if (ListBoxSuggestions.SelectedItem == null)
+            {
+                try
+                {
+                    TexBoxAddress.Text = BE.Tools.GetAddressSuggestionsGoogle(TexBoxAddress.Text, token).First();
+                }
+                catch (Exception)
+                {
+                    TexBoxAddress.Text = null;
+                }
+            TextChanged(this, e);
+            }
         }
 
         private void ListBoxSuggestions_SelectionChanged(object sender, SelectionChangedEventArgs e)

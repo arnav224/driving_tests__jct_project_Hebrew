@@ -29,7 +29,7 @@
             <TextBox x:Name="traineeIDTextBox" Width="120" IsEnabled="False" VerticalAlignment="Center" Text="{Binding TraineeID, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
 
             <Label VerticalAlignment="Center" Grid.Row="2" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="כתובת:"/>
-            <TextBox x:Name="addressTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Address, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <!--<TextBox x:Name="addressTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Address, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>-->
 
             <Label VerticalAlignment="Center" Grid.Row="3" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="תאריך:"/>
             <DatePicker x:Name="timeDatePicker" VerticalAlignment="Center" SelectedDate="{Binding Time, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Margin="3,5,5,5"  HorizontalAlignment="Stretch"  Grid.Column="1"/>
@@ -43,6 +43,8 @@
                 <TextBox x:Name="Time_hour" Grid.Column="1" Text="{Binding Hour, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="5,5,15,5" />
                 <TextBox x:Name="Time_minutes" Grid.Column="0" Text="{Binding Minute, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="15,5,5,5" />
             </Grid>
+
+            <local:AddressPicker x:Name="addressPicker" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="4,6,4,0" Grid.Row="2" Grid.RowSpan="4" VerticalAlignment="Top" TextChanged="AddressPicker_TextChanged" />
 
         </Grid>
         <Button Content="עדכן" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="15"  Width="75" Click="Button_Click"/>

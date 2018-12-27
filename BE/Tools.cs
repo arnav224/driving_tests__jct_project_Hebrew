@@ -44,6 +44,15 @@ namespace BE
             return result;
         }
 
+        [System.Runtime.InteropServices.DllImport("wininet.dll")]
+        private extern static bool InternetGetConnectedState(out int description, int reservedValue);
+
+        public static bool IsInternetAvailable()
+        {
+            int description;
+            return InternetGetConnectedState(out description, 0);
+        }
+
         /// <summary>
         /// Distance road trip between two addresses
         /// https://github.com/maximn/google-maps/blob/master/README.md
@@ -112,7 +121,7 @@ namespace BE
         {
             //return Maps_GetPlaceAutoComplete(input);//@
             var url = "https://maps.googleapis.com/maps/api/place/autocomplete/xml?input=" + input +
-                      "&types=address&location=31.728220,34.983749&radius=300000&key=" + Configuration.GoogleMapsApiKey + "&sessiontoken=" + token + "&language=he";
+                      "&types=address" /*+ "&location=31.728220,34.983749&radius=300000"*/ + "&key=" + Configuration.GoogleMapsApiKey + "&sessiontoken=" + token + "&language=he";
             try
             {
                 var xml = DownloadDataIntoXml(url);

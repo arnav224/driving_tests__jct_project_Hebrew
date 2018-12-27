@@ -53,6 +53,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.DataContext = test;
             this.Time_hour.DataContext = this;
             this.Time_minutes.DataContext = this;
+            this.addressPicker.Address = test.Address;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -99,5 +100,11 @@ namespace Project01_0740_6125_dotNet5779_V01
                     e.Cancel = true;
             }
         }
+
+        private void AddressPicker_TextChanged(object sender, EventArgs e)
+        {
+            test.Address = this.addressPicker.Address;
+        }
+
     }
 }

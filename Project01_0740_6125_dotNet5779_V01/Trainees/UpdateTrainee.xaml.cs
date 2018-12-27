@@ -31,7 +31,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.vehicleComboBox.ItemsSource = Enum.GetValues(typeof(BE.Vehicle));
             //trainee = bl.GetAllTrainees(t => t.ID == ((MainWindow)Application.Current.MainWindow).TraineesTabUserControl.Update_IdTextBox.Text).FirstOrDefault();
             this.DataContext = trainee;
-
+            this.addressPicker.Address = trainee.Address;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -74,5 +74,11 @@ namespace Project01_0740_6125_dotNet5779_V01
                     e.Cancel = true;
             }
         }
+
+        private void AddressPicker_TextChanged(object sender, EventArgs e)
+        {
+            trainee.Address = this.addressPicker.Address;
+        }
+
     }
 }

@@ -4,12 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-//using System.Net.Mail;
-//using System.Net;
-//using GoogleMapsApi;
-//using GoogleMapsApi.Entities.Directions.Request;
-//using GoogleMapsApi.Entities.Directions.Response;
-//using GoogleMapsApi.Entities.PlaceAutocomplete.Request;
 using BE;
 
 namespace DAL
@@ -84,21 +78,21 @@ namespace DAL
         public IEnumerable<BE.Tester> GetAllTesters(Func<BE.Tester, bool> predicate = null)
         {
             if (predicate == null)
-                return DS.DataSource.testers.AsEnumerable();
+                return DS.DataSource.testers.AsEnumerable().Select(t => t.Clone());
             return DS.DataSource.testers.Where(predicate).Select(t => t.Clone());
         }
 
         public IEnumerable<BE.Test> GetAllTests(Func<BE.Test, bool> predicate = null)
         {
             if (predicate == null)
-                return DS.DataSource.tests.AsEnumerable();
+                return DS.DataSource.tests.AsEnumerable().Select(t => t.Clone());
             return DS.DataSource.tests.Where(predicate).Select(t => t.Clone());
         }
 
         public IEnumerable<BE.Trainee> GetAllTrainees(Func<BE.Trainee, bool> predicate = null)
         {
             if (predicate == null)
-                return DS.DataSource.trainees.AsEnumerable();
+                return DS.DataSource.trainees.AsEnumerable().Select(t => t.Clone());
             return DS.DataSource.trainees.Where(predicate).Select(t => t.Clone());
         }
 

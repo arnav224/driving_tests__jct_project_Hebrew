@@ -61,7 +61,7 @@
                 <DatePicker x:Name="birthDateDatePicker" VerticalAlignment="Center"  SelectedDate="{Binding BirthDate, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" HorizontalAlignment="Stretch" Margin="3,3,3,5" Grid.Column="1"/>
 
                 <Label VerticalAlignment="Center" Grid.Row="5" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="כתובת:"/>
-                <TextBox x:Name="addressTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Address, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+                <!--<TextBox x:Name="addressTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Address, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>-->
 
                 <Label VerticalAlignment="Center" Grid.Row="6" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="כתובת מייל:"/>
                 <TextBox x:Name="mailAddressTextBox" Width="120" VerticalAlignment="Center" Text="{Binding MailAddress, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
@@ -85,6 +85,7 @@
 
                 <Label VerticalAlignment="Center" Grid.Row="12" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="מקסימום טסטים לשבוע:"/>
                 <TextBox x:Name="maxTestsInWeekTextBox" Width="120" VerticalAlignment="Center" Text="{Binding MaxTestsInWeek, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="12" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+                <local:AddressPicker x:Name="addressPicker" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="4,6,4,0" Grid.Row="5" Grid.RowSpan="4" VerticalAlignment="Top" TextChanged="AddressPicker_TextChanged" />
 
             </Grid>
             <Grid x:Name="WorkHoursGrid" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10" Validation.Error="time_validation_Error">

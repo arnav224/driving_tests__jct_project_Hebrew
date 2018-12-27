@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Project01_0740_6125_dotNet5779_V01"
         xmlns:BE="clr-namespace:BE;assembly=BE"
         xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
-        xmlns:UserControls="clr-namespace:PLWPF.UserControls" x:Class="Project01_0740_6125_dotNet5779_V01.AddTrainee"
+         x:Class="Project01_0740_6125_dotNet5779_V01.AddTrainee"
         mc:Ignorable="d"
         Closing="Window_Closing"
         Validation.Error="validation_Error"  
@@ -50,10 +50,6 @@
 
             <Label Content="כתובת:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
 
-            <!--<TextBox x:Name="addressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding Address, NotifyOnValidationError=true, ValidatesOnExceptions=true, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged }"
-                     behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding AddressAutoComplite}" VerticalAlignment="Center" Width="120" >
-            </TextBox>-->
-
             <Label Content="כתובת מייל:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
             <TextBox x:Name="mailAddressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="6" Text="{Binding MailAddress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnDataErrors=True, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
 
@@ -77,7 +73,7 @@
 
             <Label Content="מבקש התאמת בוחן לפי מין:" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="13" VerticalAlignment="Center"/>
             <CheckBox x:Name="onlyMyGenderCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Center"  IsChecked="{Binding OnlyMyGender, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnDataErrors=True, ValidatesOnExceptions=true}" Margin="3" Grid.Row="13" VerticalAlignment="Center"/>
-            <UserControls:AddressPicker x:Name="addressPicker" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="4,6,4,0" Grid.Row="5" Grid.RowSpan="4" VerticalAlignment="Top" TextChanged="AddressPicker_TextChanged"  />
+            <local:AddressPicker x:Name="addressPicker" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="4,6,4,0" Grid.Row="5" Grid.RowSpan="4" VerticalAlignment="Top" TextChanged="AddressPicker_TextChanged" />
         </Grid>
         <Button Content="הוסף" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="10" Width="75" Click="AddButton_Click"/>
     </Grid>

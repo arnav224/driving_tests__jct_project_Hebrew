@@ -116,14 +116,26 @@ namespace Project01_0740_6125_dotNet5779_V01
         #region TraineesTab
         private void AddTraineeButton_Click(object sender, RoutedEventArgs e)
         {
-            new AddTrainee().ShowDialog();
-            ApplyTraineesFiltering(this, new RoutedEventArgs());
+            if (!BE.Tools.IsInternetAvailable())
+               MessageBox.Show("בדוק את החיבור שלך לרשת", "אין חיבור לרשת", MessageBoxButton.OK,
+                               MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            else
+            {
+                new AddTrainee().ShowDialog();
+                ApplyTraineesFiltering(this, new RoutedEventArgs());
+            }
         }
 
         private void UpdateTraineeButton_Click(object sender, RoutedEventArgs e)
         {
-            new UpdateTrainee().ShowDialog();
-            ApplyTraineesFiltering(this, new RoutedEventArgs());
+            if (!BE.Tools.IsInternetAvailable())
+                MessageBox.Show("בדוק את החיבור שלך לרשת", "אין חיבור לרשת", MessageBoxButton.OK,
+                                MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            else
+            {
+                new UpdateTrainee().ShowDialog();
+                ApplyTraineesFiltering(this, new RoutedEventArgs());
+            }
         }
 
         private void DeleteTraineeButton_Click(object sender, RoutedEventArgs e)
@@ -217,14 +229,26 @@ namespace Project01_0740_6125_dotNet5779_V01
         #region TestersTab
         private void AddTesterButton_Click(object sender, RoutedEventArgs e)
         {
-            new AddTester().ShowDialog();
-            ApplyTestersFiltering(this, new RoutedEventArgs());
+            if (!BE.Tools.IsInternetAvailable())
+                MessageBox.Show("בדוק את החיבור שלך לרשת", "אין חיבור לרשת", MessageBoxButton.OK,
+                                MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            else
+            {
+                new AddTester().ShowDialog();
+                ApplyTestersFiltering(this, new RoutedEventArgs());
+            }
         }
 
         private void UpdateTesterButton_Click(object sender, RoutedEventArgs e)
         {
-            new UpdateTester().ShowDialog();
-            ApplyTestersFiltering(this, new RoutedEventArgs());
+            if (!BE.Tools.IsInternetAvailable())
+                MessageBox.Show("בדוק את החיבור שלך לרשת", "אין חיבור לרשת", MessageBoxButton.OK,
+                                MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            else
+            {
+                new UpdateTester().ShowDialog();
+                ApplyTestersFiltering(this, new RoutedEventArgs());
+            }
         }
 
         private void DeleteTesterButton_Click(object sender, RoutedEventArgs e)
@@ -307,17 +331,29 @@ namespace Project01_0740_6125_dotNet5779_V01
         #region TestsTab
         private void AddTestButton_Click(object sender, RoutedEventArgs e)
         {
-            new AddTest().ShowDialog();
-            ApplyTestsFiltering(this, e);
+            if (!BE.Tools.IsInternetAvailable())
+                MessageBox.Show("בדוק את החיבור שלך לרשת", "אין חיבור לרשת", MessageBoxButton.OK,
+                                MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            else
+            {
+                new AddTest().ShowDialog();
+                ApplyTestsFiltering(this, e);
+            }
         }
 
         private void UpdateTestButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!BE.Tools.IsInternetAvailable())
+                MessageBox.Show("בדוק את החיבור שלך לרשת", "אין חיבור לרשת", MessageBoxButton.OK,
+                                MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            else
+            {
             new UpdateTest().ShowDialog();
             ApplyTestsFiltering(this, e);
             this.TestsTabUserControl.DeleteButton.IsEnabled = false;
             this.TestsTabUserControl.UpdateButton.IsEnabled = false;
             this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
+            }
         }
 
         private void UpdateTestResultButton_Click(object sender, RoutedEventArgs e)

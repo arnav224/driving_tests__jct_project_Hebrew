@@ -22,7 +22,7 @@ namespace BL
         /// <param name="test"></param>
         public void AddTest(BE.Test test)
         {
-            if (test.Address == null || test.Address == "" ||test.TraineeID == null || test.TraineeID == "")
+            if (test.Address == null || test.Address == "" || test.TraineeID == null || test.TraineeID == "")
                 throw new Exception("חובה למלא את כל השדות");
             BE.Trainee trainee = IDAL.GetTraineeCopy(test.TraineeID);
             if (trainee == null)
@@ -109,9 +109,11 @@ namespace BL
         /// <param name="tester"></param>
         public void AddTester(BE.Tester tester)
         {
-            if (tester.Address == null || tester.BirthDate == null || tester.FirstName == null
-                || tester.ID == null || tester.LastName == null || tester.MailAddress == null
-                || tester.PhoneNumber == null || tester.WorkHours == null )
+            if (tester.Address == null || tester.Address == "" || tester.BirthDate == default(DateTime)
+                || tester.FirstName == null || tester.FirstName == ""
+                || tester.ID == null || tester.ID == "" || tester.LastName == null || tester.LastName == ""
+                || tester.MailAddress == null || tester.MailAddress == ""
+                || tester.PhoneNumber == null || tester.PhoneNumber == "" || tester.WorkHours == null)
                 throw new Exception("חובה למלא את כל הפרטים");
             if (DateTime.Now.Year - tester.BirthDate.Year < BE.Configuration.MinimumTesterAge)
                 throw new Exception("אין אפשרות להוסיף בוחן מתחת לגיל 40");
@@ -124,9 +126,11 @@ namespace BL
         /// <param name="trainee"></param>
         public void AddTrainee(Trainee trainee)
         {
-            if (trainee.Address == null || trainee.BirthDate == null || trainee.FirstName == null 
-                || trainee.LastName == null || trainee.PhoneNumber == null || trainee.TeacherName == null 
-                || trainee.DrivingSchoolName == null)
+            if (trainee.Address == null || trainee.Address == "" || trainee.BirthDate == default(DateTime)
+                || trainee.FirstName == null || trainee.FirstName == ""
+                || trainee.LastName == null || trainee.LastName == "" || trainee.PhoneNumber == null || trainee.PhoneNumber == ""
+                || trainee.TeacherName == null || trainee.TeacherName == ""
+                || trainee.DrivingSchoolName == null || trainee.DrivingSchoolName == "")
                 throw new Exception("חובה למלא את כל הפרטים");
             BE.Trainee ExsistTrainee = IDAL.GetTraineeCopy(trainee.ID);
             if (ExsistTrainee != null)
