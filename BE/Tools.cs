@@ -10,6 +10,7 @@ using GoogleMapsApi.Entities.Directions.Request;
 using GoogleMapsApi.Entities.Directions.Response;
 using GoogleMapsApi.Entities.PlaceAutocomplete.Request;
 using System.Xml.Linq;
+using System.IO;
 //using System.Windows.Controls;
 
 namespace BE
@@ -121,7 +122,8 @@ namespace BE
         {
             //return Maps_GetPlaceAutoComplete(input);//@
             var url = "https://maps.googleapis.com/maps/api/place/autocomplete/xml?input=" + input +
-                      "&types=address" /*+ "&location=31.728220,34.983749&radius=300000"*/ + "&key=" + Configuration.GoogleMapsApiKey + "&sessiontoken=" + token + "&language=he";
+                      "&types=address" /*+ "&location=31.728220,34.983749&radius=300000"*/ + "&key=" 
+                      + Configuration.GoogleMapsApiKey + "&sessiontoken=" + token + "&&components=country:il&language=iw";
             try
             {
                 var xml = DownloadDataIntoXml(url);
@@ -156,6 +158,28 @@ namespace BE
 
             //throw new GoogleAddressException("Google URL is not correct", "WRONG_URL");
             throw new Exception();
+        }
+
+        static public bool sendTry1()
+        {
+            try
+            {
+                string MessageTosend = File.ReadAllText("email.html");
+                var client = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    Credentials = new NetworkCredential(Configuration.SenderEmailAddress.Address, Configuration.EmailServerPasword),
+                    EnableSsl = true
+                };
+                MailMessage mailMessage = new MailMessage("avraham224@gmail.com", "avraham224@gmail.com") { Body = MessageTosend, IsBodyHtml = true, };
+                client.Send(mailMessage);
+                //client.Send(Configuration.SenderEmailAddress, recipients, subject, body);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
 
     }
