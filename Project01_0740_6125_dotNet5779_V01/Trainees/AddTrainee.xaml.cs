@@ -71,5 +71,10 @@ namespace Project01_0740_6125_dotNet5779_V01
                     e.Cancel = true;
             }
         }
+
+        private void AddressPicker_TextChanged(object sender, EventArgs e)
+        {
+            trainee.Address = this.addressPicker.Address;
+        }
     }
 }

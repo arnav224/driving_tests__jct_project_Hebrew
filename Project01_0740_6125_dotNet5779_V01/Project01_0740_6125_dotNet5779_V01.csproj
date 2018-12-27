@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddrssPicker.xaml.cs">
+      <DependentUpon>AddrssPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Appeals\AppealDecision.xaml.cs">
       <DependentUpon>AppealDecision.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
     <Compile Include="Trainees\UpdateTrainee.xaml.cs">
       <DependentUpon>UpdateTrainee.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddrssPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Appeals\AppealDecision.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

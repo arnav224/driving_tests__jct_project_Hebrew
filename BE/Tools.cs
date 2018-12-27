@@ -9,6 +9,7 @@ using GoogleMapsApi;
 using GoogleMapsApi.Entities.Directions.Request;
 using GoogleMapsApi.Entities.Directions.Response;
 using GoogleMapsApi.Entities.PlaceAutocomplete.Request;
+using System.Xml.Linq;
 //using System.Windows.Controls;
 
 namespace BE
@@ -24,8 +25,9 @@ namespace BE
         {
             if (str == null || str.Length == 0)
                return new List<string>() { "" };
+
             //@@ Currently disabled manually
-            return new List<string>() {  str /*+ "מושבת"*/ };
+            //return new List<string>() {  str /*+ "מושבת"*/ };
             //@@
 
             List<string> result = new List<string>();
@@ -102,6 +104,49 @@ namespace BE
             {
                 return false;
             }
+        }
+
+
+
+        public static List<string> GetAddressSuggestionsGoogle(string input, string token)
+        {
+            //return Maps_GetPlaceAutoComplete(input);//@
+            var url = "https://maps.googleapis.com/maps/api/place/autocomplete/xml?input=" + input +
+                      "&types=address&location=31.728220,34.983749&radius=300000&key=" + Configuration.GoogleMapsApiKey + "&sessiontoken=" + token + "&language=he";
+            try
+            {
+                var xml = DownloadDataIntoXml(url);
+                return (from adr in xml.Elements()
+                        where adr.Name == "prediction"
+                        select (string)adr.Element("description").Value
+                    ).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        private static XElement DownloadDataIntoXml(string url)
+        {
+            //check the url
+            if (url.ToLower().IndexOf("https:") > -1 || url.ToLower().IndexOf("http:") > -1)
+            {
+                //download the data into an xml
+                var wc = new WebClient();
+                var response = wc.DownloadData(url);
+                var content = Encoding.UTF8.GetString(response);
+                var xml = XElement.Parse(content);
+
+                //check the request state
+                if (xml.Element("status").Value != "OK")
+                    throw new Exception();
+                    //throw new GoogleAddressException("Google returns the next error: ", xml.Element("status").Value);
+
+                return xml;
+            }
+
+            //throw new GoogleAddressException("Google URL is not correct", "WRONG_URL");
+            throw new Exception();
         }
 
     }
