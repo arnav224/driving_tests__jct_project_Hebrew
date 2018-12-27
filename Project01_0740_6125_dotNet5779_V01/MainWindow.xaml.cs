@@ -103,14 +103,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestsTabUserControl.vehicleComboBox.Visibility = Visibility.Collapsed;
             this.TestsTabUserControl.vehicleLabel.Visibility = Visibility.Collapsed;
             this.TestsTabUserControl.ApealsWondow.Visibility = Visibility.Visible;
+            this.TestsTabUserControl.AppealButton.Visibility = Visibility.Visible;
+            this.TestsTabUserControl.AppealButton.Click += AppealButton_Click;
             this.TestsTabUserControl.ApealsWondow.Click += ApealsWondow_Click;
         }
 
-        private void ApealsWondow_Click(object sender, RoutedEventArgs e)
-        {
-            new AppeaTests().ShowDialog();
-            ApplyTestsFiltering(this, new RoutedEventArgs());
-        }
 
 
         #region TraineesTab
@@ -129,15 +126,34 @@ namespace Project01_0740_6125_dotNet5779_V01
         private void DeleteTraineeButton_Click(object sender, RoutedEventArgs e)
         {
             string Trainees = "";
-            foreach (var item in selectedTrainees)
-                Trainees += item.ToString() + "\n\n";
+            foreach (var TraineeItem in selectedTrainees)
+            {
+                Trainees += TraineeItem.ToString();
+                IEnumerable<Test> testsOfOne = bl.GetAllTests(t => t.TraineeID == TraineeItem.ID);
+                if (testsOfOne.Any())
+                {
+                    Trainees += " תלמיד זה רשום " + (testsOfOne.Count() > 1 ? "לטסטים בתאריכים הבאים: \n" : "לטסט בתאריך: \n");
+                    foreach (var TestItem in testsOfOne)
+                    {
+                        Trainees += TestItem.Time.ToString("dd/MM/yyyy") + ' ';
+                    }
+                    Trainees += "\n";
+                }
+            }
             string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + selectedTrainees.Count + (selectedTrainees.Count == 1 ? " התלמיד שנבחר\n\n" : " התלמידים שנבחרו\n\n") + Trainees;
             MessageBoxResult result = MessageBox.Show(messegeBody, "אישור מחיקה" ,MessageBoxButton.YesNo,
                                                       MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
             if (result == MessageBoxResult.Yes)
             {
-                foreach (var item in selectedTrainees)
-                    bl.RemoveTrainee(item.ID);
+                foreach (var TraineeItem in selectedTrainees)
+                {
+                    List<Test> testsOfOne = bl.GetAllTests(t => t.TraineeID == TraineeItem.ID).ToList();
+                    foreach (var TestItem in testsOfOne)
+                    {
+                        bl.RemoveTest(TestItem.TestID);
+                    }
+                    bl.RemoveTrainee(TraineeItem.ID);
+                }
                 ApplyTraineesFiltering(this, e);
                 ApplyTestsFiltering(this, new RoutedEventArgs());
             }
@@ -305,6 +321,17 @@ namespace Project01_0740_6125_dotNet5779_V01
         #endregion
 
         #region TestsTab
+        private void AppealButton_Click(object sender, RoutedEventArgs e)
+        {
+            new AppealRequest().ShowDialog();
+            ApplyTestsFiltering(this, new RoutedEventArgs());
+        }
+
+        private void ApealsWondow_Click(object sender, RoutedEventArgs e)
+        {
+            new AppeaTests().ShowDialog();
+            ApplyTestsFiltering(this, new RoutedEventArgs());
+        }
         private void AddTestButton_Click(object sender, RoutedEventArgs e)
         {
             new AddTest().ShowDialog();
@@ -396,6 +423,14 @@ namespace Project01_0740_6125_dotNet5779_V01
                         this.TestsTabUserControl.UpdateButton.ToolTip = "לא ניתן לערוך פרטים לטסט שכבר נעשה";
                         this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = true;
                         this.TestsTabUserControl.UpdateTestResultButton.ToolTip = null;
+                        if (selectedTests[0].Passed == null)
+                            this.TestsTabUserControl.AppealButton.ToolTip = "לא התקבלו תוצאות לטסט";
+                        else if (selectedTests[0].Passed == true)
+                            this.TestsTabUserControl.AppealButton.ToolTip = "התוצאה - עבר";
+                        else if (selectedTests[0].AppealTest != null)
+                            this.TestsTabUserControl.AppealButton.ToolTip = "לטסט זה כבר הוגש ערעור";
+                        else
+                            this.TestsTabUserControl.AppealButton.IsEnabled = true;
                     }
                     else
                     {
@@ -403,6 +438,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                         this.TestsTabUserControl.UpdateButton.ToolTip = null;
                         this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
                         this.TestsTabUserControl.UpdateTestResultButton.ToolTip = "לא ניתן לעדכן תוצאות לטסט שעדיין לא בוצע";
+                        this.TestsTabUserControl.AppealButton.ToolTip = "טרם התבצע הטסט";
                     }
                 }
                 else
@@ -411,6 +447,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                     this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
                     this.TestsTabUserControl.UpdateTestResultButton.ToolTip = "יש לבחור פריט אחד לעדכון";
                     this.TestsTabUserControl.UpdateButton.ToolTip = "יש לבחור פריט אחד לעריכה";
+                    this.TestsTabUserControl.AppealButton.ToolTip = "יש לבחור פריט אחד לערעור";
                 }
             }
         }
