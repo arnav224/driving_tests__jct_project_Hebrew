@@ -409,7 +409,7 @@ namespace BL
         /// <returns></returns>
         public bool PassedTest(string TrayneeId)
         {
-            return IDAL.GetAllTests(test => test.Passed && test.TraineeID == TrayneeId).Any();
+            return IDAL.GetAllTests(test => test.Passed != null && test.TraineeID == TrayneeId).Any();
         }
 
         // Note: In development

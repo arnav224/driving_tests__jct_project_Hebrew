@@ -96,7 +96,7 @@ namespace BE
             }
         }
 
-        public bool Passed { get; set; }
+        public bool? Passed { get; set; }
         public string TesterNotes { get; set; }
         /// <summary>
         /// time of last Remeinder Email sending
@@ -113,7 +113,7 @@ namespace BE
             return "מספר סידורי: " + TestID + ", מספר בוחן: " + TesterID + ", מספר תלמיד: " + TraineeID 
                 + ", מקום: " + Address + ", תאריך ושעה: " + Time.ToString("MM/dd/yyyy HH:mm") + ',' 
                 + (Time > DateTime.Now ? " טרם התבצע הטסט." : (indices != null && indices.Any(t=> t.Value != Score.עבר) ?
-                " תוצאה: " + (Passed? "עבר":"לא עבר") + ", הערות: " + TesterNotes + '.': ""));
+                " תוצאה: " + (Passed != null ? "עבר":"לא עבר") + ", הערות: " + TesterNotes + '.': ""));
         }
     }
 }
