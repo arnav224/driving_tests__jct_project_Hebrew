@@ -149,8 +149,8 @@ namespace Project01_0740_6125_dotNet5779_V01
                     {
                         Trainees += TestItem.Time.ToString("dd/MM/yyyy") + ' ';
                     }
-                    Trainees += "\n";
                 }
+                Trainees += "\n\n";
             }
             string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + selectedTrainees.Count + (selectedTrainees.Count == 1 ? " התלמיד שנבחר\n\n" : " התלמידים שנבחרו\n\n") + Trainees;
             MessageBoxResult result = MessageBox.Show(messegeBody, "אישור מחיקה" ,MessageBoxButton.YesNo,
@@ -264,22 +264,44 @@ namespace Project01_0740_6125_dotNet5779_V01
             {
                 new UpdateTester().ShowDialog();
                 ApplyTestersFiltering(this, new RoutedEventArgs());
+                ApplyTestsFiltering(this, new RoutedEventArgs());
             }
         }
 
         private void DeleteTesterButton_Click(object sender, RoutedEventArgs e)
         {
             string Testers = "";
-            foreach (var item in selectedTesters)
-                Testers += item.ToString() + "\n\n";
+            foreach (var TesterItem in selectedTesters)
+            {
+                Testers += TesterItem.ToString() + "\n";
+                IEnumerable<Test> testsOfOne = bl.GetAllTests(t => t.TesterID == TesterItem.ID && t.Time > DateTime.Now);
+                if (testsOfOne.Any())
+                {
+                    Testers += " בוחן זה רשום " + (testsOfOne.Count() > 1 ? "לטסטים בתאריכים הבאים: \n" : "לטסט בתאריך: \n");
+                    foreach (var TestItem in testsOfOne)
+                    {
+                        Testers += TestItem.Time.ToString("dd/MM/yyyy") + ' ';
+                    }
+                }
+                Testers += "\n\n";
+            }
             string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + selectedTesters.Count + (selectedTesters.Count == 1 ? " הבוחן שנבחר\n\n" : " הבוחנים שנבחרו\n\n") + Testers;
             MessageBoxResult result = MessageBox.Show(messegeBody, "אישור מחיקה", MessageBoxButton.YesNo,
                                                       MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
             if (result == MessageBoxResult.Yes)
             {
-                foreach (var item in selectedTesters)
-                    bl.RemoveTester(item.ID);
+                foreach (var TesterItem in selectedTesters)
+                {
+                    List<Test> testsOfOne = bl.GetAllTests(t => t.TesterID == TesterItem.ID && t.Time > DateTime.Now).ToList();
+                    foreach (var TestItem in testsOfOne)
+                    {
+                        //bl.EmailAboutTest(TestItem);@@@ פונקציה לא קיימת 
+                        bl.RemoveTest(TestItem.TestID);
+                    }
+                    bl.RemoveTester(TesterItem.ID);
+                }
                 ApplyTestersFiltering(this, new RoutedEventArgs());
+                ApplyTestsFiltering(this, new RoutedEventArgs());
             }
         }
 

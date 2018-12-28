@@ -126,7 +126,7 @@ namespace BE
                       + Configuration.GoogleMapsApiKey + "&sessiontoken=" + token + "&&components=country:il&language=iw";
             try
             {
-                var xml = DownloadDataIntoXml(url);
+                var xml =  DownloadDataIntoXml(url);
                 return (from adr in xml.Elements()
                         where adr.Name == "prediction"
                         select (string)adr.Element("description").Value
