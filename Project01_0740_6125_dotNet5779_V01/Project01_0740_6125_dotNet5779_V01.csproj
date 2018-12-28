@@ -181,6 +181,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\BE.Configuration.datasource" />
     <None Include="Properties\DataSources\BE.Test.datasource" />
     <None Include="Properties\DataSources\BE.Tester.datasource" />
     <None Include="Properties\DataSources\BE.Trainee.datasource" />
