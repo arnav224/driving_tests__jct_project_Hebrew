@@ -349,6 +349,7 @@ namespace Project01_0740_6125_dotNet5779_V01
         {
             new AppealRequest().ShowDialog();
             ApplyTestsFiltering(this, new RoutedEventArgs());
+            this.TestsTabUserControl.AppealButton.IsEnabled = false;
         }
 
         private void ApealsWondow_Click(object sender, RoutedEventArgs e)
