@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BE;
 
 namespace Project01_0740_6125_dotNet5779_V01
 {
@@ -23,6 +24,9 @@ namespace Project01_0740_6125_dotNet5779_V01
         List<string> errorMessages = new List<string>();
         List<string> timeErrorMessages = new List<string>();
         BE.Tester tester;
+        List<BE.Test> TestsToRemove1 = new List<Test>();
+        List<BE.Test> TestsToRemove2;
+        List<BE.Test> TestsToRemain;
         List<BE.TimePeriod> timePeriodsToRemove = new List<BE.TimePeriod>();
         public UpdateTester()
         {
@@ -49,6 +53,21 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            TestsToRemain = bl.GetAllTests(test => test.Time > DateTime.Now && tester.WorkHours.Any(t => tester.ID == test.TesterID
+                              && t.Start.Days == (int)test.Time.DayOfWeek
+                              && t.Start.Subtract(new TimeSpan(t.Start.Days, 0, 0, 0)) <= test.Time.TimeOfDay
+                              && t.End.Subtract(new TimeSpan(t.Start.Days, 0, 0, 0)) >= test.Time.TimeOfDay + BE.Configuration.TestTimeSpan)).ToList();
+
+            foreach (var TestItem in TestsToRemain)
+            {
+                if (TestsToRemove1.Any(t => t.ToString() == TestItem.ToString()))
+                    TestsToRemove1.RemoveAll(t=> t.TestID == TestItem.TestID);
+            }
+            foreach (var TestItem in TestsToRemove1)
+            {
+                //bl.EmailAboutTest(TestItem);@@@ פונקציה לא קיימת 
+                bl.RemoveTest(TestItem.TestID);
+            }
             if (errorMessages.Any())
             {
                 string err = "Exception:";
@@ -133,6 +152,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        public List<Test> TestsToRemove11 { get => TestsToRemove1; set => TestsToRemove1 = value; }
 
         private void AddTimePeriodButton_Click(object sender, RoutedEventArgs e)
         {
@@ -194,15 +214,35 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void RemoveTimePeriod_Click(object sender, RoutedEventArgs e)
         {
-            if (timePeriodsToRemove.Any(t=> bl.GetAllTests(test=> tester.ID == test.TesterID
-                && t.Start.Days == (int)test.Time.DayOfWeek 
-                && t.Start.Subtract(new TimeSpan(t.Start.Days, 0, 0, 0)) <= test.Time.TimeOfDay 
-                && t.End.Subtract(new TimeSpan(t.Start.Days, 0, 0, 0)) >= test.Time.TimeOfDay + BE.Configuration.TestTimeSpan).Any()))
+            string RemovingTimePeriods = "";
+            TestsToRemove2 = bl.GetAllTests(test => test.Time > DateTime.Now && timePeriodsToRemove.Any(t => tester.ID == test.TesterID
+                && t.Start.Days == (int)test.Time.DayOfWeek
+                && t.Start.Subtract(new TimeSpan(t.Start.Days, 0, 0, 0)) <= test.Time.TimeOfDay
+                && t.End.Subtract(new TimeSpan(t.Start.Days, 0, 0, 0)) >= test.Time.TimeOfDay + BE.Configuration.TestTimeSpan)).ToList();
+            //if (timePeriodsToRemove.Any(t=> bl.GetAllTests(test=> tester.ID == test.TesterID
+            //    && t.Start.Days == (int)test.Time.DayOfWeek 
+            //    && t.Start.Subtract(new TimeSpan(t.Start.Days, 0, 0, 0)) <= test.Time.TimeOfDay 
+            //    && t.End.Subtract(new TimeSpan(t.Start.Days, 0, 0, 0)) >= test.Time.TimeOfDay + BE.Configuration.TestTimeSpan).Any()))
+            if (TestsToRemove2.Any())
             {
-                MessageBox.Show("לא ניתן להסיר זמני עבודה שכבר שמורים לטסטים", "שגיאה - זמן העבודה שמור לטסט", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                RemovingTimePeriods += " בפעולה זו ימחקו גם הטסטים שמתוכננים " + (TestsToRemove2.Count() > 1 ? "לזמנים אלו: \n" : "לזמן זה: \n");
+                foreach (var TestItem in TestsToRemove2)
+                {
+                    RemovingTimePeriods += TestItem.Time.ToString("dd/MM/yyyy HH:mm") + ' ';
+                }
+                RemovingTimePeriods += "\n\n";
+                string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + timePeriodsToRemove.Count + (timePeriodsToRemove.Count == 1 ? " הזמן שנבחר\n\n" : " הזמנים שנבחרו\n\n") + RemovingTimePeriods;
+                MessageBoxResult result = MessageBox.Show(messegeBody, "אישור מחיקה", MessageBoxButton.YesNo,
+                                                          MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
+                if (result == MessageBoxResult.No)
+                {
+                    TestsToRemove2 = null;
+                    return;
+                }
+                TestsToRemove1.AddRange(TestsToRemove2);
+                //MessageBox.Show("לא ניתן להסיר זמני עבודה שכבר שמורים לטסטים", "שגיאה - זמן העבודה שמור לטסט", MessageBoxButton.OK, MessageBoxImage.Error);
+                //return;
             }
-
             foreach (var item in timePeriodsToRemove)
             {
                 tester.WorkHours.Remove(item);
