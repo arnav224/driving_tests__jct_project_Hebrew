@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project01_0740_6125_dotNet5779_V01"
         mc:Ignorable="d"
-        Title="AppealRequest" Height="450" Width="800">
+        Closing="Window_Closing"
+        Title="טופס ערעור" Height="350" Width="600" FlowDirection="RightToLeft">
     <Grid>
-        
+        <Grid x:Name="grid1" VerticalAlignment="Stretch"  HorizontalAlignment="Center" Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="WelcomeTextBlock" HorizontalAlignment="Left" Margin="15" TextWrapping="Wrap" Grid.Row="0" Text="{Binding}" VerticalAlignment="Stretch"/>
+            <Label x:Name="AppealLabel" Content="כתוב בפרוט את טענותיך" Margin="15" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Stretch"/>
+            <TextBox x:Name="AppealTextBox" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.Row="2" TextWrapping="Wrap"  Width="550" Height="120" Text="">
+            </TextBox>
+
+        </Grid>
+        <Button x:Name="SendButton"  Content="שלח"  Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="15"  Width="75" Click="Button_Click" IsEnabled="False"/>
+
     </Grid>
 </Window>
