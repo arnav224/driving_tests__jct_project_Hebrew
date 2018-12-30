@@ -35,5 +35,20 @@
     <Setting Name="FridayWorkEndHour" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">14</Value>
     </Setting>
+    <Setting Name="SenderEmailAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">avraham224@gmail.com</Value>
+    </Setting>
+    <Setting Name="EmailServerPasword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">hluuarmauvxfpzfs</Value>
+    </Setting>
+    <Setting Name="GoogleMapsApiKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AIzaSyBzz5Hd1UJW7NKf27JvD4HB0nBfLM4qfJQ</Value>
+    </Setting>
+    <Setting Name="SMTP_Server" Type="System.String" Scope="User">
+      <Value Profile="(Default)">smtp.gmail.com</Value>
+    </Setting>
+    <Setting Name="SMTP_Port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">587</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

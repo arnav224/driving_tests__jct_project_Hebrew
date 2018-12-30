@@ -154,5 +154,65 @@ namespace BE.Properties {
                 this["FridayWorkEndHour"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("avraham224@gmail.com")]
+        public string SenderEmailAddress {
+            get {
+                return ((string)(this["SenderEmailAddress"]));
+            }
+            set {
+                this["SenderEmailAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("hluuarmauvxfpzfs")]
+        public string EmailServerPasword {
+            get {
+                return ((string)(this["EmailServerPasword"]));
+            }
+            set {
+                this["EmailServerPasword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("AIzaSyBzz5Hd1UJW7NKf27JvD4HB0nBfLM4qfJQ")]
+        public string GoogleMapsApiKey {
+            get {
+                return ((string)(this["GoogleMapsApiKey"]));
+            }
+            set {
+                this["GoogleMapsApiKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("smtp.gmail.com")]
+        public string SMTP_Server {
+            get {
+                return ((string)(this["SMTP_Server"]));
+            }
+            set {
+                this["SMTP_Server"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("587")]
+        public int SMTP_Port {
+            get {
+                return ((int)(this["SMTP_Port"]));
+            }
+            set {
+                this["SMTP_Port"] = value;
+            }
+        }
     }
 }

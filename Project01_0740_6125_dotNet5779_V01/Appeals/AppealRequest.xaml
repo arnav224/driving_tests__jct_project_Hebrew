@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
             <TextBlock x:Name="WelcomeTextBlock" HorizontalAlignment="Left" Margin="15" TextWrapping="Wrap" Grid.Row="0" Text="{Binding}" VerticalAlignment="Stretch"/>
             <Label x:Name="AppealLabel" Content="כתוב בפרוט את טענותיך" Margin="15" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Stretch"/>
-            <TextBox x:Name="AppealTextBox" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.Row="2" TextWrapping="Wrap"  Width="550" Height="120" Text="">
+            <TextBox x:Name="AppealTextBox" AcceptsReturn="True" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.Row="2" TextWrapping="Wrap"  Width="550" Height="120" Text="">
             </TextBox>
 
         </Grid>
