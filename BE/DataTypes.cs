@@ -87,6 +87,10 @@ namespace BE
         public AppealStatus appealStatus;
         public string TraineeNotes;
         public string Decision;
+        public override string ToString()
+        {
+            return "הוגש - " + appealStatus.ToString();
+        }
     }
 
     public enum AppealStatus

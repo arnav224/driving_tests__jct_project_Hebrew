@@ -65,7 +65,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             test.AppealTest.TraineeNotes = this.AppealTextBox.Text;
             try
             {
-                bl.UpdateTest(test);
+                bl.UpdateTestResult(test);
                 this.Closing -= Window_Closing;
                 this.Close();
             }

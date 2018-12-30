@@ -590,6 +590,12 @@ namespace Project01_0740_6125_dotNet5779_V01
                 case "TesterNotes":
                     e.Column.Header = "הערות הבוחן";
                     break;
+                case "AppealTest":
+                    e.Column.Header = "ערעור";
+                    break;
+                case "Indices":
+                    e.Cancel = true;
+                    break;
                 case "RemeinderEmailSent":
                     e.Cancel = true;
                     break;
