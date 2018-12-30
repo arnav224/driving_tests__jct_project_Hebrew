@@ -47,8 +47,9 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void DesisionButton_Click(object sender, RoutedEventArgs e)
         {
-            new AppealDecision().ShowDialog();
-            ApplyFiltering(this, new RoutedEventArgs());
+            new AppealDecision(selectedTests[0]).ShowDialog();
+            ApplyFiltering(this, e);
+
         }
 
         private void AppealsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -65,8 +66,12 @@ namespace Project01_0740_6125_dotNet5779_V01
                     {
                         selectedTests.RemoveAll(t => t.TestID == item.TestID);
                     }
-
-                    if (selectedTests.Count > 1)
+                    if (selectedTests.Count < 1)
+                    {
+                        this.DesisionButton.IsEnabled = false;
+                        this.DesisionButton.ToolTip = "בחר טסט לטיפול";
+                    }
+                    else if (selectedTests.Count > 1)
                     {
                         this.DesisionButton.IsEnabled = false;
                         this.DesisionButton.ToolTip = "יש לבחור פריט אחד לטיפול";
