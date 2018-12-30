@@ -37,7 +37,7 @@ namespace Project01_0740_6125_dotNet5779_V01
         {
             if (errorMessages.Any())  
             {
-                string err = "Exception:";
+                string err = ":יש לתקן את השגיאות";
                 foreach (var item in errorMessages)
                     err += "\n" + item;
                 MessageBox.Show(err);

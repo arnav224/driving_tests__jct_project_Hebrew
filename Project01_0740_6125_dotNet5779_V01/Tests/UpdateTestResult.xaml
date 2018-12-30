@@ -66,7 +66,7 @@
         <local:GridRow x:Name="GrudRow17" Grid.Row="17" />
         <local:GridRow x:Name="GrudRow18" Grid.Row="18" />
          <Label Content="הערות:" Grid.Row="19" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox x:Name="TesterNotesTextBox" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="19" TextWrapping="Wrap"  Width="240">
+        <TextBox x:Name="TesterNotesTextBox" AcceptsReturn="True" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="19" TextWrapping="Wrap"  Width="240">
             
         </TextBox>
         <!--<TextBlock x:Name="TesterNotesTextBlock" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="19" TextWrapping="Wrap"  Width="240"><Run Text="TextBlock"/><InlineUIContainer>

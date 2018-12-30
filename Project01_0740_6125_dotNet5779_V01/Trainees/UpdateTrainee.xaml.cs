@@ -29,7 +29,6 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.gearBoxTypeComboBox.ItemsSource = Enum.GetValues(typeof(BE.GearBoxType));
             this.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender));
             this.vehicleComboBox.ItemsSource = Enum.GetValues(typeof(BE.Vehicle));
-            //trainee = bl.GetAllTrainees(t => t.ID == ((MainWindow)Application.Current.MainWindow).TraineesTabUserControl.Update_IdTextBox.Text).FirstOrDefault();
             this.DataContext = trainee;
             this.addressPicker.Address = trainee.Address;
         }
@@ -38,7 +37,7 @@ namespace Project01_0740_6125_dotNet5779_V01
         {
             if (errorMessages.Any())  
             {
-                string err = "Exception:";
+                string err = ":יש לתקן את השגיאות";
                 foreach (var item in errorMessages)
                     err += "\n" + item;
                 MessageBox.Show(err);

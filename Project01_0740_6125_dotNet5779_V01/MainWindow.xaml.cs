@@ -22,7 +22,7 @@ namespace Project01_0740_6125_dotNet5779_V01
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         BL.IBL bl;
         public List<Trainee> selectedTrainees = new List<Trainee>();
@@ -33,6 +33,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             InitializeComponent();
             bl = BL.Factory.GetInstance();
 
+            #region TraineesTab
             this.TraineesTabUserControl.AddButton.Content = "הוסף תלמיד";
             this.TraineesTabUserControl.DeleteButton.Content = "מחק תלמיד";
             this.TraineesTabUserControl.UpdateButton.Content = "ערוך תלמיד";
@@ -54,8 +55,9 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TraineesTabUserControl.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender));
             this.TraineesTabUserControl.vehicleComboBox.ItemsSource = Enum.GetValues(typeof(BE.Vehicle));
             ApplyTraineesFiltering(this, new RoutedEventArgs());
+            #endregion
 
-
+            #region TestersTab
             this.TestersTabUserControl.AddButton.Content = "הוסף בוחן";
             this.TestersTabUserControl.DeleteButton.Content = "מחק בוחן";
             this.TestersTabUserControl.UpdateButton.Content = "ערוך בוחן";
@@ -78,8 +80,9 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestersTabUserControl.passedComboBox.Visibility = Visibility.Collapsed;
             this.TestersTabUserControl.passedLable.Visibility = Visibility.Collapsed;
             ApplyTestersFiltering(this, new RoutedEventArgs());
+            #endregion
 
-
+            #region TestsTab
             this.TestsTabUserControl.AddButton.Content = "הוסף טסט";
             this.TestsTabUserControl.DeleteButton.Content = "מחק טסט";
             this.TestsTabUserControl.UpdateButton.Content = "ערוך טסט";
@@ -106,6 +109,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestsTabUserControl.AppealButton.Visibility = Visibility.Visible;
             this.TestsTabUserControl.AppealButton.Click += AppealButton_Click;
             this.TestsTabUserControl.ApealsWondow.Click += ApealsWondow_Click;
+            #endregion
         }
 
 
@@ -609,7 +613,7 @@ namespace Project01_0740_6125_dotNet5779_V01
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (e.WidthChanged)
-                this.blankTabItem.Width  = e.NewSize.Width - 80 * 3 - 65 - 30;
+                this.blankTabItem.Width  = e.NewSize.Width - 100 * 3 - 65 - 30;
         }
     }
 }

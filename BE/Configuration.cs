@@ -169,11 +169,58 @@ namespace BE
 
 
         //Email Configuration:
-        public static readonly MailAddress SenderEmailAddress = new MailAddress("avraham224@gmail.com", "Y&A בית ספר לנהיגה");
-        public static readonly string EmailServerPasword = "hluuarmauvxfpzfs";
-        //internal static string GoogleMapsApiKey = "AIzaSyA2GzC_8tGKa16ta2bQG-H1U0vjwQYOWns";
-        public static string GoogleMapsApiKey = "AIzaSyBzz5Hd1UJW7NKf27JvD4HB0nBfLM4qfJQ";
-        internal static string GoogleDistanceURL = "https://maps.googleapis.com/maps/api/distancematrix/";
+        static public string SenderEmailAddress
+        {
+            get { return (string)Settings.Default["SenderEmailAddress"]; }
+            set
+            {
+                new MailAddress(value); //validation
+                Settings.Default["SenderEmailAddress"] = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        static public string SMTP_Server
+        {
+            get { return (string)Settings.Default["SMTP_Server"]; }
+            set
+            {
+                Settings.Default["SMTP_Server"] = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        static public int SMTP_Port
+        {
+            get { return (int)Settings.Default["SMTP_Port"]; }
+            set
+            {
+                if (value < 0)
+                    throw new Exception();
+                Settings.Default["SMTP_Port"] = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        static public string EmailServerPasword
+        {
+            get { return (string)Settings.Default["EmailServerPasword"]; }
+            set
+            {
+                Settings.Default["EmailServerPasword"] = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        static public string GoogleMapsApiKey
+        {
+            get { return (string)Settings.Default["GoogleMapsApiKey"]; }
+            set
+            {
+                Settings.Default["GoogleMapsApiKey"] = value;
+                Properties.Settings.Default.Save();
+            }
+        }
 
     }
 }

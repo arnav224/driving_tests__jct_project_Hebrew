@@ -33,6 +33,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                     try
                     {
                         generateNewToken();
+                        //var text = BE.Tools.Maps_GetPlaceAutoComplete(value.ToString())[0];
                         var text = BE.Tools.GetAddressSuggestionsGoogle(value.ToString(), token).First();
                         Action action = () =>
                         {

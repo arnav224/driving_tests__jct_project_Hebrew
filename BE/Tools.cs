@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Net.Mail;
 using System.Net;
 using GoogleMapsApi;
@@ -104,7 +104,7 @@ namespace BE
             {
                 var client = new SmtpClient("smtp.gmail.com", 587)
                 {
-                    Credentials = new NetworkCredential(Configuration.SenderEmailAddress.Address, Configuration.EmailServerPasword),
+                    Credentials = new NetworkCredential(Configuration.SenderEmailAddress, Configuration.EmailServerPasword),
                     EnableSsl = true
                 };
                 MailMessage mailMessage = new MailMessage(recipients, recipients) { Body = body };
@@ -125,7 +125,7 @@ namespace BE
             //return Maps_GetPlaceAutoComplete(input);//@
             var url = "https://maps.googleapis.com/maps/api/place/autocomplete/xml?input=" + input +
                       "&types=address" /*+ "&location=31.728220,34.983749&radius=300000"*/ + "&key=" 
-                      + Configuration.GoogleMapsApiKey + "&sessiontoken=" + token + "&&components=country:il&language=iw";
+                      + Configuration.GoogleMapsApiKey + "&sessiontoken=" + token + /*"&components=country:il" +*/ "&language=iw";
             try
             {
                 var xml =  DownloadDataIntoXml(url);
@@ -162,25 +162,41 @@ namespace BE
             throw new Exception();
         }
 
-        static public bool sendTry1()
+        static public void sendTry1()
         {
-            try
-            {
-                string MessageTosend = File.ReadAllText("email.html");
-                var client = new SmtpClient("smtp.gmail.com", 587)
-                {
-                    Credentials = new NetworkCredential(Configuration.SenderEmailAddress.Address, Configuration.EmailServerPasword),
-                    EnableSsl = true
-                };
-                MailMessage mailMessage = new MailMessage("avraham224@gmail.com", "avraham224@gmail.com") { Body = MessageTosend, IsBodyHtml = true, };
-                client.Send(mailMessage);
-                //client.Send(Configuration.SenderEmailAddress, recipients, subject, body);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+    //        new Thread(() => 
+    //        {
+    //            try
+    //            {
+    //                string MessageTosend = File.ReadAllText("emails/TestRemeinder/1.txt")
+    //                    + "מועד הטסט שלך מתקרב" + File.ReadAllText("emails/TestRemeinder/2.txt")
+    //                    + @"חיים היקר, רק רצינו להזכיר לך שמועד הטסט שלך מתקרב
+    //הטסט שלך יתקיים בתאריך XX בשעה YY  מומלץ להקדים.
+    //בהצלחה! 
+
+    //."
+    //                    + File.ReadAllText("emails/TestRemeinder/3.txt")
+    //                    + "ttps://www.google.co.il/maps/place/" + ""
+    //                    + File.ReadAllText("emails/TestRemeinder/4.txt")
+    //                    + "נווט למיקום הטסט"
+    //                    + File.ReadAllText("emails/TestRemeinder/5.txt");
+
+    //                var client = new SmtpClient("smtp.gmail.com", 587)
+    //                {
+    //                    Credentials = new NetworkCredential(Configuration.SenderEmailAddress.Address, Configuration.EmailServerPasword),
+    //                    EnableSsl = true
+    //                };
+    //                MailMessage mailMessage = new MailMessage("avraham224@gmail.com", "avraham224@gmail.com") { Body = MessageTosend, IsBodyHtml = true, };
+    //                client.Send(mailMessage);
+    //                //client.Send(Configuration.SenderEmailAddress, recipients, subject, body);
+    //                return true;
+    //            }
+    //            catch (Exception)
+    //            {
+    //                return false;
+    //            }
+
+            //}).Start();
 
         }
 
