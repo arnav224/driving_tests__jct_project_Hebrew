@@ -55,12 +55,13 @@ namespace BL
         /// <param name="TestID"></param>
         /// <param name="indices">@</param>
         void UpdateTestResult(BE.Test test);
+        void TestAppeal(BE.Test test);
         /// <summary>
         /// Remove Test
         /// </summary>
         /// <param name="ID"></param>
         void RemoveTest(int ID);
-
+        SortedSet<DateTime> avalibleDateTimes(BE.Test test);
         /// <summary>
         /// Get All Testers
         /// </summary>
@@ -94,6 +95,7 @@ namespace BL
         /// <returns></returns>
         IEnumerable<BE.Test> GetAllTests(DateTime dateTime);
         IEnumerable<BE.Test> GetAllTests(string searchString, DateTime? FromTime, DateTime? ToTime, bool? passed);
+        IEnumerable<BE.Test> GetAllAppealTests(string searchString, DateTime? FromAppealTime, DateTime? ToAppealTime, BE.AppealStatus status);
         /// <summary>
         /// Get All Trainees
         /// </summary>

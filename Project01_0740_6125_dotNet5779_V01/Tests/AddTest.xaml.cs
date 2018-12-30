@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,10 +17,11 @@ namespace Project01_0740_6125_dotNet5779_V01
     /// <summary>
     /// Interaction logic for AddTest.xaml
     /// </summary>
-    public partial class AddTest : Window
+    public partial class AddTest 
     {
         BL.IBL bl = BL.Factory.GetInstance();
         BE.Test test = new BE.Test();
+        SortedSet<DateTime> avalibleDateTimes;
         List<string> errorMessages = new List<string>();
         private int hour;
         public int Hour
@@ -47,20 +48,23 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
-        public AddTest()
+        public AddTest(string TraineeID = null)
         {
             InitializeComponent();
             this.DataContext = test;
             this.Time_hour.DataContext = this;
             this.Time_minutes.DataContext = this;
             this.addressPicker.Address = test.Address;
+            this.TraineeIDComboBox.ItemsSource = from item in bl.GetAllTrainees() select item.ID;
+            if (TraineeID != null )
+                this.TraineeIDComboBox.SelectedItem = TraineeID;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             if (errorMessages.Any())
             {
-                string err = "Exception:";
+                string err = ":יש לתקן את השגיאות";
                 foreach (var item in errorMessages)
                     err += "\n" + item;
                 MessageBox.Show(err);
@@ -107,5 +111,26 @@ namespace Project01_0740_6125_dotNet5779_V01
             test.Address = this.addressPicker.Address;
         }
 
+        private void TraineeIDComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            test.TraineeID = this.TraineeIDComboBox.SelectedItem.ToString();
+        }
+
+        private void AddressPicker_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (this.addressPicker.Address != null && this.TraineeIDComboBox.SelectedItem != null)
+            {
+                //this.dateDatePicker.
+                this.avalibleDateTimes = bl.avalibleDateTimes(test);
+                new Thread(() => { this.avalibleDateTimes = bl.avalibleDateTimes(test); }).Start();
+                this.dateDatePicker.IsEnabled = true;
+                this.dateDatePicker.ToolTip = null;
+            }
+            else
+            {
+                this.dateDatePicker.IsEnabled = false;
+                this.dateDatePicker.ToolTip = "יש לבחור תלמיד וכתובת תחילה";
+            }
+        }
     }
 }

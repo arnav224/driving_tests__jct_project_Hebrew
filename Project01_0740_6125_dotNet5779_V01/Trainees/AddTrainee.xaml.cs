@@ -17,7 +17,7 @@ namespace Project01_0740_6125_dotNet5779_V01
     /// <summary>
     /// Interaction logic for AddTrainee.xaml
     /// </summary>
-    public partial class AddTrainee : Window
+    public partial class AddTrainee 
     {
         BL.IBL bl;
         BE.Trainee trainee;

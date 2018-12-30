@@ -50,10 +50,12 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TraineesTabUserControl.DataGrid.AutoGeneratingColumn += TraineesDataGrid_AutoGeneratingColumn;
             this.TraineesTabUserControl.ResetFiltersButton.Click += TraineesResetFilters;
             this.TraineesTabUserControl.DataGrid.SelectionChanged += TraineesDataGrid_SelectionChanged;
-            this.TraineesTabUserControl.UpdateTestResultButton.Visibility = Visibility.Collapsed;
             this.TraineesTabUserControl.gearBoxTypeComboBox.ItemsSource = Enum.GetValues(typeof(BE.GearBoxType));
             this.TraineesTabUserControl.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender));
             this.TraineesTabUserControl.vehicleComboBox.ItemsSource = Enum.GetValues(typeof(BE.Vehicle));
+            this.TraineesTabUserControl.OptionalButton.Content = "הוסף טסט";
+            this.TraineesTabUserControl.OptionalButton.Click += AddTestToTraineeButton_Click;
+
             ApplyTraineesFiltering(this, new RoutedEventArgs());
             #endregion
 
@@ -73,7 +75,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestersTabUserControl.DataGrid.AutoGeneratingColumn += TraineesDataGrid_AutoGeneratingColumn;
             this.TestersTabUserControl.ResetFiltersButton.Click += TestersResetFilters;
             this.TestersTabUserControl.DataGrid.SelectionChanged += TestersDataGrid_SelectionChanged;
-            this.TestersTabUserControl.UpdateTestResultButton.Visibility = Visibility.Collapsed;
+            this.TestersTabUserControl.OptionalButton.Visibility = Visibility.Collapsed;
             this.TestersTabUserControl.gearBoxTypeComboBox.ItemsSource = Enum.GetValues(typeof(BE.GearBoxType));
             this.TestersTabUserControl.genderComboBox.ItemsSource = Enum.GetValues(typeof(BE.Gender));
             this.TestersTabUserControl.vehicleComboBox.ItemsSource = Enum.GetValues(typeof(BE.Vehicle));
@@ -89,9 +91,8 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestsTabUserControl.passedLable.Content = "עבר";
             this.TestsTabUserControl.AddButton.Click += AddTestButton_Click;
             this.TestsTabUserControl.UpdateButton.Click += UpdateTestButton_Click;
-            this.TestsTabUserControl.UpdateTestResultButton.Click += UpdateTestResultButton_Click;
+            this.TestsTabUserControl.OptionalButton.Click += UpdateTestResultButton_Click;
             this.TestsTabUserControl.DeleteButton.Click += DeleteTestButton_Click;
-            this.TestsTabUserControl.DataGrid.ItemsSource = bl.GetAllTests();
             this.TestsTabUserControl.SearchTextBox.TextChanged += ApplyTestsFiltering;
             this.TestsTabUserControl.passedComboBox.SelectionChanged += ApplyTestsFiltering;
             this.TestsTabUserControl.FromTimeDatePicker.LostFocus += ApplyTestsFiltering;
@@ -109,12 +110,21 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestsTabUserControl.AppealButton.Visibility = Visibility.Visible;
             this.TestsTabUserControl.AppealButton.Click += AppealButton_Click;
             this.TestsTabUserControl.ApealsWondow.Click += ApealsWondow_Click;
+            this.TestsTabUserControl.SendMailButton.Click += TestSendMailButton_Click;
+            this.TestsTabUserControl.SendMailButton.Visibility = Visibility.Visible;
+
+            this.ApplyTestsFiltering(this, new RoutedEventArgs());
             #endregion
         }
 
 
 
         #region TraineesTab
+        /// <summary>
+        /// Add Trainee Button Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddTraineeButton_Click(object sender, RoutedEventArgs e)
         {
             if (!BE.Tools.IsInternetAvailable())
@@ -136,6 +146,18 @@ namespace Project01_0740_6125_dotNet5779_V01
             {
                 new UpdateTrainee().ShowDialog();
                 ApplyTraineesFiltering(this, new RoutedEventArgs());
+            }
+        }
+
+        private void AddTestToTraineeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!BE.Tools.IsInternetAvailable())
+                MessageBox.Show("בדוק את החיבור שלך לרשת", "אין חיבור לרשת", MessageBoxButton.OK,
+                                MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            else
+            {
+                new AddTest(selectedTrainees[0].ID).ShowDialog();
+                ApplyTestsFiltering(this, e);
             }
         }
 
@@ -238,7 +260,9 @@ namespace Project01_0740_6125_dotNet5779_V01
                         selectedTrainees.RemoveAll(t => t.ID == item.ID);
                     }
                 }
-                this.TraineesTabUserControl.UpdateButton.IsEnabled = selectedTrainees.Count == 1;
+                
+                this.TraineesTabUserControl.UpdateButton.IsEnabled = this.TraineesTabUserControl.OptionalButton.IsEnabled = selectedTrainees.Count == 1;
+                this.TraineesTabUserControl.UpdateButton.ToolTip = this.TraineesTabUserControl.OptionalButton.ToolTip = selectedTrainees.Count == 1 ? null : "יש לבחור תלמיד אחד";
                 this.TraineesTabUserControl.DeleteButton.IsEnabled = selectedTrainees.Count >= 1;
                 this.TraineesTabUserControl.DeleteButton.Content = selectedTrainees.Count > 1 ? "מחק תלמידים" : "מחק תלמיד";
             }
@@ -299,7 +323,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                     List<Test> testsOfOne = bl.GetAllTests(t => t.TesterID == TesterItem.ID && t.Time > DateTime.Now).ToList();
                     foreach (var TestItem in testsOfOne)
                     {
-                        //bl.EmailAboutTest(TestItem);@@@ פונקציה לא קיימת 
+                        Tools.TestCancelationSendEmail(TestItem, bl.GetAllTrainees(t => t.ID == TestItem.TraineeID).First());
                         bl.RemoveTest(TestItem.TestID);
                     }
                     bl.RemoveTester(TesterItem.ID);
@@ -390,6 +414,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                                 MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
             else
             {
+                //this.TraineesTabUserControl.DataGrid.SelectedItems = null;
                 new AddTest().ShowDialog();
                 ApplyTestsFiltering(this, e);
             }
@@ -406,7 +431,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             ApplyTestsFiltering(this, e);
             this.TestsTabUserControl.DeleteButton.IsEnabled = false;
             this.TestsTabUserControl.UpdateButton.IsEnabled = false;
-            this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
+            this.TestsTabUserControl.OptionalButton.IsEnabled = false;
             }
         }
 
@@ -416,7 +441,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             ApplyTestsFiltering(this, e);
             this.TestsTabUserControl.DeleteButton.IsEnabled = false;
             this.TestsTabUserControl.UpdateButton.IsEnabled = false;
-            this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
+            this.TestsTabUserControl.OptionalButton.IsEnabled = false;
         }
 
         private void DeleteTestButton_Click(object sender, RoutedEventArgs e)
@@ -424,28 +449,42 @@ namespace Project01_0740_6125_dotNet5779_V01
             string Teste = "";
             foreach (var item in selectedTests)
                 Teste += item.ToString() + "\n\n";
-            string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + selectedTests.Count + (selectedTests.Count == 1 ? " הטסטים שנבחר\n\n" : " הטסטים שנבחרו\n\n") + Teste;
+            string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + selectedTests.Count + (selectedTests.Count == 1 ? " הטסטים שנבחר\n\n" : " הטסטים שנבחרו\n\n") + Teste
+                + " הודעה במייל תישלח לתלמיד על הביטול";
             MessageBoxResult result = MessageBox.Show(messegeBody, "אישור מחיקה", MessageBoxButton.YesNo,
                                                       MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
             if (result == MessageBoxResult.Yes)
             {
                 foreach (var item in selectedTests)
+                {
                     bl.RemoveTest(item.TestID);
+                    Tools.TestCancelationSendEmail(item, bl.GetAllTrainees(t => t.ID == item.TraineeID).First());
+                }
                 ApplyTestsFiltering(this, e);
                 this.TestsTabUserControl.DeleteButton.IsEnabled = false;
                 this.TestsTabUserControl.UpdateButton.IsEnabled = false;
-                this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
+                this.TestsTabUserControl.OptionalButton.IsEnabled = false;
             }
         }
 
         private void ApplyTestsFiltering(object sender, RoutedEventArgs e)
         {
-            this.TestsTabUserControl.DataGrid.ItemsSource = bl.GetAllTests(this.TestsTabUserControl.SearchTextBox.Text,
+            this.TestsTabUserControl.DataGrid.ItemsSource = from item in bl.GetAllTests(this.TestsTabUserControl.SearchTextBox.Text,
                                                                            this.TestsTabUserControl.FromTimeDatePicker.SelectedDate,
                                                                            this.TestsTabUserControl.ToTimeDatePicker.SelectedDate,
                                                                            (this.TestsTabUserControl.passedComboBox.SelectedIndex == -1 ? (bool?)null
-                                                                                : (this.TestsTabUserControl.passedComboBox.SelectedIndex == 0 ? true : false)));
-
+                                                                                : (this.TestsTabUserControl.passedComboBox.SelectedIndex == 0 ? true : false)))
+                                                                                select new
+                                                                                {
+                                                                                    TestID  = item.TestID,
+                                                                                    TraineeID = item.TraineeID,
+                                                                                    TesterID = item.TesterID,
+                                                                                    Time = item.Time.ToString("dd/MM/yyyy HH/mm"),
+                                                                                    Address = item.Address,
+                                                                                    Passed = item.Passed == null ? "" : (item.Passed == true ? "עבר" : "נכשל"),
+                                                                                    TesterNotes = item.TesterNotes,
+                                                                                    AppealTest = item.AppealTest == null ? "" : item.AppealTest.appealStatus.ToString(),
+                                                                                };
         }
 
         private void TestsResetFilters(object sender, RoutedEventArgs e)
@@ -458,17 +497,18 @@ namespace Project01_0740_6125_dotNet5779_V01
         }
         private void TestsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            this.TestsTabUserControl.SendMailButton.IsEnabled = false;
             if (e.OriginalSource != null)
             {
                 if (e.OriginalSource.GetType() == typeof(DataGrid))
                 {
-                    foreach (Test item in e.AddedItems)
+                    foreach (dynamic item in e.AddedItems)
                     {
-                        selectedTests.Add(item);
+                        selectedTests.Add((BE.Test)bl.GetAllTests(t => t.TestID == item.TestID).First());
                     }
-                    foreach (Test item in e.RemovedItems)
+                    foreach (dynamic item in e.RemovedItems)
                     {
-                        selectedTests.Remove(item);
+                        selectedTests.RemoveAll(t => t.TestID == item.TestID);
                     }
                 }
                 bool ExistOldTest = selectedTests.Any(t => t.Time < DateTime.Now);
@@ -484,8 +524,8 @@ namespace Project01_0740_6125_dotNet5779_V01
                     {
                         this.TestsTabUserControl.UpdateButton.IsEnabled = false;
                         this.TestsTabUserControl.UpdateButton.ToolTip = "לא ניתן לערוך פרטים לטסט שכבר נעשה";
-                        this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = true;
-                        this.TestsTabUserControl.UpdateTestResultButton.ToolTip = null;
+                        this.TestsTabUserControl.OptionalButton.IsEnabled = true;
+                        this.TestsTabUserControl.OptionalButton.ToolTip = null;
                         if (selectedTests[0].Passed == null)
                             this.TestsTabUserControl.AppealButton.ToolTip = "לא התקבלו תוצאות לטסט";
                         else if (selectedTests[0].Passed == true)
@@ -493,26 +533,37 @@ namespace Project01_0740_6125_dotNet5779_V01
                         else if (selectedTests[0].AppealTest != null)
                             this.TestsTabUserControl.AppealButton.ToolTip = "לטסט זה כבר הוגש ערעור";
                         else
+                        {
                             this.TestsTabUserControl.AppealButton.IsEnabled = true;
+                            this.TestsTabUserControl.AppealButton.ToolTip = null;
+                        }
                     }
                     else
                     {
+                        this.TestsTabUserControl.SendMailButton.IsEnabled = true;
+                        this.TestsTabUserControl.AppealButton.IsEnabled = false;
                         this.TestsTabUserControl.UpdateButton.IsEnabled = true;
                         this.TestsTabUserControl.UpdateButton.ToolTip = null;
-                        this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
-                        this.TestsTabUserControl.UpdateTestResultButton.ToolTip = "לא ניתן לעדכן תוצאות לטסט שעדיין לא בוצע";
+                        this.TestsTabUserControl.OptionalButton.IsEnabled = false;
+                        this.TestsTabUserControl.OptionalButton.ToolTip = "לא ניתן לעדכן תוצאות לטסט שעדיין לא בוצע";
                         this.TestsTabUserControl.AppealButton.ToolTip = "טרם התבצע הטסט";
                     }
                 }
                 else
                 {
+                    this.TestsTabUserControl.AppealButton.IsEnabled = false;
                     this.TestsTabUserControl.UpdateButton.IsEnabled = false;
-                    this.TestsTabUserControl.UpdateTestResultButton.IsEnabled = false;
-                    this.TestsTabUserControl.UpdateTestResultButton.ToolTip = "יש לבחור פריט אחד לעדכון";
+                    this.TestsTabUserControl.OptionalButton.IsEnabled = false;
+                    this.TestsTabUserControl.OptionalButton.ToolTip = "יש לבחור פריט אחד לעדכון";
                     this.TestsTabUserControl.UpdateButton.ToolTip = "יש לבחור פריט אחד לעריכה";
                     this.TestsTabUserControl.AppealButton.ToolTip = "יש לבחור פריט אחד לערעור";
                 }
             }
+        }
+
+        private void TestSendMailButton_Click(object sender, RoutedEventArgs e)
+        {
+            Tools.TestReminderSendEmail(selectedTests[0], bl.GetAllTrainees(t => t.ID == selectedTests[0].TraineeID).First());
         }
         #endregion
 

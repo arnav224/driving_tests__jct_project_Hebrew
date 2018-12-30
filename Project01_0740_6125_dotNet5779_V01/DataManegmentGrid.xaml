@@ -92,7 +92,7 @@
                 <ColumnDefinition Width="8*" MinWidth="95"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="UpdateTestResultButton"  Content="עדכון תוצאות טסט" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" 
+            <Button x:Name="OptionalButton"  Content="עדכון תוצאות טסט" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" 
                     Width="120" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" 
                     ToolTipService.ShowOnDisabled="True" ToolTip="בחר טסט כדי לעדכן תוצאות">
             </Button>
@@ -108,6 +108,11 @@
                     Width="120" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" 
                     IsEnabled="False" ToolTipService.ShowOnDisabled="True" ToolTip="בחר טסט כדי לערער" Visibility="Collapsed">
             </Button>
+            <Button x:Name="SendMailButton"  Content="שלח מייל תזכורת" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Width="120" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False"
+                    ToolTipService.ShowOnDisabled="True" Visibility="Collapsed" ToolTip="בחר טסט כדי לשלוח מייל">
+            </Button>
+
 
         </Grid>
 

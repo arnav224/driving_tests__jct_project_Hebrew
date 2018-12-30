@@ -17,7 +17,7 @@ namespace Project01_0740_6125_dotNet5779_V01
     /// <summary>
     /// Interaction logic for UpdateTestResult.xaml
     /// </summary>
-    public partial class UpdateTestResult : Window
+    public partial class UpdateTestResult 
     {
         BL.IBL bl = BL.Factory.GetInstance();
         BE.Test test = ((MainWindow)System.Windows.Application.Current.MainWindow).selectedTests[0];

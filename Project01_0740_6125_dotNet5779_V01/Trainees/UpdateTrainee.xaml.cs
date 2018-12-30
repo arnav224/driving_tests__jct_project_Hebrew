@@ -17,7 +17,7 @@ namespace Project01_0740_6125_dotNet5779_V01
     /// <summary>
     /// Interaction logic for UpdateTrainee.xaml
     /// </summary>
-    public partial class UpdateTrainee : Window
+    public partial class UpdateTrainee
     {
         BL.IBL bl;
         BE.Trainee trainee = ((MainWindow)Application.Current.MainWindow).selectedTrainees[0];

@@ -18,7 +18,7 @@ namespace Project01_0740_6125_dotNet5779_V01
     /// <summary>
     /// Interaction logic for UpdateTester.xaml
     /// </summary>
-    public partial class UpdateTester : Window
+    public partial class UpdateTester
     {
         BL.IBL bl = BL.Factory.GetInstance();
         List<string> errorMessages = new List<string>();
@@ -65,12 +65,12 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
             foreach (var TestItem in TestsToRemove1)
             {
-                //bl.EmailAboutTest(TestItem);@@@ פונקציה לא קיימת 
+                Tools.TestCancelationSendEmail(TestItem, bl.GetAllTrainees(t => t.ID == TestItem.TraineeID).First());
                 bl.RemoveTest(TestItem.TestID);
             }
             if (errorMessages.Any())
             {
-                string err = "Exception:";
+                string err = ":יש לתקן את השגיאות";
                 foreach (var item in errorMessages)
                     err += "\n" + item;
                 MessageBox.Show(err);
@@ -208,7 +208,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                     timePeriodsToRemove.Remove(tester.WorkHours.Where(TP => TP.ToString() == item.OnetimePeriod).First());
                 }
             }
-            catch (Exception)   //@
+            catch (Exception)
             {}
         }
 

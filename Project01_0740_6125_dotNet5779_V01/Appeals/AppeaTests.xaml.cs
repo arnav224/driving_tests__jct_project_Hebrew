@@ -17,7 +17,7 @@ namespace Project01_0740_6125_dotNet5779_V01
     /// <summary>
     /// Interaction logic for AppeaTests.xaml
     /// </summary>
-    public partial class AppeaTests : Window
+    public partial class AppeaTests 
     {
         BL.IBL bl = BL.Factory.GetInstance();
         public List<BE.Test> selectedTests = new List<BE.Test>();
@@ -94,17 +94,21 @@ namespace Project01_0740_6125_dotNet5779_V01
         {
             int parsResult;
             int.TryParse(this.SearchTextBox.Text, out parsResult);
-            this.AppealsDataGrid.ItemsSource = from item in bl.GetAllTests(t => t.AppealTest != null).Where(t =>
-                                                     (this.FromTimeDatePicker.SelectedDate == null || t.AppealTest.RequestTime >= this.FromTimeDatePicker.SelectedDate)
-                                    && (this.ToTimeDatePicker.SelectedDate == null || t.AppealTest.RequestTime <= this.ToTimeDatePicker.SelectedDate)
-                                    && (this.SearchTextBox.Text == null || t.TestID == parsResult 
-                                    || t.TesterID.Contains(this.SearchTextBox.Text) || t.TraineeID.Contains(this.SearchTextBox.Text)) 
-                                    && (this.StatusComboBox.SelectedIndex == -1 || t.AppealTest.appealStatus.Equals(this.StatusComboBox.SelectedValue)))
-                                               select new { TestID = item.TestID, TraineeID = item.TraineeID, TesterID = item.TesterID,
-                                                   RequestTime = item.AppealTest.RequestTime.ToString("dd/MM/yyyy HH:mm"),
-                                                   DecisionTime = (item.AppealTest.appealStatus != BE.AppealStatus.ממתין ? item.AppealTest.DecisionTime.ToString("dd/MM/yyyy HH:mm") : "טרם טופל"),
-                                                   AppealStatus = item.AppealTest.appealStatus, TraineeNotes = item.AppealTest.TraineeNotes,
-                                                   Decision = item.AppealTest.Decision };
+
+            this.AppealsDataGrid.ItemsSource = from item in bl.GetAllAppealTests(this.SearchTextBox.Text, this.FromTimeDatePicker.SelectedDate, this.ToTimeDatePicker.SelectedDate,
+                                                                     (StatusComboBox.SelectedIndex != -1 ? (BE.AppealStatus)this.StatusComboBox.SelectedItem : default(BE.AppealStatus)))
+                                        select new
+                                        {
+                                            TestID = item.TestID,
+                                            TraineeID = item.TraineeID,
+                                            TesterID = item.TesterID,
+                                            RequestTime = item.AppealTest.RequestTime.ToString("dd/MM/yyyy HH:mm"),
+                                            DecisionTime = (item.AppealTest.appealStatus != BE.AppealStatus.ממתין ? item.AppealTest.DecisionTime.ToString("dd/MM/yyyy HH:mm") : "טרם טופל"),
+                                            AppealStatus = item.AppealTest.appealStatus,
+                                            TraineeNotes = item.AppealTest.TraineeNotes,
+                                            Decision = item.AppealTest.Decision
+                                        };
+
         }
 
         private void AppealsDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

@@ -17,7 +17,7 @@ namespace Project01_0740_6125_dotNet5779_V01
     /// <summary>
     /// Interaction logic for AddTester.xaml
     /// </summary>
-    public partial class AddTester : Window
+    public partial class AddTester 
     {
         BL.IBL bl = BL.Factory.GetInstance();
         BE.Tester tester = new BE.Tester();
@@ -195,7 +195,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                     timePeriodsToRemove.Remove(tester.WorkHours.Where(TP => TP.ToString() == item.OnetimePeriod).First());
                 }
             }
-            catch (Exception)   //@
+            catch (Exception)
             { }
         }
 

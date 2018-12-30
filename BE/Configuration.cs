@@ -142,6 +142,14 @@ namespace BE
             }
         }
 
+        static private int daysdaysInAdvance = 4;
+        static public int DaysdaysInAdvance
+        {
+            get { return daysdaysInAdvance; }
+            set { daysdaysInAdvance = value; }
+        }
+
+
         static public int WorkEndHour
         {
             get { return (int)Settings.Default["WorkEndHour"]; }
@@ -202,15 +210,22 @@ namespace BE
             }
         }
 
+        //static public string EmailServerPasword
+        //{
+        //    get { return (string)Settings.Default["EmailServerPasword"]; }
+        //    set
+        //    {
+        //        Settings.Default["EmailServerPasword"] = value;
+        //        Properties.Settings.Default.Save();
+        //    }
+        //}
+        static private string myVar = "fhmbqwxfzdjefqhd";
         static public string EmailServerPasword
         {
-            get { return (string)Settings.Default["EmailServerPasword"]; }
-            set
-            {
-                Settings.Default["EmailServerPasword"] = value;
-                Properties.Settings.Default.Save();
-            }
+            get { return myVar; }
+            set { myVar = value; }
         }
+
 
         static public string GoogleMapsApiKey
         {

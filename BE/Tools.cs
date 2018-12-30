@@ -29,10 +29,6 @@ namespace BE
             if (str == null || str.Length == 0)
                return new List<string>() { "" };
 
-            //@@ Currently disabled manually
-            //return new List<string>() {  str /*+ "מושבת"*/ };
-            //@@
-
             List<string> result = new List<string>();
             PlaceAutocompleteRequest request = new PlaceAutocompleteRequest();
             request.ApiKey = "AIzaSyBzz5Hd1UJW7NKf27JvD4HB0nBfLM4qfJQ";
@@ -102,14 +98,13 @@ namespace BE
         {
             try
             {
-                var client = new SmtpClient("smtp.gmail.com", 587)
+                var client = new SmtpClient(BE.Configuration.SMTP_Server, BE.Configuration.SMTP_Port)
                 {
                     Credentials = new NetworkCredential(Configuration.SenderEmailAddress, Configuration.EmailServerPasword),
                     EnableSsl = true
                 };
-                MailMessage mailMessage = new MailMessage(recipients, recipients) { Body = body };
+                MailMessage mailMessage = new MailMessage(recipients, recipients) { Body = body, IsBodyHtml = true, Subject = subject, };
                 client.Send(mailMessage);
-                //client.Send(Configuration.SenderEmailAddress, recipients, subject, body);
                 return true;
             }
             catch (Exception)
@@ -122,10 +117,8 @@ namespace BE
 
         public static List<string> GetAddressSuggestionsGoogle(string input, string token)
         {
-            //return Maps_GetPlaceAutoComplete(input);//@
-            var url = "https://maps.googleapis.com/maps/api/place/autocomplete/xml?input=" + input +
-                      "&types=address" /*+ "&location=31.728220,34.983749&radius=300000"*/ + "&key=" 
-                      + Configuration.GoogleMapsApiKey + "&sessiontoken=" + token + /*"&components=country:il" +*/ "&language=iw";
+            var url = "https://maps.googleapis.com/maps/api/place/autocomplete/xml?input=" + input + "&key="
+                      + Configuration.GoogleMapsApiKey + "&sessiontoken=" + token + "&components=country:il" + "&language=iw";
             try
             {
                 var xml =  DownloadDataIntoXml(url);
@@ -162,43 +155,98 @@ namespace BE
             throw new Exception();
         }
 
-        static public void sendTry1()
+        static public void TestReminderSendEmail(Test test, Trainee trainee)
         {
-    //        new Thread(() => 
-    //        {
-    //            try
-    //            {
-    //                string MessageTosend = File.ReadAllText("emails/TestRemeinder/1.txt")
-    //                    + "מועד הטסט שלך מתקרב" + File.ReadAllText("emails/TestRemeinder/2.txt")
-    //                    + @"חיים היקר, רק רצינו להזכיר לך שמועד הטסט שלך מתקרב
-    //הטסט שלך יתקיים בתאריך XX בשעה YY  מומלץ להקדים.
-    //בהצלחה! 
+           new Thread(() =>
+            {
+                try
+                {
+                    string MessageTosend = File.ReadAllText("emails/TestRemeinder/1.txt")
+                        + "מועד הטסט שלך מתקרב" + File.ReadAllText("emails/TestRemeinder/2.txt")
+                        + trainee.FirstName + (trainee.Gender == BE.Gender.זכר ? " היקר " : " היקרה ") + @" רק רצינו להזכיר לך שמועד הטסט שלך מתקרב\n
 
-    //."
-    //                    + File.ReadAllText("emails/TestRemeinder/3.txt")
-    //                    + "ttps://www.google.co.il/maps/place/" + ""
-    //                    + File.ReadAllText("emails/TestRemeinder/4.txt")
-    //                    + "נווט למיקום הטסט"
-    //                    + File.ReadAllText("emails/TestRemeinder/5.txt");
+    הטסט שלך יתקיים בתאריך " + test.Time.ToString("dd/MM/yyyy") + " בשעה " + test.Time.ToString("mm:HH") + ".\n" +
+    "המיקום שנקבע לטסט הוא " + test.Address 
+    + "\nבהצלחה!"
+                        + File.ReadAllText("emails/TestRemeinder/3.txt")
+                        + "ttps://www.google.co.il/maps/place/" + test.Address.Replace(' ', '+')
+                        + File.ReadAllText("emails/TestRemeinder/4.txt")
+                        + "נווט למיקום הטסט"
+                        + File.ReadAllText("emails/TestRemeinder/5.txt");
+                    if (SendingEmail(trainee.MailAddress, "מועד הטסט שלך מתקרב", MessageTosend))
+                        test.RemeinderEmailSent = DateTime.Now;
 
-    //                var client = new SmtpClient("smtp.gmail.com", 587)
-    //                {
-    //                    Credentials = new NetworkCredential(Configuration.SenderEmailAddress.Address, Configuration.EmailServerPasword),
-    //                    EnableSsl = true
-    //                };
-    //                MailMessage mailMessage = new MailMessage("avraham224@gmail.com", "avraham224@gmail.com") { Body = MessageTosend, IsBodyHtml = true, };
-    //                client.Send(mailMessage);
-    //                //client.Send(Configuration.SenderEmailAddress, recipients, subject, body);
-    //                return true;
-    //            }
-    //            catch (Exception)
-    //            {
-    //                return false;
-    //            }
+                }
+                catch (Exception)
+                {
+                }
 
-            //}).Start();
-
+            }).Start();
         }
+
+        static public void TestCancelationSendEmail(Test test, Trainee trainee)
+        {
+            new Thread(() =>
+            {
+                try
+                {
+                    string MessageTosend = File.ReadAllText("emails/TestCancelation/1.txt")
+                        + "הטסט שלך התבטל" + File.ReadAllText("emails/TestCancelation/2.txt")
+                        + trainee.FirstName + (trainee.Gender == BE.Gender.זכר ? " היקר " : " היקרה ")
+                        + "לצערנו הטסט שלך שנקבע לתאריך " + test.Time.ToString("dd/MM/yyyy")
+                        + " בשעה " + test.Time.ToString("HH:mm")
+                        + " התבטל.\n"
+                        + "תוכל לקבוע מועד חדש לטסט.\n"
+                        + "בהצלחה!"
+                        + File.ReadAllText("emails/TestCancelation/3.txt");
+                    if (SendingEmail(trainee.MailAddress, "הטסט שלך התבטל", MessageTosend))
+                        test.RemeinderEmailSent = DateTime.Now;
+
+                }
+                catch (Exception)
+                {
+                }
+
+            }).Start();
+        }
+
+        //    static public void sendTry1()
+        //    {
+        //        new Thread(() =>
+        //        {
+        //            try
+        //            {
+        //                string MessageTosend = File.ReadAllText("emails/TestRemeinder/1.txt")
+        //                    + "מועד הטסט שלך מתקרב" + File.ReadAllText("emails/TestRemeinder/2.txt")
+        //                    + @"חיים היקר, רק רצינו להזכיר לך שמועד הטסט שלך מתקרב
+        //הטסט שלך יתקיים בתאריך XX בשעה YY  מומלץ להקדים.
+        //בהצלחה! 
+
+        //."
+        //                    + File.ReadAllText("emails/TestRemeinder/3.txt")
+        //                    + "ttps://www.google.co.il/maps/place/" + ""
+        //                    + File.ReadAllText("emails/TestRemeinder/4.txt")
+        //                    + "נווט למיקום הטסט"
+        //                    + File.ReadAllText("emails/TestRemeinder/5.txt");
+
+        //                var client = new SmtpClient("smtp.gmail.com", 587)
+        //                {
+        //                    Credentials = new NetworkCredential(Configuration.SenderEmailAddress.Address, Configuration.EmailServerPasword),
+        //                    EnableSsl = true
+        //                };
+        //                MailMessage mailMessage = new MailMessage("avraham224@gmail.com", "avraham224@gmail.com") { Body = MessageTosend, IsBodyHtml = true, };
+        //                client.Send(mailMessage);
+        //                //client.Send(Configuration.SenderEmailAddress, recipients, subject, body);
+        //                return true;
+        //            }
+        //            catch (Exception)
+        //            {
+        //                return false;
+        //            }
+
+        //        }).Start();
+
+        //    }
 
         /// <summary>
         /// deep cloning

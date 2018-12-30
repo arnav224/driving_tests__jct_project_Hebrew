@@ -17,7 +17,7 @@ namespace Project01_0740_6125_dotNet5779_V01
     /// <summary>
     /// Interaction logic for AppealDecision.xaml
     /// </summary>
-    public partial class AppealDecision : Window
+    public partial class AppealDecision
     {
         BL.IBL bl = BL.Factory.GetInstance();
         BE.Test test;
@@ -51,18 +51,22 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void AppealTextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            if (this.AppealTextBox.Text != "" || this.AppealTextBox.Text != null)
+            if (this.AppealTextBox.Text != "" && this.AppealTextBox.Text != null)
+            {
                 this.SendButton.IsEnabled = true;
+                this.SendButton.ToolTip = null;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             test.AppealTest.appealStatus = (this.DecisionCheckBox.IsChecked == true ? BE.AppealStatus.התקבל : BE.AppealStatus.נדחה);
+            test.Passed = this.DecisionCheckBox.IsChecked;
             test.AppealTest.DecisionTime = DateTime.Now;
             test.AppealTest.Decision = this.AppealTextBox.Text;
             try
             {
-                bl.UpdateTestResult(test);
+                bl.TestAppeal(test);
                 this.Closing -= Window_Closing;
                 this.Close();
             }

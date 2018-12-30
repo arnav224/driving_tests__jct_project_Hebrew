@@ -17,7 +17,7 @@ namespace Project01_0740_6125_dotNet5779_V01
     /// <summary>
     /// Interaction logic for UpdateTest.xaml
     /// </summary>
-    public partial class UpdateTest : Window
+    public partial class UpdateTest 
     {
         BL.IBL bl = BL.Factory.GetInstance();
         BE.Test test = ((MainWindow)Application.Current.MainWindow).selectedTests[0];
@@ -60,7 +60,7 @@ namespace Project01_0740_6125_dotNet5779_V01
         {
             if (errorMessages.Any())
             {
-                string err = "Exception:";
+                string err = ":יש לתקן את השגיאות";
                 foreach (var item in errorMessages)
                     err += "\n" + item;
                 MessageBox.Show(err);

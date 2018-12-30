@@ -1,10 +1,11 @@
-﻿<Window
+﻿<Controls:MetroWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project01_0740_6125_dotNet5779_V01"
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="Project01_0740_6125_dotNet5779_V01.AddTester"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Validation.Error="validation_Error" 
         Closing="Window_Closing"
@@ -251,4 +252,4 @@
         <TextBlock x:Name="workHoursTextBlock" HorizontalAlignment="Left" Margin="10,562,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="134" Width="318"/>-->
 
     </Grid>
-</Window>
+</Controls:MetroWindow>

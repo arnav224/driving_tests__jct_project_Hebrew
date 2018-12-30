@@ -17,17 +17,15 @@ namespace Project01_0740_6125_dotNet5779_V01
     /// <summary>
     /// Interaction logic for AppealRequest.xaml
     /// </summary>
-    public partial class AppealRequest : Window
+    public partial class AppealRequest 
     {
         BL.IBL bl = BL.Factory.GetInstance();
         BE.Test test = ((MainWindow)Application.Current.MainWindow).selectedTests[0];
-        string OldTestTraineeNotes;
         public AppealRequest()
         {
             InitializeComponent();
             this.DataContext = test;
             test.AppealTest = new BE.AppealTest();
-            OldTestTraineeNotes = test.AppealTest.TraineeNotes = "";
             this.AppealTextBox.SelectionChanged += AppealTextBox_SelectionChanged;
             BE.Trainee trainee = bl.GetAllTrainees(t=> t.ID == test.TraineeID).First();
             this.WelcomeTextBlock.Text = "שלום לך " + trainee.FirstName + ' ' + trainee.LastName + "! " 
@@ -54,8 +52,11 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void AppealTextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            if (this.AppealTextBox.Text != OldTestTraineeNotes)
+            if (this.AppealTextBox.Text != "" && this.AppealTextBox.Text != null)
+            {
                 this.SendButton.IsEnabled = true;
+                this.SendButton.ToolTip = null;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -77,7 +78,7 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (this.AppealTextBox.Text != OldTestTraineeNotes)
+            if (this.AppealTextBox.Text != "" && this.AppealTextBox.Text != null)
             {
                 MessageBoxResult result = MessageBox.Show("?לצאת בלי לשמור שינויים", "", MessageBoxButton.YesNo,
                                           MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);

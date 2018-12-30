@@ -190,6 +190,37 @@ namespace BL
                                     && (passed == null || passed == t.Passed));
 
         }
+        public IEnumerable<Test> GetAllTests(string searchString, DateTime? FromTestTime, DateTime? ToTestTime, bool? passed, DateTime? FromAppealTime = null, DateTime? ToAppealTime = null)
+        {
+            int parsResult;
+            int.TryParse(searchString, out parsResult);
+            return IDAL.GetAllTests(t =>
+                                    (FromTestTime == null || t.Time >= FromTestTime)
+                                    && (ToTestTime == null || t.Time <= ToTestTime)
+                                    && (searchString == null || t.TestID == parsResult
+                                    || t.TesterID.Contains(searchString) || t.TraineeID.Contains(searchString)
+                                    || t.Address.Contains(searchString))
+                                    && (passed == null || passed == t.Passed)
+                                    && (FromAppealTime == null || t.AppealTest.RequestTime >= FromAppealTime)
+                                    && (ToAppealTime == null || t.AppealTest.RequestTime <= ToAppealTime)
+                                    );
+
+        }
+
+        public IEnumerable<Test> GetAllAppealTests(string searchString, DateTime? FromAppealTime, DateTime? ToAppealTime, AppealStatus status)
+        {
+            int parsResult;
+            int.TryParse(searchString, out parsResult);
+            return IDAL.GetAllTests(t =>
+                                    t.AppealTest != null
+                                    && (searchString == null || t.TestID == parsResult
+                                    || t.TesterID.Contains(searchString) || t.TraineeID.Contains(searchString)
+                                    || t.AppealTest.TraineeNotes.Contains(searchString)
+                                    || t.AppealTest.Decision.Contains(searchString))
+                                    && (FromAppealTime == null || t.AppealTest.RequestTime >= FromAppealTime)
+                                    && (ToAppealTime == null || t.AppealTest.RequestTime <= ToAppealTime)
+                                    && (status == default(BE.AppealStatus) || t.AppealTest.appealStatus == status));
+        }
 
         /// <summary>
         /// Get All Trainees
@@ -271,10 +302,16 @@ namespace BL
                 sum += (int)pair.Value;
             }
             test.Passed = (100 * sum / (3 * test.Indices.Count) >= BE.Configuration.PassingGrade && !test.Indices.Any(pair => pair.Value == BE.Score.נכשל));
-
-
             IDAL.UpdateTestResult(test);
         }
+
+        public void TestAppeal(Test test)
+        {
+            if (test.Time > DateTime.Now)
+                throw new Exception("לא ניתן לעדכן תוצאות לטסט שעדיין לא התבצע.");
+            IDAL.UpdateTestResult(test);
+        }
+
 
         /// <summary>
         /// update address and time fo test
@@ -467,5 +504,24 @@ namespace BL
             IDAL.RemoveTest(ID);
         }
 
+        public SortedSet<DateTime> avalibleDateTimes(Test test)
+        {
+            var result = new SortedSet<DateTime>();
+            DateTime time = DateTime.Now;
+            time = time.AddMinutes(120 - time.Minute);
+            while (time <= DateTime.Now + new TimeSpan(BE.Configuration.DaysdaysInAdvance,0,0,0))
+            {
+                try
+                {
+                    AddTest(test);
+                    RemoveTest(test.TestID);
+                    result.Add(time);
+                }
+                catch (Exception)
+                {}
+                time = time.AddMinutes(15);
+            }
+            return result;
+        }
     }
 }
