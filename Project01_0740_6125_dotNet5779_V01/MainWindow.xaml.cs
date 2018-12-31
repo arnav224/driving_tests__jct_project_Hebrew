@@ -212,22 +212,23 @@ namespace Project01_0740_6125_dotNet5779_V01
                                         this.TraineesTabUserControl.FromTimeDatePicker.SelectedDate,
                                         this.TraineesTabUserControl.ToTimeDatePicker.SelectedDate,
                                         passed)
-                                        select new
-                                        {
-                                            FirstName = item.FirstName,
-                                            LastName = item.LastName,
-                                            ID = item.ID,
-                                            Gender = item.Gender,
-                                            BirthDate = item.BirthDate.ToString("dd/MM/yyyy"),
-                                            PhoneNumber = item.PhoneNumber,
-                                            Address = item.Address,
-                                            MailAddress = item.MailAddress,
-                                            Vehicle = item.Vehicle,
-                                            gearBoxType = item.gearBoxType,
-                                            DrivingSchoolName = item.DrivingSchoolName,
-                                            TeacherName = item.TeacherName,
-                                            NumOfDrivingLessons = item.NumOfDrivingLessons,
-                                            OnlyMyGender = item.OnlyMyGender
+                                                               select new
+                                                               {
+                                                                   FirstName = item.FirstName,
+                                                                   LastName = item.LastName,
+                                                                   ID = item.ID,
+                                                                   Gender = item.Gender,
+                                                                   BirthDate = item.BirthDate.ToString("dd/MM/yyyy"),
+                                                                   PhoneNumber = item.PhoneNumber,
+                                                                   Address = item.Address,
+                                                                   MailAddress = item.MailAddress,
+                                                                   Vehicle = item.Vehicle,
+                                                                   gearBoxType = item.gearBoxType,
+                                                                   DrivingSchoolName = item.DrivingSchoolName,
+                                                                   TeacherName = item.TeacherName,
+                                                                   NumOfDrivingLessons = item.NumOfDrivingLessons,
+                                                                   OnlyMyGender = item.OnlyMyGender,
+                                                                   עבר = bl.PassedTest(item.ID)? "עבר" : "לא עבר"
                                         }; 
         }
 
@@ -563,8 +564,12 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void TestSendMailButton_Click(object sender, RoutedEventArgs e)
         {
-            new SendingEmail(selectedTests[0]).ShowDialog();
-            //Tools.TestReminderSendEmail(selectedTests[0], bl.GetAllTrainees(t => t.ID == selectedTests[0].TraineeID).First());
+
+            if (!BE.Tools.IsInternetAvailable())
+                MessageBox.Show("בדוק את החיבור שלך לרשת", "אין חיבור לרשת", MessageBoxButton.OK,
+                                MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            else
+                new SendingEmail(bl.GetAllTests(t=> t.TestID == selectedTests[0].TestID).First()).ShowDialog();
         }
         #endregion
 

@@ -34,6 +34,12 @@ namespace Project01_0740_6125_dotNet5779_V01
             InitializeComponent();
             this.test = _test;
             trainee = bl.GetAllTrainees(t => t.ID == test.TraineeID).First();
+            if (test.RemeinderEmailSent != null)
+                this.lable.Text = "לתלמיד זה כבר נשלחה תזכורת בתאריך "
+                    + ((DateTime)test.RemeinderEmailSent).ToString("dd/MM/yyyy")
+                        + " בשעה " + ((DateTime)test.RemeinderEmailSent).ToString("HH:mm")
+                        +".\n  האם אתה בטוח שברצונך לשלוח שוב?";
+
             messege = trainee.FirstName + (trainee.Gender == BE.Gender.זכר ? " היקר " : " היקרה ") + @" רק רצינו להזכיר לך שמועד הטסט שלך מתקרב\n
 
     הטסט שלך יתקיים בתאריך " + test.Time.ToString("dd/MM/yyyy") + " בשעה " + test.Time.ToString("mm:HH") + ".\n" +
@@ -67,9 +73,20 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
+            //loading gif
             dynamic doc = showEmailWebBrowser.Document;
             var htmlText = doc.documentElement.InnerHtml;
-            BE.Tools.SendingEmail(trainee.MailAddress, title, htmlText);
+            if (BE.Tools.SendingEmail(trainee.MailAddress, title, htmlText))
+            {
+                MessageBox.Show("המייל נשלח בהצלחה", "", MessageBoxButton.OK,
+                               MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
+                bl.UpdateEmailSendingTime(test.TestID, null, DateTime.Now);
+            }
+            else
+            {
+                 MessageBox.Show("שגיאה בשליחת המייל", "", MessageBoxButton.OK,
+                          MessageBoxImage.Error, MessageBoxResult.No, MessageBoxOptions.RightAlign);
+            }
             this.Close();
         }
     }

@@ -165,7 +165,7 @@ namespace BE
                         + "מועד הטסט שלך מתקרב" + File.ReadAllText("emails/TestRemeinder/2.txt")
                         + trainee.FirstName + (trainee.Gender == BE.Gender.זכר ? " היקר " : " היקרה ") + @" רק רצינו להזכיר לך שמועד הטסט שלך מתקרב\n
 
-    הטסט שלך יתקיים בתאריך " + test.Time.ToString("dd/MM/yyyy") + " בשעה " + test.Time.ToString("mm:HH") + ".\n" +
+    הטסט שלך יתקיים בתאריך " + test.Time.ToString("dd/MM/yyyy") + " בשעה " + test.Time.ToString("HH:mm") + ".\n" +
     "המיקום שנקבע לטסט הוא " + test.Address 
     + "\nבהצלחה!"
                         + File.ReadAllText("emails/TestRemeinder/3.txt")

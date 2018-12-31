@@ -123,6 +123,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                 //this.dateDatePicker.
                 //this.avalibleDateTimes = bl.avalibleDateTimes(test);
                 //new Thread(() => { this.avalibleDateTimes = bl.avalibleDateTimes(test); }).Start();
+
                 this.dateDatePicker.IsEnabled = true;
                 this.dateDatePicker.ToolTip = null;
             }

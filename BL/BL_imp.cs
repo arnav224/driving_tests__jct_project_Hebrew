@@ -523,5 +523,16 @@ namespace BL
             }
             return result;
         }
+
+        public void UpdateEmailSendingTime(int testID, DateTime? SummaryEmailSent = null, DateTime? RemeinderEmailSent = null)
+        {
+            Test test = IDAL.GetTestCopy(testID);
+            if (SummaryEmailSent != null)
+                test.SummaryEmailSent = SummaryEmailSent;
+            if (RemeinderEmailSent != null)
+                test.RemeinderEmailSent = RemeinderEmailSent;
+            IDAL.RemoveTest(testID);
+            IDAL.AddTest(test);
+        }
     }
 }
