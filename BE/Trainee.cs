@@ -183,6 +183,7 @@ namespace BE
             this.MailAddress = MailAddress;
             this.Address = Address;
             this.Vehicle = Vehicle;
+            this.gearBoxType = gearBoxType;
             this.DrivingSchoolName = DrivingSchoolName;
             this.TeacherName = TeacherName;
             this.NumOfDrivingLessons = NumOfDrivingLessons;
