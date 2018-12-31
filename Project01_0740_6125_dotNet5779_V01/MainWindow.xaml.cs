@@ -470,21 +470,21 @@ namespace Project01_0740_6125_dotNet5779_V01
         private void ApplyTestsFiltering(object sender, RoutedEventArgs e)
         {
             this.TestsTabUserControl.DataGrid.ItemsSource = from item in bl.GetAllTests(this.TestsTabUserControl.SearchTextBox.Text,
-                                                                           this.TestsTabUserControl.FromTimeDatePicker.SelectedDate,
-                                                                           this.TestsTabUserControl.ToTimeDatePicker.SelectedDate,
-                                                                           (this.TestsTabUserControl.passedComboBox.SelectedIndex == -1 ? (bool?)null
-                                                                                : (this.TestsTabUserControl.passedComboBox.SelectedIndex == 0 ? true : false)))
-                                                                                select new
-                                                                                {
-                                                                                    TestID  = item.TestID,
-                                                                                    TraineeID = item.TraineeID,
-                                                                                    TesterID = item.TesterID,
-                                                                                    Time = item.Time.ToString("dd/MM/yyyy HH/mm"),
-                                                                                    Address = item.Address,
-                                                                                    Passed = item.Passed == null ? "" : (item.Passed == true ? "עבר" : "נכשל"),
-                                                                                    TesterNotes = item.TesterNotes,
-                                                                                    AppealTest = item.AppealTest == null ? "" : item.AppealTest.appealStatus.ToString(),
-                                                                                };
+                                                            this.TestsTabUserControl.FromTimeDatePicker.SelectedDate,
+                                                            this.TestsTabUserControl.ToTimeDatePicker.SelectedDate,
+                                                            (this.TestsTabUserControl.passedComboBox.SelectedIndex == -1 ? (bool?)null
+                                                                 : (this.TestsTabUserControl.passedComboBox.SelectedIndex == 0 ? true : false)))
+                                                                 select new
+                                                                 {
+                                                                     TestID  = item.TestID,
+                                                                     TraineeID = item.TraineeID,
+                                                                     TesterID = item.TesterID,
+                                                                     Time = item.Time.ToString("dd/MM/yyyy HH/mm"),
+                                                                     Address = item.Address,
+                                                                     Passed = item.Passed == null ? "" : (item.Passed == true ? "עבר" : "נכשל"),
+                                                                     TesterNotes = item.TesterNotes,
+                                                                     AppealTest = item.AppealTest == null ? "" : item.AppealTest.appealStatus.ToString(),
+                                                                 };
         }
 
         private void TestsResetFilters(object sender, RoutedEventArgs e)
@@ -563,7 +563,8 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void TestSendMailButton_Click(object sender, RoutedEventArgs e)
         {
-            Tools.TestReminderSendEmail(selectedTests[0], bl.GetAllTrainees(t => t.ID == selectedTests[0].TraineeID).First());
+            new SendingEmail(selectedTests[0]).ShowDialog();
+            //Tools.TestReminderSendEmail(selectedTests[0], bl.GetAllTrainees(t => t.ID == selectedTests[0].TraineeID).First());
         }
         #endregion
 

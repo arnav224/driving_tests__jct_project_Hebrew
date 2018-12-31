@@ -76,6 +76,9 @@
     <Compile Include="Appeals\AppeaTests.xaml.cs">
       <DependentUpon>AppeaTests.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SendingEmail.xaml.cs">
+      <DependentUpon>SendingEmail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tests\AddTest.xaml.cs">
       <DependentUpon>AddTest.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Appeals\AppeaTests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SendingEmail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
