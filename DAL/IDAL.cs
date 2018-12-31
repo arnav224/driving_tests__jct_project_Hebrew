@@ -91,5 +91,8 @@ namespace DAL
         /// <param name="predicate">Predicate for filtering or null to get all tests</param>
         /// <returns></returns>
         IEnumerable<BE.Test> GetAllTests(Func<BE.Test, bool> predicate = null);
+
+        string GetEmailTemltateTestRemeinder(int TestID, string NoteToAdd = "");
+
     }
 }

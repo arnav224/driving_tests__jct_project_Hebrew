@@ -32,6 +32,7 @@ namespace Project01_0740_6125_dotNet5779_V01
         {
             InitializeComponent();
             bl = BL.Factory.GetInstance();
+            bl.SendTestsRemindersLoop();
 
             #region TraineesTab
             this.TraineesTabUserControl.AddButton.Content = "הוסף תלמיד";
@@ -671,6 +672,17 @@ namespace Project01_0740_6125_dotNet5779_V01
         {
             if (e.WidthChanged)
                 this.blankTabItem.Width  = e.NewSize.Width - 100 * 3 - 65 - 30;
+        }
+
+        private void ToggleSwitch_Checked(object sender, RoutedEventArgs e)
+        {
+            bl.SendTestsRemindersLoop();
+        }
+
+        private void PasswordTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            BE.Configuration.EmailServerPasword = this.passwordTextBox.Text;
+            this.passwordTextBox.Text = String.Concat(Enumerable.Repeat('*', Configuration.EmailServerPasword.Length));
         }
     }
 }

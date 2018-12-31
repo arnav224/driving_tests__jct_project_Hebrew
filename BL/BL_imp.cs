@@ -454,24 +454,25 @@ namespace BL
         {
             new Thread(() =>
             {
-            while (true)
-            {
-                while (DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Friday
-                       || DateTime.Now.Hour < 8 || DateTime.Now.Hour > 21)    // Send only during working hours.
-                    Thread.Sleep(100 * 60 * 60);
-                foreach (var item in GetAllTests(t => t.RemeinderEmailSent == null && (t.Time > DateTime.Now) && ((t.Time - DateTime.Now).Days <= 3)))
+                while (BE.Configuration.AutoSendingEmails)
                 {
-                    BE.Trainee trainee = IDAL.GetTraineeCopy(item.TraineeID);
+                    while (DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Friday
+                           || DateTime.Now.Hour < 8 || DateTime.Now.Hour > 21)    // Send only during working hours.
+                        Thread.Sleep(100 * 60 * 60);
+                    foreach (var item in GetAllTests(t => t.RemeinderEmailSent == null && (t.Time > DateTime.Now) && ((t.Time - DateTime.Now).Days <= 3)))
+                    {
+                        if (!BE.Configuration.AutoSendingEmails)
+                            break;
+                        BE.Trainee trainee = IDAL.GetTraineeCopy(item.TraineeID);
                         try
                         {
-                            BE.Tools.SendingEmail(trainee.MailAddress, "מועד הטסט שלך מתקרב", "שגיאה");
-                            item.RemeinderEmailSent = DateTime.Now;
+                            BE.Tools.SendingEmail(trainee.MailAddress, "מועד הטסט שלך מתקרב", IDAL.GetEmailTemltateTestRemeinder(item.TestID));
+                            UpdateEmailSendingTime(item.TestID, null, DateTime.Now);
                         }
                         catch (Exception)
-                        {
-                            // @ else -                        
-                        }
+                        { }
                     }
+                    Thread.Sleep(100 * 60 * 60);
                 }
             }).Start();
         }
@@ -533,6 +534,11 @@ namespace BL
                 test.RemeinderEmailSent = RemeinderEmailSent;
             IDAL.RemoveTest(testID);
             IDAL.AddTest(test);
+        }
+
+        public string GetEmailTemltateTestRemeinder(int TestID, string NoteToAdd = "")
+        {
+            return IDAL.GetEmailTemltateTestRemeinder(TestID, NoteToAdd);
         }
     }
 }

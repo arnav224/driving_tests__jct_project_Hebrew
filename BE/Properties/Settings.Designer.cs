@@ -214,5 +214,17 @@ namespace BE.Properties {
                 this["SMTP_Port"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoSendingEmails {
+            get {
+                return ((bool)(this["AutoSendingEmails"]));
+            }
+            set {
+                this["AutoSendingEmails"] = value;
+            }
+        }
     }
 }
