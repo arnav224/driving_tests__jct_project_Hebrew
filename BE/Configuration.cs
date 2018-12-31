@@ -142,7 +142,7 @@ namespace BE
             }
         }
 
-        static private int daysdaysInAdvance = 4;
+        static private int daysdaysInAdvance = 90;
         static public int DaysdaysInAdvance
         {
             get { return daysdaysInAdvance; }

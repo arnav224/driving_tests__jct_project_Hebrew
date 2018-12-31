@@ -121,7 +121,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             if (this.addressPicker.Address != null && this.TraineeIDComboBox.SelectedItem != null)
             {
                 //this.dateDatePicker.
-                //this.avalibleDateTimes = bl.avalibleDateTimes(test);
+                this.avalibleDateTimes = bl.avalibleDateTimes(test);
                 //new Thread(() => { this.avalibleDateTimes = bl.avalibleDateTimes(test); }).Start();
 
                 this.dateDatePicker.IsEnabled = true;
