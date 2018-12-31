@@ -64,13 +64,13 @@ namespace BL
                          && BE.Tools.Maps_DrivingDistance(item.Address, test.Address) < item.MaxDistanceInMeters
                          select item).Any() && time.Subtract(DateTime.Now).TotalDays < 30 * 3)
                 {
-                    time += new TimeSpan(0, 15, 0); 
+                    time += new TimeSpan(0, 15, 0);
                     time = NextWorkTime(time);
                 }
                 if (time.Subtract(DateTime.Now).TotalDays >= 30 * 3)
                     throw new Exception("הזמן המבוקש תפוס. לא קיים זמן פנוי בשלושת החודשים הקרובים.");
                 else
-                    throw new Exception("הזמן המבוקש תפוס, אבל יש לנו זמן אחר להציע לך: " + time.Day + '/' + time.Month + '/' 
+                    throw new Exception("הזמן המבוקש תפוס, אבל יש לנו זמן אחר להציע לך: " + time.Day + '/' + time.Month + '/'
                         + time.Year + ' ' + time.Hour + ':' + time.Minute);// time.ToString("MM/dd/yyyy HH:mm"));
             }
             test.TesterID = tester.ID;
@@ -86,19 +86,19 @@ namespace BL
         {
             if (time.DayOfWeek >= DayOfWeek.Friday)
             {
-                time.AddDays(DayOfWeek.Saturday - time.DayOfWeek + 1);
-                time.AddHours(-time.Hour);
-                time.AddMinutes(-time.Minute);
+                time = time.AddDays(DayOfWeek.Saturday - time.DayOfWeek + 1);
+                time = time.AddHours(-time.Hour);
+                time = time.AddMinutes(-time.Minute);
             }
             if (time.Hour < Configuration.WorkStartHour)
             {
-                time.AddHours(Configuration.WorkStartHour - time.Hour);
-                time.AddMinutes(-time.Minute);
+                time = time.AddHours(Configuration.WorkStartHour - time.Hour);
+                time = time.AddMinutes(-time.Minute);
             }
             if (time.Hour > Configuration.WorkEndHour)
             {
-                time.AddHours(24 - time.Hour + Configuration.WorkStartHour);
-                time.AddMinutes(-time.Minute);
+                time = time.AddHours(24 - time.Hour + Configuration.WorkStartHour);
+                time = time.AddMinutes(-time.Minute);
             }
             return time;
         }
@@ -507,23 +507,91 @@ namespace BL
 
         public SortedSet<DateTime> avalibleDateTimes(Test test)
         {
+            BE.Trainee trainee = IDAL.GetTraineeCopy(test.TraineeID);
             var result = new SortedSet<DateTime>();
-            DateTime time = DateTime.Now;
+            DateTime time = DateTime.Now.AddDays(2);
             time = time.AddMinutes(120 - time.Minute);
-            while (time <= DateTime.Now + new TimeSpan(BE.Configuration.DaysdaysInAdvance,0,0,0))
+            while (time <= DateTime.Now.AddDays(BE.Configuration.DaysdaysInAdvance))
             {
                 try
                 {
-                    AddTest(test);
-                    RemoveTest(test.TestID);
+                    test.Time = time;
+
+                    BE.Test LastPreviusTest = null, FirstNextTest = null;
+                    foreach (var item in IDAL.GetAllTests(t => t.TraineeID == test.TraineeID))
+                    {
+                        if (item.Time < test.Time && (LastPreviusTest == null || LastPreviusTest.Time < item.Time))
+                            LastPreviusTest = item;
+                        else if (item.Time >= test.Time && (FirstNextTest == null || LastPreviusTest.Time < item.Time))
+                            FirstNextTest = item;
+                    }
+                    if (LastPreviusTest != null && (test.Time - LastPreviusTest.Time).Days < BE.Configuration.MinimumDaysBetweenTests
+                        || FirstNextTest != null && (FirstNextTest.Time - test.Time).Days < BE.Configuration.MinimumDaysBetweenTests)
+                        throw new Exception("לתלמיד זה קיים מבחן בהפרש של פחות משבעה ימים.");
+                    if (test.Time != NextWorkTime(test.Time))
+                        throw new Exception("מועד הטסט מחוץ לשעות העבודה. \nשעות העבודה בימי השבוע הם: " + BE.Configuration.WorkStartHour + " עד " + BE.Configuration.WorkEndHour);
+
+                    BE.Tester tester = (from item in GetAllTesters(test.Time)
+                                        where item.Vehicle == trainee.Vehicle
+                                        && BE.Tools.Maps_DrivingDistance(item.Address, test.Address) < item.MaxDistanceInMeters
+                                        && (!trainee.OnlyMyGender || item.Gender == trainee.Gender)
+                                        && item.gearBoxType == trainee.gearBoxType
+                                        && NumOfTestsInWeek(item, test.Time) < item.MaxTestsInWeek // @
+                                        select item).FirstOrDefault();
+                    if (tester == null)
+                    {
+                            throw new Exception("הזמן המבוקש תפוס");
+                    }
                     result.Add(time);
+                    time = time.AddDays(1);
+                    time = time.AddHours(-time.Hour + BE.Configuration.WorkStartHour);
                 }
                 catch (Exception)
-                {}
-                time = time.AddMinutes(15);
+                {
+                     time = time.AddMinutes(15);
+                }
+                time = NextWorkTime(time);
             }
             return result;
         }
+
+        public SortedSet<DateTime> avalibleTimesInDay(Test test)
+        {
+            BE.Trainee trainee = IDAL.GetTraineeCopy(test.TraineeID);
+            var result = new SortedSet<DateTime>();
+            DateTime time = test.Time;
+            DateTime timeFlag = test.Time;
+            timeFlag = timeFlag.AddHours(-timeFlag.Hour);
+            time = time.AddMinutes(120 - time.Minute);
+            while (time <= timeFlag + new TimeSpan(1,0,0))
+            {
+                try
+                {
+                    test.Time = time;
+                    if (test.Time != NextWorkTime(test.Time))
+                        throw new Exception("מועד הטסט מחוץ לשעות העבודה. \nשעות העבודה בימי השבוע הם: " + BE.Configuration.WorkStartHour + " עד " + BE.Configuration.WorkEndHour);
+
+                    BE.Tester tester = (from item in GetAllTesters(test.Time)
+                                        where item.Vehicle == trainee.Vehicle
+                                        && BE.Tools.Maps_DrivingDistance(item.Address, test.Address) < item.MaxDistanceInMeters
+                                        && (!trainee.OnlyMyGender || item.Gender == trainee.Gender)
+                                        && item.gearBoxType == trainee.gearBoxType
+                                        && NumOfTestsInWeek(item, test.Time) < item.MaxTestsInWeek // @
+                                        select item).FirstOrDefault();
+                    if (tester == null)
+                    {
+                        throw new Exception("הזמן המבוקש תפוס");
+                    }
+                    result.Add(time);
+                }
+                catch (Exception)
+                { }
+                time = time.AddMinutes(15);
+                time = NextWorkTime(time);
+            }
+            return result;
+        }
+
 
         public void UpdateEmailSendingTime(int testID, DateTime? SummaryEmailSent = null, DateTime? RemeinderEmailSent = null)
         {

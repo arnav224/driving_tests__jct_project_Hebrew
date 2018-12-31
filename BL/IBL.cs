@@ -49,7 +49,9 @@ namespace BL
         /// </summary>
         /// <param name="test"></param>
         void UpdateTest(BE.Test test);
+
         string GetEmailTemltateTestRemeinder(int TestID, string NoteToAdd = "");
+
         void UpdateEmailSendingTime(int testID, DateTime? SummaryEmailSent = null, DateTime? RemeinderEmailSent = null);
         /// <summary>
         /// Update test results when done.
