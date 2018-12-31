@@ -27,8 +27,6 @@ namespace BE
 
 
 
-
-
         static public int MinimumTaineeAge
         {
             get { return (int)Settings.Default["MinimumTaineeAge"]; }
@@ -149,7 +147,6 @@ namespace BE
             set { daysdaysInAdvance = value; }
         }
 
-
         static public int WorkEndHour
         {
             get { return (int)Settings.Default["WorkEndHour"]; }
@@ -188,6 +185,18 @@ namespace BE
             }
         }
 
+        //static private bool autoSendingEmails;
+        static public bool AutoSendingEmails
+        {
+            get { return (bool)Settings.Default["AutoSendingEmails"]; }
+            set
+            {
+                Settings.Default["AutoSendingEmails"] = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+
         static public string SMTP_Server
         {
             get { return (string)Settings.Default["SMTP_Server"]; }
@@ -210,21 +219,21 @@ namespace BE
             }
         }
 
-        //static public string EmailServerPasword
-        //{
-        //    get { return (string)Settings.Default["EmailServerPasword"]; }
-        //    set
-        //    {
-        //        Settings.Default["EmailServerPasword"] = value;
-        //        Properties.Settings.Default.Save();
-        //    }
-        //}
-        static private string myVar = "fhmbqwxfzdjefqhd";
         static public string EmailServerPasword
         {
-            get { return myVar; }
-            set { myVar = value; }
+            get { return (string)Settings.Default["EmailServerPasword"]; }
+            set
+            {
+                Settings.Default["EmailServerPasword"] = value;
+                Properties.Settings.Default.Save();
+            }
         }
+        //static private string myVar = "fhmbqwxfzdjefqhd"; //"hluuarmauvxfpzfs"
+        //static public string EmailServerPasword
+        //{
+        //    get { return myVar; }
+        //    set { myVar = value; }
+        //}
 
 
         static public string GoogleMapsApiKey

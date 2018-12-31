@@ -62,7 +62,7 @@ namespace BE
         public static int Maps_DrivingDistance(string sourceAddress, string destinationAddress)
         {
             //@@ Currently disabled manually
-            return new Random().Next(2000,3000);
+            //return new Random().Next(2000,3000);
             //@@
 
 
@@ -210,43 +210,6 @@ namespace BE
             }).Start();
         }
 
-        //    static public void sendTry1()
-        //    {
-        //        new Thread(() =>
-        //        {
-        //            try
-        //            {
-        //                string MessageTosend = File.ReadAllText("emails/TestRemeinder/1.txt")
-        //                    + "מועד הטסט שלך מתקרב" + File.ReadAllText("emails/TestRemeinder/2.txt")
-        //                    + @"חיים היקר, רק רצינו להזכיר לך שמועד הטסט שלך מתקרב
-        //הטסט שלך יתקיים בתאריך XX בשעה YY  מומלץ להקדים.
-        //בהצלחה! 
-
-        //."
-        //                    + File.ReadAllText("emails/TestRemeinder/3.txt")
-        //                    + "ttps://www.google.co.il/maps/place/" + ""
-        //                    + File.ReadAllText("emails/TestRemeinder/4.txt")
-        //                    + "נווט למיקום הטסט"
-        //                    + File.ReadAllText("emails/TestRemeinder/5.txt");
-
-        //                var client = new SmtpClient("smtp.gmail.com", 587)
-        //                {
-        //                    Credentials = new NetworkCredential(Configuration.SenderEmailAddress.Address, Configuration.EmailServerPasword),
-        //                    EnableSsl = true
-        //                };
-        //                MailMessage mailMessage = new MailMessage("avraham224@gmail.com", "avraham224@gmail.com") { Body = MessageTosend, IsBodyHtml = true, };
-        //                client.Send(mailMessage);
-        //                //client.Send(Configuration.SenderEmailAddress, recipients, subject, body);
-        //                return true;
-        //            }
-        //            catch (Exception)
-        //            {
-        //                return false;
-        //            }
-
-        //        }).Start();
-
-        //    }
 
         /// <summary>
         /// deep cloning

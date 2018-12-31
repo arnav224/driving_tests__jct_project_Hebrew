@@ -143,5 +143,21 @@ namespace DAL
                 throw new KeyNotFoundException("לא נמצא טסט שמספרו " + ID);
             DS.DataSource.tests.Remove(test);
         }
+
+        public string GetEmailTemltateTestRemeinder(int TestID, string NoteToAdd = "")
+        {
+            BE.Test test = GetTest(TestID);
+            BE.Trainee trainee = GetTrainee(test.TraineeID);
+
+            string messege = '!' + trainee.FirstName + (trainee.Gender == BE.Gender.זכר ? " היקר " : " היקרה ") + @"<p> רק רצינו להזכיר לך שמועד הטסט שלך מתקרב</p>"
++ @".הטסט שלך יתקיים בתאריך <b>" + test.Time.ToString("dd/MM/yyyy") + "</b> בשעה <b>" + test.Time.ToString("mm:HH") + "</b><br>" +
+".המיקום שנקבע לטסט הוא: <b>" + test.Address + "</b>"
++ "<p></p>!בהצלחה";
+            string URL = "https://www.google.com/maps/search/" + test.Address/*.Replace(' ', '+').Replace(',', '%')*/;
+
+            return DS.DataSource.RemeinderEmailHTML
+                .Replace("@@Text@@", messege + "<p>" + NoteToAdd.Replace("\n", "<br>") + "</p>" )
+                .Replace("@@LINK@@", URL);
+        }
     }
 }

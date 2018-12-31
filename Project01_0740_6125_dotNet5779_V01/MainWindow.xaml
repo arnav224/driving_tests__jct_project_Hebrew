@@ -149,13 +149,17 @@
                              TextWrapping="Wrap" Text="{Binding Source={StaticResource ConfigurationClass}, Path=SMTP_Port , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  />
 
                     <Label Content="סיסמה"  Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                    <TextBox HorizontalAlignment="Left" Height="20" Grid.Row="4" Grid.Column="4" VerticalAlignment="Center" 
-                             TextWrapping="Wrap" Text="g" />
+                    <TextBox x:Name="passwordTextBox" HorizontalAlignment="Left" Height="20" Grid.Row="4" Grid.Column="4" VerticalAlignment="Center" 
+                             TextWrapping="Wrap" Text="**********" LostFocus="PasswordTextBox_LostFocus"/>
 
                     <Label Content="Google Maps Api Key"  Grid.Row="5" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" />
                     <TextBox HorizontalAlignment="Left" Height="20" Grid.Row="5" Grid.Column="4" VerticalAlignment="Center"
                              TextWrapping="Wrap" Text="{Binding Source={StaticResource ConfigurationClass}, Path=GoogleMapsApiKey , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  />
 
+                    <Label Content="שליחת מיילים אוטומטית"  Grid.Row="6" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <Controls:ToggleSwitch IsChecked="{Binding Source={StaticResource ConfigurationClass}, Path=AutoSendingEmails , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                                           Grid.Row="6" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" OnLabel="" OffLabel=""  Checked="ToggleSwitch_Checked"></Controls:ToggleSwitch>
+                    
                 </Grid>
 
             </TabItem>

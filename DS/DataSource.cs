@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -11,6 +12,17 @@ namespace DS
         public static List<BE.Tester> testers;
         public static List<BE.Trainee> trainees;
         public static List<BE.Test> tests;
+
+        private static string remeinderEmailHTML;
+        public static string RemeinderEmailHTML
+        {
+            get
+            {
+                if (remeinderEmailHTML == null)
+                    remeinderEmailHTML = File.ReadAllText("emails/TestRemeinder.html");
+                return remeinderEmailHTML;
+            }
+        }
 
         static public void Initializer()
         {
