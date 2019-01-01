@@ -456,22 +456,28 @@ namespace BL
             {
                 while (BE.Configuration.AutoSendingEmails)
                 {
-                    while (DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Friday
-                           || DateTime.Now.Hour < 8 || DateTime.Now.Hour > 21)    // Send only during working hours.
-                        Thread.Sleep(100 * 60 * 60);
-                    foreach (var item in GetAllTests(t => t.RemeinderEmailSent == null && (t.Time > DateTime.Now) && ((t.Time - DateTime.Now).Days <= 3)))
+                    DateTime now = DateTime.Now;
+                    if (now != NextWorkTime(now))
+                        Thread.Sleep((NextWorkTime(now) - now).Milliseconds);
+                    try
                     {
-                        if (!BE.Configuration.AutoSendingEmails)
-                            break;
-                        BE.Trainee trainee = IDAL.GetTraineeCopy(item.TraineeID);
-                        try
+                        foreach (var item in GetAllTests(t => t.RemeinderEmailSent == null 
+                                 && (t.Time > DateTime.Now) && ((t.Time - DateTime.Now).Days <= Configuration.SendingEmails_DaysInAdvance)))
                         {
-                            BE.Tools.SendingEmail(trainee.MailAddress, "מועד הטסט שלך מתקרב", IDAL.GetEmailTemltateTestRemeinder(item.TestID));
-                            UpdateEmailSendingTime(item.TestID, null, DateTime.Now);
+                            if (!BE.Configuration.AutoSendingEmails)
+                                break;
+                            BE.Trainee trainee = IDAL.GetTraineeCopy(item.TraineeID);
+                            try
+                            {
+                                if (BE.Tools.SendingEmail(trainee.MailAddress, "מועד הטסט שלך מתקרב", IDAL.GetEmailTemltateTestRemeinder(item.TestID)))
+                                    UpdateEmailSendingTime(item.TestID, null, DateTime.Now);
+                            }
+                            catch (Exception)
+                            { }
                         }
-                        catch (Exception)
-                        { }
                     }
+                    catch (Exception)
+                    { }
                     Thread.Sleep(100 * 60 * 60);
                 }
             }).Start();
@@ -511,7 +517,7 @@ namespace BL
             var result = new SortedSet<DateTime>();
             DateTime time = DateTime.Now.AddDays(2);
             time = time.AddMinutes(120 - time.Minute);
-            while (time <= DateTime.Now.AddDays(BE.Configuration.DaysdaysInAdvance))
+            while (time <= DateTime.Now.AddDays(BE.Configuration.AllowToAddTest_DaysInAdvance))
             {
                 try
                 {
@@ -595,13 +601,7 @@ namespace BL
 
         public void UpdateEmailSendingTime(int testID, DateTime? SummaryEmailSent = null, DateTime? RemeinderEmailSent = null)
         {
-            Test test = IDAL.GetTestCopy(testID);
-            if (SummaryEmailSent != null)
-                test.SummaryEmailSent = SummaryEmailSent;
-            if (RemeinderEmailSent != null)
-                test.RemeinderEmailSent = RemeinderEmailSent;
-            IDAL.RemoveTest(testID);
-            IDAL.AddTest(test);
+            IDAL.UpdateEmailSendingTime(testID, SummaryEmailSent, RemeinderEmailSent);
         }
 
         public string GetEmailTemltateTestRemeinder(int TestID, string NoteToAdd = "")

@@ -140,11 +140,11 @@ namespace BE
             }
         }
 
-        static private int daysdaysInAdvance = 90;
-        static public int DaysdaysInAdvance
+        static private int allowToAddTest_DaysInAdvance = 90;
+        static public int AllowToAddTest_DaysInAdvance
         {
-            get { return daysdaysInAdvance; }
-            set { daysdaysInAdvance = value; }
+            get { return allowToAddTest_DaysInAdvance; }
+            set { allowToAddTest_DaysInAdvance = value; }
         }
 
         static public int WorkEndHour
@@ -196,6 +196,27 @@ namespace BE
             }
         }
 
+        static public bool AutoSendingEmailsAboutAddingAndCancalation
+        {
+            get { return (bool)Settings.Default["AutoSendingEmailsAboutAddingAndCancalation"]; }
+            set
+            {
+                Settings.Default["AutoSendingEmailsAboutAddingAndCancalation"] = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        static public int SendingEmails_DaysInAdvance
+        {
+            get { return (int)Settings.Default["SendingEmails_DaysInAdvance"]; }
+            set
+            {
+                if (value < 0)
+                    throw new Exception();
+                Settings.Default["SendingEmails_DaysInAdvance"] = value;
+                Properties.Settings.Default.Save();
+            }
+        }
 
         static public string SMTP_Server
         {

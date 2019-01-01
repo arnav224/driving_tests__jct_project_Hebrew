@@ -194,6 +194,8 @@ namespace BE
             }
         }
 
+
+
         public Tester(string ID, string FirstName, string LastName, DateTime birthDate,
              Gender Gender, string PhoneNumber, string MailAddress, string Address,
             int Experience, int MaxTestsInWeek, Vehicle Vehicle, GearBoxType gearBoxType, SortedSet<TimePeriod> WorkHours, int MaxDistanceInMeters)

@@ -11,50 +11,18 @@
     <Window.Resources>
         <BE:Configuration x:Key="ConfigurationClass"/>
     </Window.Resources>
-    
-    
+    <!--<Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button x:Name="ExperimentalButton" Content="  " MouseDoubleClick="ExperimentalButton_MouseDoubleClick"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>-->
+
     <Grid>
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="RightToLeft" Controls:TabControlHelper.IsUnderlined="True"
                     Controls:TabControlHelper.UnderlineMouseOverBrush="LightSkyBlue">
             <TabItem Header="תלמידים"  >
                 <local:DataManegmentGrid x:Name="TraineesTabUserControl" />
 
-                <!--<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  DataContext="{StaticResource traineeViewSource}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="82*"/>
-                        <RowDefinition Height="29*"/>
-                        <RowDefinition Height="282*"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid HorizontalAlignment="Stretch" Margin="5" VerticalAlignment="Stretch" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5*"/>
-                            <ColumnDefinition Width="4*"/>
-                            <ColumnDefinition Width="4*"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Content="הוסף תלמיד" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center"  Width="110" Height="49" Click="AddTraineeButton_Click"/>
-                        <Grid  >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-                            <TextBox x:Name="UpdateTraineeIdTextBox" Grid.Column="0" Height="23"  TextWrapping="Wrap" Text="" />
-                            <Button Content="עדכן"  Width="75" Grid.Row="1" Height="20" Click="UpdateTraineeButton_Click" />
-                            <Button Content="מחק" Grid.Column="1" Width="75" Grid.Row="1" Height="20" Click="UpdateTraineeButton_Click" />
-                            <Label Content=":תעודת זהות לעדכון או מחיקה" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                        </Grid>
-                    </Grid>
-                    <DataGrid x:Name="TraineesDataGrid" AutoGenerateColumns="True" Grid.Row="2" IsReadOnly="True" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" />
-
-                </Grid>-->
             </TabItem>
             <TabItem Header="בוחנים" >
                 <local:DataManegmentGrid x:Name="TestersTabUserControl" />
@@ -86,7 +54,7 @@
                         <ColumnDefinition Width="263*"/>
                         <ColumnDefinition Width="33*"/>
                         <ColumnDefinition Width="48*"/>
-                        <ColumnDefinition Width="116*"/>
+                        <ColumnDefinition Width="136*"/>
                         <ColumnDefinition Width="263*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
@@ -136,6 +104,7 @@
 
 
                     <!-- seconde column: -->
+                    <Label Content="הגדרות מיילים:" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14"/>
                     <Label Content="כתובת המייל של המערכת" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" />
                     <TextBox HorizontalAlignment="Left" Height="23" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center"
                              TextWrapping="Wrap" Text="{Binding Source={StaticResource ConfigurationClass}, Path=SenderEmailAddress , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  />
@@ -149,16 +118,27 @@
                              TextWrapping="Wrap" Text="{Binding Source={StaticResource ConfigurationClass}, Path=SMTP_Port , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  />
 
                     <Label Content="סיסמה"  Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                    <TextBox x:Name="passwordTextBox" HorizontalAlignment="Left" Height="20" Grid.Row="4" Grid.Column="4" VerticalAlignment="Center" 
-                             TextWrapping="Wrap" Text="**********" LostFocus="PasswordTextBox_LostFocus"/>
+                    <PasswordBox x:Name="PasswordBox" LostFocus="PasswordBox_LostFocus" Width="100"
+                                 HorizontalAlignment="Left" Height="20" Grid.Row="4" Grid.Column="4" VerticalAlignment="Center"></PasswordBox>
+                    <!--<TextBox x:Name="passwordTextBox" HorizontalAlignment="Left" Height="20" Grid.Row="4" Grid.Column="4" VerticalAlignment="Center" 
+                             TextWrapping="Wrap" Text="**********" LostFocus="PasswordTextBox_LostFocus"/>-->
 
                     <Label Content="Google Maps Api Key"  Grid.Row="5" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" />
                     <TextBox HorizontalAlignment="Left" Height="20" Grid.Row="5" Grid.Column="4" VerticalAlignment="Center"
                              TextWrapping="Wrap" Text="{Binding Source={StaticResource ConfigurationClass}, Path=GoogleMapsApiKey , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  />
 
-                    <Label Content="שליחת מיילים אוטומטית"  Grid.Row="6" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <Label Content="שליחת תזכורות במייל אוטומטית"  Grid.Row="6" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" />
                     <Controls:ToggleSwitch IsChecked="{Binding Source={StaticResource ConfigurationClass}, Path=AutoSendingEmails , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                                           Grid.Row="6" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" OnLabel="" OffLabel=""  Checked="ToggleSwitch_Checked"></Controls:ToggleSwitch>
+                                           Grid.Row="6" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center"  OnLabel="" OffLabel=""  Checked="ToggleSwitch_Checked"></Controls:ToggleSwitch>
+
+                    <Label Content="כמה ימים מראש לשלוח מייל"  Grid.Row="7" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <TextBox HorizontalAlignment="Left" Height="23" Grid.Row="7" Grid.Column="4" VerticalAlignment="Center"
+                             TextWrapping="Wrap" Text="{Binding Source={StaticResource ConfigurationClass}, Path=SendingEmails_DaysInAdvance , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  />
+
+                    <Label Content="שליחת תזכורות במייל על קביעה וביטול טסט" Grid.ColumnSpan="2" Grid.Row="8" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <Controls:ToggleSwitch IsChecked="{Binding Source={StaticResource ConfigurationClass}, Path=AutoSendingEmailsAboutAddingAndCancalation , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                                           Grid.Row="8" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center"  OnLabel="" OffLabel=""  Checked="ToggleSwitch_Checked"></Controls:ToggleSwitch>
+
                     
                 </Grid>
 

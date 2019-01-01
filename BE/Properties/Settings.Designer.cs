@@ -226,5 +226,29 @@ namespace BE.Properties {
                 this["AutoSendingEmails"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int SendingEmails_DaysInAdvance {
+            get {
+                return ((int)(this["SendingEmails_DaysInAdvance"]));
+            }
+            set {
+                this["SendingEmails_DaysInAdvance"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoSendingEmailsAboutAddingAndCancalation {
+            get {
+                return ((bool)(this["AutoSendingEmailsAboutAddingAndCancalation"]));
+            }
+            set {
+                this["AutoSendingEmailsAboutAddingAndCancalation"] = value;
+            }
+        }
     }
 }

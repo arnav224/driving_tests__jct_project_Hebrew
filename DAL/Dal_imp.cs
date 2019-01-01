@@ -159,5 +159,14 @@ namespace DAL
                 .Replace("@@Text@@", messege + "<p>" + NoteToAdd.Replace("\n", "<br>") + "</p>" )
                 .Replace("@@LINK@@", URL);
         }
+
+        public void UpdateEmailSendingTime(int testID, DateTime? SummaryEmailSent = null, DateTime? RemeinderEmailSent = null)
+        {
+            Test test = GetTest(testID);
+            if (SummaryEmailSent != null)
+                test.SummaryEmailSent = SummaryEmailSent;
+            if (RemeinderEmailSent != null)
+                test.RemeinderEmailSent = RemeinderEmailSent;
+        }
     }
 }

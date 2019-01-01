@@ -679,10 +679,20 @@ namespace Project01_0740_6125_dotNet5779_V01
             bl.SendTestsRemindersLoop();
         }
 
-        private void PasswordTextBox_LostFocus(object sender, RoutedEventArgs e)
+        //private void PasswordTextBox_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    BE.Configuration.EmailServerPasword = this.passwordTextBox.Text;
+        //    this.passwordTextBox.Text = String.Concat(Enumerable.Repeat('*', Configuration.EmailServerPasword.Length));
+        //}
+
+        //private void ExperimentalButton_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //{
+        //    new Experimental().Show();
+        //}
+
+        private void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            BE.Configuration.EmailServerPasword = this.passwordTextBox.Text;
-            this.passwordTextBox.Text = String.Concat(Enumerable.Repeat('*', Configuration.EmailServerPasword.Length));
+            BE.Configuration.EmailServerPasword = this.PasswordBox.Password;
         }
     }
 }

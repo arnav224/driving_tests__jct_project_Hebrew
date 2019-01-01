@@ -93,6 +93,7 @@ namespace DAL
         IEnumerable<BE.Test> GetAllTests(Func<BE.Test, bool> predicate = null);
 
         string GetEmailTemltateTestRemeinder(int TestID, string NoteToAdd = "");
+        void UpdateEmailSendingTime(int testID, DateTime? SummaryEmailSent = null, DateTime? RemeinderEmailSent = null);
 
     }
 }
