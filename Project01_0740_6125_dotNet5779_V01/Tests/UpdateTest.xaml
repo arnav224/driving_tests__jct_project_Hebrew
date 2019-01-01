@@ -41,8 +41,8 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="Time_hour" Grid.Column="1" Text="{Binding Hour, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="5,5,15,5" />
-                <TextBox x:Name="Time_minutes" Grid.Column="0" Text="{Binding Minute, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="15,5,5,5" />
+                <TextBox x:Name="Time_hour" Grid.Column="1" Text="{Binding Hour, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="5,5,15,5" GotFocus="Time_GotFocus"/>
+                <TextBox x:Name="Time_minutes" Grid.Column="0" Text="{Binding Minute, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="15,5,5,5" GotFocus="Time_GotFocus"/>
             </Grid>
 
             <local:AddressPicker x:Name="addressPicker" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="4,6,4,0" Grid.Row="2" Grid.RowSpan="4" VerticalAlignment="Top" TextChanged="AddressPicker_TextChanged" />

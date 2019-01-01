@@ -133,5 +133,12 @@ namespace Project01_0740_6125_dotNet5779_V01
                 this.dateDatePicker.ToolTip = "יש לבחור תלמיד וכתובת תחילה";
             }
         }
+
+        private void Time_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var t = e.OriginalSource as TextBox;
+            if (t != null)
+                t.SelectAll();
+        }
     }
 }

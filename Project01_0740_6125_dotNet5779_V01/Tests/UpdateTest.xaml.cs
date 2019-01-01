@@ -106,5 +106,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             test.Address = this.addressPicker.Address;
         }
 
+        private void Time_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var t = e.OriginalSource as TextBox;
+            if (t != null)
+                t.SelectAll();
+        }
     }
 }
