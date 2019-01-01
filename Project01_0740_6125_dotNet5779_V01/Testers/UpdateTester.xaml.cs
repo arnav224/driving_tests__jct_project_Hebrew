@@ -225,13 +225,15 @@ namespace Project01_0740_6125_dotNet5779_V01
             //    && t.End.Subtract(new TimeSpan(t.Start.Days, 0, 0, 0)) >= test.Time.TimeOfDay + BE.Configuration.TestTimeSpan).Any()))
             if (TestsToRemove2.Any())
             {
-                RemovingTimePeriods += " בפעולה זו ימחקו גם הטסטים שמתוכננים " + (TestsToRemove2.Count() > 1 ? "לזמנים אלו: \n" : "לזמן זה: \n");
+                RemovingTimePeriods += " בלחיצה על \"שמור\" ימחקו גם הטסטים שמתוכננים " + (TestsToRemove2.Count() > 1 ? "לזמנים אלו: \n" : "לזמן זה: \n");
                 foreach (var TestItem in TestsToRemove2)
                 {
-                    RemovingTimePeriods += TestItem.Time.ToString("dd/MM/yyyy HH:mm") + ' ';
+                    RemovingTimePeriods += TestItem.Time.ToString("dd/MM/yyyy HH:mm") + ", ";
                 }
+                RemovingTimePeriods.TrimEnd(',', ' ');
                 RemovingTimePeriods += "\n\n";
-                string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + timePeriodsToRemove.Count + (timePeriodsToRemove.Count == 1 ? " הזמן שנבחר\n\n" : " הזמנים שנבחרו\n\n") + RemovingTimePeriods;
+                string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + timePeriodsToRemove.Count + (timePeriodsToRemove.Count == 1 ? " הזמן שנבחר\n\n" : " הזמנים שנבחרו\n\n")
+                    + RemovingTimePeriods + " ניתן לשנות זמנים. עדכון יתבצע בלחיצה על \"שמור\". ";
                 MessageBoxResult result = MessageBox.Show(messegeBody, "אישור מחיקה", MessageBoxButton.YesNo,
                                                           MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
                 if (result == MessageBoxResult.No)
