@@ -34,8 +34,8 @@
 
             <Grid Grid.Column="2" Grid.RowSpan="2" HorizontalAlignment="Right">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -48,34 +48,43 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
-                
-                <Label Content="חיפוש" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <TextBox x:Name="SearchTextBox" Grid.Column="0" Width="100" TextWrapping="Wrap" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" Grid.Row="1" />
 
-                <Label Content="מתאריך" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <DatePicker x:Name="FromTimeDatePicker"  Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Margin="5" />
+                <Label Content="חיפוש" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3" />
+                <TextBox x:Name="SearchTextBox" Grid.Column="0" Width="100" TextWrapping="Wrap" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3"  Grid.Row="1"  />
 
-                <Label Content="עד תאריך" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" />
-                <DatePicker x:Name="ToTimeDatePicker" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Margin="5" />
+                <Label x:Name="timeLabel" Content="זמן" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3" Visibility="Collapsed"/>
+                <ComboBox x:Name="timeComboBox" Grid.Column="1" Width="85" HorizontalAlignment="Center"  Margin="3" Grid.Row="1" VerticalAlignment="Center" Visibility="Collapsed">
+                    <ComboBoxItem Content="השבוע" />
+                    <ComboBoxItem Content="בשבוע הבא"/>
+                    <ComboBoxItem Content="החודש"/>
+                    <ComboBoxItem Content="בחודש הבא"/>
+                </ComboBox>
 
-                <Label x:Name="genderLabel" Content="מין" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <ComboBox x:Name="genderComboBox" Grid.Column="3" Width="58" HorizontalAlignment="Center"  Margin="5" Grid.Row="1" VerticalAlignment="Center" />
+                <Label Content="מתאריך" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3" />
+                <DatePicker x:Name="FromTimeDatePicker"  Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Margin="3" />
 
-                <Label x:Name="vehicleLabel" Content="סוג רשיון" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <ComboBox x:Name="vehicleComboBox" Grid.Column="4" Width="70" HorizontalAlignment="Center"  Margin="5" Grid.Row="1" VerticalAlignment="Center" />
+                <Label Content="עד תאריך" Grid.Column="3" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="3" />
+                <DatePicker x:Name="ToTimeDatePicker" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Margin="3" />
 
-                <Label x:Name="gearBoxTypeLabel" Content="הילוכים" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <ComboBox x:Name="gearBoxTypeComboBox" Grid.Column="5" Width="60" HorizontalAlignment="Center"  Margin="5" Grid.Row="1" VerticalAlignment="Center" />
+                <Label x:Name="genderLabel" Content="מין" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3" />
+                <ComboBox x:Name="genderComboBox" Grid.Column="4" Width="58" HorizontalAlignment="Center"  Margin="3" Grid.Row="1" VerticalAlignment="Center" />
 
-                <Label x:Name="passedLable" Content="עבר טסט" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <ComboBox x:Name="passedComboBox" Grid.Column="7" HorizontalAlignment="Center" Width="55" Margin="5" Grid.Row="1" VerticalAlignment="Center">
+                <Label x:Name="vehicleLabel" Content="סוג רשיון" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="12,7" />
+                <ComboBox x:Name="vehicleComboBox" Grid.Column="5" Width="70" HorizontalAlignment="Center"  Margin="3" Grid.Row="1" VerticalAlignment="Center" />
+
+                <Label x:Name="gearBoxTypeLabel" Content="הילוכים" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3" />
+                <ComboBox x:Name="gearBoxTypeComboBox" Grid.Column="6" Width="60" HorizontalAlignment="Center"  Margin="3" Grid.Row="1" VerticalAlignment="Center" />
+
+                <Label x:Name="passedLable" Content="עבר טסט" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="3" />
+                <ComboBox x:Name="passedComboBox" Grid.Column="7" HorizontalAlignment="Center" Width="55" Margin="4.778,7,5.111,7" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2">
                     <ComboBoxItem Content="עבר" />
                     <ComboBoxItem Content="לא עבר"/>
                 </ComboBox>
 
-                <Button x:Name="ResetFiltersButton" Content="איפוס סינון" Grid.Column="8" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Width="75"/>
+                <Button x:Name="ResetFiltersButton" Content="איפוס סינון" Grid.Column="9" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Width="75"/>
             </Grid>
 
         </Grid>

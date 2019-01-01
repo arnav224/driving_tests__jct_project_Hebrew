@@ -12,16 +12,8 @@ namespace BE
     /// Driving student
     /// </summary>
     [Serializable]
-    public class Trainee // :INotifyPropertyChanged
+    public class Trainee
     {
-        #region INotifyPropertyChanged Members
-        
-        //[field: NonSerialized]
-        //public event PropertyChangedEventHandler PropertyChanged;
-        ////public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
-
         private string firstName;
         public string FirstName
         {

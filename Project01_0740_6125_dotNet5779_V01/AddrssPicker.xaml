@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Project01_0740_6125_dotNet5779_V01"
              mc:Ignorable="d" LostFocus="UserControl_LostFocus" 
+             
             >
     <StackPanel MinWidth="115" MaxWidth="150" ZIndex="0" FlowDirection="RightToLeft">
         <TextBox x:Name="TexBoxAddress" HorizontalAlignment="Stretch" TextChanged="TexBoxAddress_TextChanged" MaxWidth="150"/>
