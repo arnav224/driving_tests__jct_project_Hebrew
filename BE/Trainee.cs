@@ -194,9 +194,8 @@ namespace BE
         public override string ToString()  
         {
             return "תעודת זהות: " + ID + ", מין: " + Gender + ", שם: " + FirstName + ' ' + LastName 
-                + (birthDate != default(DateTime) ? ", " + ", תאריך לידה: " + birthDate.ToString("dd/MM/yyyy") : "") 
-                + ", " + "טלפון: " + PhoneNumber + ", כתובת: " + Address 
-                + ", סוג רכב: " + Vehicle + "-" + gearBoxType + ", בית ספר: "
+                + (birthDate != default(DateTime) ? ", תאריך לידה: " + birthDate.ToString("dd/MM/yyyy") : "") 
+                + ", טלפון: " + PhoneNumber + ", כתובת: " + Address + ", סוג רכב: " + Vehicle + "-" + gearBoxType + ", בית ספר: "
                  + DrivingSchoolName + ", שם המורה: " + TeacherName + ", מספר שיעורים: " + numOfDrivingLessons + '.';
         }
     }

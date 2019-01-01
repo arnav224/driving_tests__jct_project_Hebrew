@@ -28,6 +28,7 @@ namespace Project01_0740_6125_dotNet5779_V01
         public List<Trainee> selectedTrainees = new List<Trainee>();
         public List<Tester> selectedTesters = new List<Tester>();
         public List<Test> selectedTests = new List<Test>();
+        readonly static int SUMITEMSTODISPLY = 7;
         public MainWindow()
         {
             InitializeComponent();
@@ -164,6 +165,7 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void DeleteTraineeButton_Click(object sender, RoutedEventArgs e)
         {
+            int SumItemsToDisplay = SUMITEMSTODISPLY;
             string Trainees = "";
             foreach (var TraineeItem in selectedTrainees)
             {
@@ -178,8 +180,11 @@ namespace Project01_0740_6125_dotNet5779_V01
                     }
                 }
                 Trainees += "\n\n";
+                if (--SumItemsToDisplay == 0)
+                    break;
             }
-            string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + selectedTrainees.Count + (selectedTrainees.Count == 1 ? " התלמיד שנבחר\n\n" : " התלמידים שנבחרו\n\n") + Trainees;
+            string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + selectedTrainees.Count + (selectedTrainees.Count == 1 ? " התלמיד שנבחר\n\n" : " התלמידים שנבחרו\n\n") + Trainees
+                 + (selectedTrainees.Count > SUMITEMSTODISPLY ? "רשימה חלקית.\n\n" : "");
             MessageBoxResult result = MessageBox.Show(messegeBody, "אישור מחיקה" ,MessageBoxButton.YesNo,
                                                       MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
             if (result == MessageBoxResult.Yes)
@@ -300,6 +305,7 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void DeleteTesterButton_Click(object sender, RoutedEventArgs e)
         {
+            int SumItemsToDisplay = SUMITEMSTODISPLY;
             string Testers = "";
             foreach (var TesterItem in selectedTesters)
             {
@@ -314,8 +320,11 @@ namespace Project01_0740_6125_dotNet5779_V01
                     }
                 }
                 Testers += "\n\n";
+                if (--SumItemsToDisplay == 0)
+                    break;
             }
-            string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + selectedTesters.Count + (selectedTesters.Count == 1 ? " הבוחן שנבחר\n\n" : " הבוחנים שנבחרו\n\n") + Testers;
+            string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + selectedTesters.Count + (selectedTesters.Count == 1 ? " הבוחן שנבחר\n\n" : " הבוחנים שנבחרו\n\n") + Testers
+                 + (selectedTesters.Count > SUMITEMSTODISPLY ? "רשימה חלקית.\n\n" : "");
             MessageBoxResult result = MessageBox.Show(messegeBody, "אישור מחיקה", MessageBoxButton.YesNo,
                                                       MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
             if (result == MessageBoxResult.Yes)
@@ -448,11 +457,16 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void DeleteTestButton_Click(object sender, RoutedEventArgs e)
         {
+            int SumItemsToDisplay = SUMITEMSTODISPLY;
             string Teste = "";
             foreach (var item in selectedTests)
+            {
                 Teste += item.ToString() + "\n\n";
+                if (--SumItemsToDisplay == 0)
+                    break;
+            }
             string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + selectedTests.Count + (selectedTests.Count == 1 ? " הטסטים שנבחר\n\n" : " הטסטים שנבחרו\n\n") + Teste
-                + " הודעה במייל תישלח לתלמיד על הביטול";
+                + (selectedTests.Count > SUMITEMSTODISPLY ? "רשימה חלקית.\n\n":"") + " הודעה במייל תישלח לתלמיד על הביטול";
             MessageBoxResult result = MessageBox.Show(messegeBody, "אישור מחיקה", MessageBoxButton.YesNo,
                                                       MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
             if (result == MessageBoxResult.Yes)
