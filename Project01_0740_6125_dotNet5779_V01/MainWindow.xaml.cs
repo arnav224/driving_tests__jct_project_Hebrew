@@ -97,8 +97,8 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestsTabUserControl.DeleteButton.Click += DeleteTestButton_Click;
             this.TestsTabUserControl.SearchTextBox.TextChanged += ApplyTestsFiltering;
             this.TestsTabUserControl.passedComboBox.SelectionChanged += ApplyTestsFiltering;
-            this.TestsTabUserControl.FromTimeDatePicker.LostFocus += ApplyTestsFiltering;
-            this.TestsTabUserControl.ToTimeDatePicker.LostFocus += ApplyTestsFiltering;
+            this.TestsTabUserControl.FromTimeDatePicker.LostFocus += FromAndToTimeDatePicker_LostFocus; ;
+            this.TestsTabUserControl.ToTimeDatePicker.LostFocus += FromAndToTimeDatePicker_LostFocus;
             this.TestsTabUserControl.DataGrid.AutoGeneratingColumn += TraineesDataGrid_AutoGeneratingColumn;
             this.TestsTabUserControl.ResetFiltersButton.Click += TestsResetFilters;
             this.TestsTabUserControl.DataGrid.SelectionChanged += TestsDataGrid_SelectionChanged;
@@ -120,7 +120,6 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.ApplyTestsFiltering(this, new RoutedEventArgs());
             #endregion
         }
-
 
 
         #region TraineesTab
@@ -485,6 +484,12 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        private void FromAndToTimeDatePicker_LostFocus(object sender, RoutedEventArgs e)
+        {
+            this.TestsTabUserControl.timeComboBox.SelectedIndex = -1;
+            ApplyTestsFiltering(this, e);
+        }
+
         private void ApplyTestsFiltering(object sender, RoutedEventArgs e)
         {
             if (this.TestsTabUserControl.timeComboBox.SelectedIndex != -1)
@@ -523,7 +528,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                                                                 TestID = item.TestID,
                                                                 TraineeID = item.TraineeID,
                                                                 TesterID = item.TesterID,
-                                                                Time = item.Time.ToString("dd/MM/yyyy HH/mm"),
+                                                                Time = item.Time.ToString("dd/MM/yyyy HH:mm"),
                                                                 Address = item.Address,
                                                                 Passed = item.Passed == null ? "" : (item.Passed == true ? "עבר" : "נכשל"),
                                                                 TesterNotes = item.TesterNotes,
