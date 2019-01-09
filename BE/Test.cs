@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml.Serialization;
 
 namespace BE
 {
@@ -12,7 +13,7 @@ namespace BE
     [Serializable]
     public class Test
     {
-        public int TestID { get; internal set; }
+        public int TestID { get; set; }
 
         private string testerID;
         public string TesterID
@@ -58,7 +59,7 @@ namespace BE
         public string TesterNotes { get; set; }
 
         private Dictionary<string, BE.Score> indices;
-
+        [XmlIgnore]
         public Dictionary<string, BE.Score> Indices
         {
             get
@@ -90,6 +91,34 @@ namespace BE
             set
             {
                 indices = value;
+            }
+        }
+        public string IndicesToString
+        {
+            get
+            {
+                if (indices == null)
+                    return null;
+                string result = "";
+                foreach (var item in indices)
+                {
+                    result += item.Key + ',' + item.Value.ToString() + ';';
+                }
+                    return result.TrimEnd(';');
+            }
+            set
+            {
+                if (value != null)
+                {
+                    string[] pairs = value.Split(';');
+                    Dictionary<string, Score> tempIndices = new Dictionary<string, Score>();
+                    foreach (var item in pairs)
+                    {
+                        string[] pair = item.Split(',');
+                        tempIndices.Add(pair[0], (Score)Enum.Parse(typeof(Score), pair[1]));
+                    }
+                    indices = tempIndices;
+                }
             }
         }
 

@@ -31,8 +31,8 @@ namespace Project01_0740_6125_dotNet5779_V01
         readonly static int SUMITEMSTODISPLY = 7;
         public MainWindow()
         {
-            InitializeComponent();
             bl = BL.Factory.GetInstance();
+            InitializeComponent();
             bl.SendTestsRemindersLoop();
 
             #region TraineesTab
@@ -211,32 +211,40 @@ namespace Project01_0740_6125_dotNet5779_V01
                 passed = null;
             else
                 passed = ((ComboBoxItem)this.TraineesTabUserControl.passedComboBox.SelectedItem).Content.ToString() == "עבר" ? true : false;
-            this.TraineesTabUserControl.DataGrid.ItemsSource = from item in bl.GetAllTrainees(
-                                        this.TraineesTabUserControl.SearchTextBox.Text,
-                                        this.TraineesTabUserControl.genderComboBox.SelectedItem as BE.Gender?,
-                                        this.TraineesTabUserControl.gearBoxTypeComboBox.SelectedItem as BE.GearBoxType?,
-                                        this.TraineesTabUserControl.vehicleComboBox.SelectedItem as BE.Vehicle?,
-                                        this.TraineesTabUserControl.FromTimeDatePicker.SelectedDate,
-                                        this.TraineesTabUserControl.ToTimeDatePicker.SelectedDate,
-                                        passed)
-                                                               select new
-                                                               {
-                                                                   FirstName = item.FirstName,
-                                                                   LastName = item.LastName,
-                                                                   ID = item.ID,
-                                                                   Gender = item.Gender,
-                                                                   BirthDate = item.BirthDate.ToString("dd/MM/yyyy"),
-                                                                   PhoneNumber = item.PhoneNumber,
-                                                                   Address = item.Address,
-                                                                   MailAddress = item.MailAddress,
-                                                                   Vehicle = item.Vehicle,
-                                                                   gearBoxType = item.gearBoxType,
-                                                                   DrivingSchoolName = item.DrivingSchoolName,
-                                                                   TeacherName = item.TeacherName,
-                                                                   NumOfDrivingLessons = item.NumOfDrivingLessons,
-                                                                   OnlyMyGender = item.OnlyMyGender,
-                                                                   עבר = bl.PassedTest(item.ID) ? "עבר" : "לא עבר"
-                                                               };
+            try
+            {
+                this.TraineesTabUserControl.DataGrid.ItemsSource = from item in bl.GetAllTrainees(
+                                            this.TraineesTabUserControl.SearchTextBox.Text,
+                                            this.TraineesTabUserControl.genderComboBox.SelectedItem as BE.Gender?,
+                                            this.TraineesTabUserControl.gearBoxTypeComboBox.SelectedItem as BE.GearBoxType?,
+                                            this.TraineesTabUserControl.vehicleComboBox.SelectedItem as BE.Vehicle?,
+                                            this.TraineesTabUserControl.FromTimeDatePicker.SelectedDate,
+                                            this.TraineesTabUserControl.ToTimeDatePicker.SelectedDate,
+                                            passed)
+                                                                   select new
+                                                                   {
+                                                                       FirstName = item.FirstName,
+                                                                       LastName = item.LastName,
+                                                                       ID = item.ID,
+                                                                       Gender = item.Gender,
+                                                                       BirthDate = item.BirthDate.ToString("dd/MM/yyyy"),
+                                                                       PhoneNumber = item.PhoneNumber,
+                                                                       Address = item.Address,
+                                                                       MailAddress = item.MailAddress,
+                                                                       Vehicle = item.Vehicle,
+                                                                       gearBoxType = item.GearBoxType,
+                                                                       DrivingSchoolName = item.DrivingSchoolName,
+                                                                       TeacherName = item.TeacherName,
+                                                                       NumOfDrivingLessons = item.NumOfDrivingLessons,
+                                                                       OnlyMyGender = item.OnlyMyGender,
+                                                                       עבר = bl.PassedTest(item.ID) ? "עבר" : ""
+                                                                   };
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "שגיאה", MessageBoxButton.OK,
+                                MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            }
         }
 
         private void TraineesResetFilters(object sender, RoutedEventArgs e)
@@ -365,7 +373,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                                                                   Address = item.Address,
                                                                   MailAddress = item.MailAddress,
                                                                   Vehicle = item.Vehicle,
-                                                                  gearBoxType = item.gearBoxType,
+                                                                  gearBoxType = item.GearBoxType,
                                                                   Experience = item.Experience,
                                                                   MaxTestsInWeek = item.MaxTestsInWeek,
                                                                   WorkHours = item.WorkHours,
@@ -508,11 +516,11 @@ namespace Project01_0740_6125_dotNet5779_V01
                         break;
                     case 2: //this month
                         this.TestsTabUserControl.FromTimeDatePicker.SelectedDate = new DateTime(now.Year, now.Month, 1);
-                        this.TestsTabUserControl.ToTimeDatePicker.SelectedDate = new DateTime(now.Year, (now.Month + 1) % 12, 1);
+                        this.TestsTabUserControl.ToTimeDatePicker.SelectedDate = new DateTime(now.Year, (now.Month + 1) % 12, 1).AddDays(-1);
                         break;
                     case 3: //next month
                         this.TestsTabUserControl.FromTimeDatePicker.SelectedDate = new DateTime(now.Year, (now.Month + 1) % 12, 1);
-                        this.TestsTabUserControl.ToTimeDatePicker.SelectedDate = new DateTime(now.Year, (now.Month + 2) % 12, 1);
+                        this.TestsTabUserControl.ToTimeDatePicker.SelectedDate = new DateTime(now.Year, (now.Month + 2) % 12, 1).AddDays(-1);
                         break;
                     default:
                         break;
@@ -536,14 +544,15 @@ namespace Project01_0740_6125_dotNet5779_V01
                                                             };
         }
 
-            private void TestsResetFilters(object sender, RoutedEventArgs e)
-            {
-                this.TestsTabUserControl.FromTimeDatePicker.SelectedDate = null;
-                this.TestsTabUserControl.ToTimeDatePicker.SelectedDate = null;
-                this.TestsTabUserControl.SearchTextBox.Text = "";
-                this.TestsTabUserControl.passedComboBox.SelectedItem = null;
-                ApplyTestsFiltering(this, e);
-            }
+        private void TestsResetFilters(object sender, RoutedEventArgs e)
+        {
+            this.TestsTabUserControl.FromTimeDatePicker.SelectedDate = null;
+            this.TestsTabUserControl.ToTimeDatePicker.SelectedDate = null;
+            this.TestsTabUserControl.SearchTextBox.Text = "";
+            this.TestsTabUserControl.passedComboBox.SelectedItem = null;
+            this.TestsTabUserControl.timeComboBox.SelectedIndex = -1;
+            ApplyTestsFiltering(this, e);
+        }
 
             private void TestsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
             {
@@ -726,17 +735,6 @@ namespace Project01_0740_6125_dotNet5779_V01
             {
                 bl.SendTestsRemindersLoop();
             }
-
-            //private void PasswordTextBox_LostFocus(object sender, RoutedEventArgs e)
-            //{
-            //    BE.Configuration.EmailServerPasword = this.passwordTextBox.Text;
-            //    this.passwordTextBox.Text = String.Concat(Enumerable.Repeat('*', Configuration.EmailServerPasword.Length));
-            //}
-
-            //private void ExperimentalButton_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-            //{
-            //    new Experimental().Show();
-            //}
 
             private void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
             {

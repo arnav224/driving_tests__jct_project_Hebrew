@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
+using System.Xml.Serialization;
+
 namespace BE
 {
     /// <summary>
@@ -141,9 +143,10 @@ namespace BE
         }
 
         public Vehicle Vehicle { get; set; }
-        public GearBoxType gearBoxType { get; set; }
+        public GearBoxType GearBoxType { get; set; }
 
         private SortedSet<TimePeriod> workHours;
+        [XmlIgnore]
         public SortedSet<TimePeriod> WorkHours
         {
             get
@@ -179,6 +182,31 @@ namespace BE
             }
         }
 
+        public string WorkHoursToSring
+        {
+            get
+            {
+                string result = "";
+                foreach (var item in workHours)
+                {
+                    result += item.Start.Days.ToString() + ',' + item.Start.Hours.ToString() + ',' + item.Start.Minutes.ToString() + ',' + item.End.Hours.ToString() + ',' + item.End.Minutes.ToString() + ';';
+                }
+                return result.TrimEnd(';');
+            }
+            set
+            {
+                string[] timePeriods = value.Split(';');
+                SortedSet<BE.TimePeriod> tempTimePeriods = new SortedSet<TimePeriod>();
+                foreach (var item in timePeriods)
+                {
+                    int[] timePeriod = (from str in item.Split(',') select Convert.ToInt32(str)).ToArray();
+                    tempTimePeriods.Add(new TimePeriod(new TimeSpan(timePeriod[0], timePeriod[1], timePeriod[2], 0),
+                                        new TimeSpan(timePeriod[0], timePeriod[3], timePeriod[4], 0)));
+                }
+                workHours = tempTimePeriods;
+            }
+        }
+
         /// <summary>
         /// Maximum distance the Tester agrees to move from his home to the Test
         /// </summary>
@@ -211,7 +239,7 @@ namespace BE
             this.ExperiencedSince = DateTime.Now.AddYears(-Experience);
             this.MaxTestsInWeek = MaxTestsInWeek;
             this.Vehicle = Vehicle;
-            this.gearBoxType = gearBoxType;
+            this.GearBoxType = gearBoxType;
             this.WorkHours = WorkHours;
             this.MaxDistanceInMeters = MaxDistanceInMeters;
         }
@@ -222,7 +250,7 @@ namespace BE
             string result = "שם: " + FirstName + ' ' + LastName +  ", ת\"ז:" + ID + (birthDate != default(DateTime) ? ", תאריך לידה: " + birthDate.ToString("dd/MM/yyyy") : "")
                 + ", מין: " + Gender + ", טלפון: " + PhoneNumber + ", כתובת מייל: " + MailAddress + ", כתובת: " + Address
                 + ", שנות נסיון: " + Experience + ", מקסימום טסטים בשבוע: "
-                + MaxTestsInWeek + ", סוג רכב: " + Vehicle + '-' + gearBoxType + ", שעות עבודה: ";
+                + MaxTestsInWeek + ", סוג רכב: " + Vehicle + '-' + GearBoxType + ", שעות עבודה: ";
             foreach (var item in WorkHours)
             {
                 result += item.ToString() + ", ";

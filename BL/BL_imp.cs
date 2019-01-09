@@ -50,7 +50,7 @@ namespace BL
                                 where item.Vehicle == trainee.Vehicle
                                 && BE.Tools.Maps_DrivingDistance(item.Address, test.Address) < item.MaxDistanceInMeters
                                 && (!trainee.OnlyMyGender || item.Gender == trainee.Gender)
-                                && item.gearBoxType == trainee.gearBoxType
+                                && item.GearBoxType == trainee.GearBoxType
                                 && NumOfTestsInWeek(item, test.Time) < item.MaxTestsInWeek // @
                                 select item).FirstOrDefault();
             DateTime time = test.Time;
@@ -60,7 +60,7 @@ namespace BL
                 while (!(from item in GetAllTesters(time)
                          where item.Vehicle == trainee.Vehicle
                          && (!trainee.OnlyMyGender || item.Gender == trainee.Gender)
-                         && item.gearBoxType == trainee.gearBoxType
+                         && item.GearBoxType == trainee.GearBoxType
                          && BE.Tools.Maps_DrivingDistance(item.Address, test.Address) < item.MaxDistanceInMeters
                          select item).Any() && time.Subtract(DateTime.Now).TotalDays < 30 * 3)
                 {
@@ -247,7 +247,7 @@ namespace BL
 
                 && (gender == null || gender == t.Gender)
 
-                && (gearBoxType == null || gearBoxType == t.gearBoxType) 
+                && (gearBoxType == null || gearBoxType == t.GearBoxType) 
 
                 && (vahicle == null || vahicle == t.Vehicle)
 
@@ -360,7 +360,7 @@ namespace BL
             if (ExistTrainee == null)
                 throw new KeyNotFoundException("לא נמצא תלמיד שמספרו " + trainee.ID);
             if (ExistTrainee.Gender != trainee.Gender || ExistTrainee.BirthDate != trainee.BirthDate
-                || ExistTrainee.Vehicle != trainee.Vehicle || ExistTrainee.gearBoxType != trainee.gearBoxType
+                || ExistTrainee.Vehicle != trainee.Vehicle || ExistTrainee.GearBoxType != trainee.GearBoxType
                 || ExistTrainee.DrivingSchoolName != trainee.DrivingSchoolName || ExistTrainee.TeacherName != trainee.TeacherName)
                 throw new KeyNotFoundException("לא ניתן לשנות מידע בסיסי של תלמיד");
             IDAL.UpdateTrainee(trainee);
@@ -386,7 +386,7 @@ namespace BL
 
                 && (gender == null || gender == t.Gender)
 
-                && (gearBoxType == null || gearBoxType == t.gearBoxType)
+                && (gearBoxType == null || gearBoxType == t.GearBoxType)
 
                 && (vahicle == null || vahicle == t.Vehicle)
 
@@ -541,7 +541,7 @@ namespace BL
                                         where item.Vehicle == trainee.Vehicle
                                         && BE.Tools.Maps_DrivingDistance(item.Address, test.Address) < item.MaxDistanceInMeters
                                         && (!trainee.OnlyMyGender || item.Gender == trainee.Gender)
-                                        && item.gearBoxType == trainee.gearBoxType
+                                        && item.GearBoxType == trainee.GearBoxType
                                         && NumOfTestsInWeek(item, test.Time) < item.MaxTestsInWeek // @
                                         select item).FirstOrDefault();
                     if (tester == null)
@@ -581,7 +581,7 @@ namespace BL
                                         where item.Vehicle == trainee.Vehicle
                                         && BE.Tools.Maps_DrivingDistance(item.Address, test.Address) < item.MaxDistanceInMeters
                                         && (!trainee.OnlyMyGender || item.Gender == trainee.Gender)
-                                        && item.gearBoxType == trainee.gearBoxType
+                                        && item.GearBoxType == trainee.GearBoxType
                                         && NumOfTestsInWeek(item, test.Time) < item.MaxTestsInWeek // @
                                         select item).FirstOrDefault();
                     if (tester == null)

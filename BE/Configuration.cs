@@ -13,7 +13,7 @@ namespace BE
     public class Configuration
     {
         static public Random Random = new Random();
-        private static int LastTestId = 10000000;
+        public static int LastTestId = 10000000;
         /// <summary>
         /// Serial number for Tests
         /// </summary>

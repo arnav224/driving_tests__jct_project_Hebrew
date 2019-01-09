@@ -119,7 +119,7 @@ namespace BE
         //public string TestItems = BE.Tools.Maps_GetPlaceAutoComplete(Address);
 
         public Vehicle Vehicle { get; set; }
-        public GearBoxType gearBoxType { get; set; }
+        public GearBoxType GearBoxType { get; set; }
         private string drivingSchoolName;
         public string DrivingSchoolName
         {
@@ -175,7 +175,7 @@ namespace BE
             this.MailAddress = MailAddress;
             this.Address = Address;
             this.Vehicle = Vehicle;
-            this.gearBoxType = gearBoxType;
+            this.GearBoxType = gearBoxType;
             this.DrivingSchoolName = DrivingSchoolName;
             this.TeacherName = TeacherName;
             this.NumOfDrivingLessons = NumOfDrivingLessons;
@@ -187,7 +187,7 @@ namespace BE
         {
             return "תעודת זהות: " + ID + ", מין: " + Gender + ", שם: " + FirstName + ' ' + LastName 
                 + (birthDate != default(DateTime) ? ", תאריך לידה: " + birthDate.ToString("dd/MM/yyyy") : "") 
-                + ", טלפון: " + PhoneNumber + ", כתובת: " + Address + ", סוג רכב: " + Vehicle + "-" + gearBoxType + ", בית ספר: "
+                + ", טלפון: " + PhoneNumber + ", כתובת: " + Address + ", סוג רכב: " + Vehicle + "-" + GearBoxType + ", בית ספר: "
                  + DrivingSchoolName + ", שם המורה: " + TeacherName + ", מספר שיעורים: " + numOfDrivingLessons + '.';
         }
     }
