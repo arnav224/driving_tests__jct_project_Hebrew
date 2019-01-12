@@ -47,6 +47,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             {
                 bl.UpdateTrainee(trainee);
                 this.Closing -= Window_Closing;
+                DialogResult = true;
                 this.Close();
             }
             catch (Exception ex)

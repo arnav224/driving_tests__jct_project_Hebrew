@@ -34,17 +34,17 @@
             </Grid.ColumnDefinitions>
 
             <Label VerticalAlignment="Center" Grid.Row="0" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="שם פרטי:"/>
-            <TextBox x:Name="firstNameTextBox" Width="120" VerticalAlignment="Center" 
+            <TextBox x:Name="firstNameTextBox" Width="120" VerticalAlignment="Center" IsEnabled="False"
                      Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                      Grid.Row="0" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
 
             <Label VerticalAlignment="Center" Grid.Row="1" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="שם משפחה:"/>
-            <TextBox x:Name="lastNameTextBox" Width="120" VerticalAlignment="Center" 
+            <TextBox x:Name="lastNameTextBox" Width="120" VerticalAlignment="Center" IsEnabled="False"
                      Text="{Binding LastName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                      Grid.Row="1" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
 
             <Label VerticalAlignment="Center" Grid.Row="2" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="תעודת זהות:"/>
-            <TextBox x:Name="iDTextBox" Width="120" VerticalAlignment="Center" 
+            <TextBox x:Name="iDTextBox" Width="120" VerticalAlignment="Center" IsEnabled="False"
                      Text="{Binding ID, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                      Grid.Row="2" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
 

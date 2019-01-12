@@ -28,7 +28,10 @@ namespace Project01_0740_6125_dotNet5779_V01
         public List<Trainee> selectedTrainees = new List<Trainee>();
         public List<Tester> selectedTesters = new List<Tester>();
         public List<Test> selectedTests = new List<Test>();
+        Queue<string> notificationsQueue = new Queue<string>();
         readonly static int SUMITEMSTODISPLY = 7;
+        public dynamic htmlText;
+        DateTime timeOfLastNotification;
         public MainWindow()
         {
             bl = BL.Factory.GetInstance();
@@ -135,7 +138,8 @@ namespace Project01_0740_6125_dotNet5779_V01
                                 MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
             else
             {
-                new AddTrainee().ShowDialog();
+                if (new AddTrainee().ShowDialog() == true)
+                    addNotification("תלמיד נוסף בהצלחה");
                 ApplyTraineesFiltering(this, new RoutedEventArgs());
             }
         }
@@ -147,7 +151,8 @@ namespace Project01_0740_6125_dotNet5779_V01
                                 MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
             else
             {
-                new UpdateTrainee().ShowDialog();
+                if (new UpdateTrainee().ShowDialog() == true)
+                    addNotification("תלמיד עודכן בהצלחה");
                 ApplyTraineesFiltering(this, new RoutedEventArgs());
             }
         }
@@ -554,191 +559,326 @@ namespace Project01_0740_6125_dotNet5779_V01
             ApplyTestsFiltering(this, e);
         }
 
-            private void TestsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TestsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.TestsTabUserControl.SendMailButton.IsEnabled = false;
+            if (e.OriginalSource != null)
             {
-                this.TestsTabUserControl.SendMailButton.IsEnabled = false;
-                if (e.OriginalSource != null)
+                if (e.OriginalSource.GetType() == typeof(DataGrid))
                 {
-                    if (e.OriginalSource.GetType() == typeof(DataGrid))
+                    foreach (dynamic item in e.AddedItems)
                     {
-                        foreach (dynamic item in e.AddedItems)
-                        {
-                            selectedTests.Add((BE.Test)bl.GetAllTests(t => t.TestID == item.TestID).First());
-                        }
-                        foreach (dynamic item in e.RemovedItems)
-                        {
-                            selectedTests.RemoveAll(t => t.TestID == item.TestID);
-                        }
+                        selectedTests.Add((BE.Test)bl.GetAllTests(t => t.TestID == item.TestID).First());
                     }
-                    bool ExistOldTest = selectedTests.Any(t => t.Time < DateTime.Now);
-                    this.TestsTabUserControl.DeleteButton.IsEnabled = selectedTests.Count >= 1 && !ExistOldTest;
-                    if (ExistOldTest)
-                        this.TestsTabUserControl.DeleteButton.ToolTip = "לא ניתן למחוק טסט שזמנו עבר";
-                    else
-                        this.TestsTabUserControl.DeleteButton.ToolTip = null;
-                    this.TestsTabUserControl.DeleteButton.Content = selectedTests.Count > 1 ? "מחק טסטים" : "מחק טסט";
-                    if (selectedTests.Count == 1)
+                    foreach (dynamic item in e.RemovedItems)
                     {
-                        if (selectedTests[0].Time < DateTime.Now)
-                        {
-                            this.TestsTabUserControl.UpdateButton.IsEnabled = false;
-                            this.TestsTabUserControl.UpdateButton.ToolTip = "לא ניתן לערוך פרטים לטסט שכבר נעשה";
-                            this.TestsTabUserControl.OptionalButton.IsEnabled = true;
-                            this.TestsTabUserControl.OptionalButton.ToolTip = null;
-                            if (selectedTests[0].Passed == null)
-                                this.TestsTabUserControl.AppealButton.ToolTip = "לא התקבלו תוצאות לטסט";
-                            else if (selectedTests[0].Passed == true)
-                                this.TestsTabUserControl.AppealButton.ToolTip = "התוצאה - עבר";
-                            else if (selectedTests[0].AppealTest != null)
-                                this.TestsTabUserControl.AppealButton.ToolTip = "לטסט זה כבר הוגש ערעור";
-                            else
-                            {
-                                this.TestsTabUserControl.AppealButton.IsEnabled = true;
-                                this.TestsTabUserControl.AppealButton.ToolTip = null;
-                            }
-                        }
+                        selectedTests.RemoveAll(t => t.TestID == item.TestID);
+                    }
+                }
+                bool ExistOldTest = selectedTests.Any(t => t.Time < DateTime.Now);
+                this.TestsTabUserControl.DeleteButton.IsEnabled = selectedTests.Count >= 1 && !ExistOldTest;
+                if (ExistOldTest)
+                    this.TestsTabUserControl.DeleteButton.ToolTip = "לא ניתן למחוק טסט שזמנו עבר";
+                else
+                    this.TestsTabUserControl.DeleteButton.ToolTip = null;
+                this.TestsTabUserControl.DeleteButton.Content = selectedTests.Count > 1 ? "מחק טסטים" : "מחק טסט";
+                if (selectedTests.Count == 1)
+                {
+                    if (selectedTests[0].Time < DateTime.Now)
+                    {
+                        this.TestsTabUserControl.UpdateButton.IsEnabled = false;
+                        this.TestsTabUserControl.UpdateButton.ToolTip = "לא ניתן לערוך פרטים לטסט שכבר נעשה";
+                        this.TestsTabUserControl.OptionalButton.IsEnabled = true;
+                        this.TestsTabUserControl.OptionalButton.ToolTip = null;
+                        if (selectedTests[0].Passed == null)
+                            this.TestsTabUserControl.AppealButton.ToolTip = "לא התקבלו תוצאות לטסט";
+                        else if (selectedTests[0].Passed == true)
+                            this.TestsTabUserControl.AppealButton.ToolTip = "התוצאה - עבר";
+                        else if (selectedTests[0].AppealTest != null)
+                            this.TestsTabUserControl.AppealButton.ToolTip = "לטסט זה כבר הוגש ערעור";
                         else
                         {
-                            this.TestsTabUserControl.SendMailButton.IsEnabled = true;
-                            this.TestsTabUserControl.AppealButton.IsEnabled = false;
-                            this.TestsTabUserControl.UpdateButton.IsEnabled = true;
-                            this.TestsTabUserControl.UpdateButton.ToolTip = null;
-                            this.TestsTabUserControl.OptionalButton.IsEnabled = false;
-                            this.TestsTabUserControl.OptionalButton.ToolTip = "לא ניתן לעדכן תוצאות לטסט שעדיין לא בוצע";
-                            this.TestsTabUserControl.AppealButton.ToolTip = "טרם התבצע הטסט";
+                            this.TestsTabUserControl.AppealButton.IsEnabled = true;
+                            this.TestsTabUserControl.AppealButton.ToolTip = null;
                         }
                     }
                     else
                     {
+                        this.TestsTabUserControl.SendMailButton.IsEnabled = true;
                         this.TestsTabUserControl.AppealButton.IsEnabled = false;
-                        this.TestsTabUserControl.UpdateButton.IsEnabled = false;
+                        this.TestsTabUserControl.UpdateButton.IsEnabled = true;
+                        this.TestsTabUserControl.UpdateButton.ToolTip = null;
                         this.TestsTabUserControl.OptionalButton.IsEnabled = false;
-                        this.TestsTabUserControl.OptionalButton.ToolTip = "יש לבחור פריט אחד לעדכון";
-                        this.TestsTabUserControl.UpdateButton.ToolTip = "יש לבחור פריט אחד לעריכה";
-                        this.TestsTabUserControl.AppealButton.ToolTip = "יש לבחור פריט אחד לערעור";
+                        this.TestsTabUserControl.OptionalButton.ToolTip = "לא ניתן לעדכן תוצאות לטסט שעדיין לא בוצע";
+                        this.TestsTabUserControl.AppealButton.ToolTip = "טרם התבצע הטסט";
                     }
                 }
-            }
-
-            private void TestSendMailButton_Click(object sender, RoutedEventArgs e)
-            {
-
-                if (!BE.Tools.IsInternetAvailable())
-                    MessageBox.Show("בדוק את החיבור שלך לרשת", "אין חיבור לרשת", MessageBoxButton.OK,
-                                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
                 else
-                    new SendingEmail(bl.GetAllTests(t => t.TestID == selectedTests[0].TestID).First()).ShowDialog();
-            }
-            #endregion
-
-
-            private void TraineesDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-            {
-                switch (e.PropertyName)
                 {
-                    case "ID":
-                        e.Column.Header = "תעודת זהות";
-                        break;
-                    case "FirstName":
-                        e.Column.Header = "שם פרטי";
-                        break;
-                    case "LastName":
-                        e.Column.Header = "שם משפחה";
-                        break;
-                    case "BirthDate":
-                        e.Column.Header = "תאריך לידה";
-                        break;
-                    case "Gender":
-                        e.Column.Header = "מין";
-                        break;
-                    case "PhoneNumber":
-                        e.Column.Header = "מספר טלפון";
-                        break;
-                    case "MailAddress":
-                        e.Column.Header = "כתובת מייל";
-                        break;
-                    case "Address":
-                        e.Column.Header = "כתובת";
-                        break;
-                    case "Vehicle":
-                        e.Column.Header = "סוג רשיון";
-                        break;
-                    case "gearBoxType":
-                        e.Column.Header = "תיבת\nהילוכים";
-                        break;
-                    case "DrivingSchoolName":
-                        e.Column.Header = "שם\nבית הספר";
-                        break;
-                    case "TeacherName":
-                        e.Column.Header = "שם\nהמורה";
-                        break;
-                    case "NumOfDrivingLessons":
-                        e.Column.Header = "מספר\nשיעורים";
-                        break;
-                    case "Experience":
-                        e.Column.Header = "שנות נסיון";
-                        break;
-                    case "MaxTestsInWeek":
-                        e.Column.Header = "מסקסימום\nטסטים לשבוע";
-                        break;
-                    case "MaxDistanceInMeters":
-                        e.Column.Header = "מרחק\nמקסימלי";
-                        break;
-                    case "TestID":
-                        e.Column.Header = "מספר טסט";
-                        break;
-                    case "TesterID":
-                        e.Column.Header = "תעודת זהות\nבוחן";
-                        break;
-                    case "TraineeID":
-                        e.Column.Header = "תעודת זהות\nתלמיד";
-                        break;
-                    case "Passed":
-                        e.Column.Header = "עבר";
-                        break;
-                    case "WorkHours":
-                        e.Cancel = true;
-                        break;
-                    case "Time":
-                        e.Column.Header = "זמן";
-                        break;
-                    case "TesterNotes":
-                        e.Column.Header = "הערות הבוחן";
-                        break;
-                    case "AppealTest":
-                        e.Column.Header = "ערעור";
-                        break;
-                    case "Indices":
-                        e.Cancel = true;
-                        break;
-                    case "RemeinderEmailSent":
-                        e.Cancel = true;
-                        break;
-                    case "SummaryEmailSent":
-                        e.Cancel = true;
-                        break;
-                    case "OnlyMyGender":
-                        e.Cancel = true;
-                        break;
-                    default:
-                        break;
+                    this.TestsTabUserControl.AppealButton.IsEnabled = false;
+                    this.TestsTabUserControl.UpdateButton.IsEnabled = false;
+                    this.TestsTabUserControl.OptionalButton.IsEnabled = false;
+                    this.TestsTabUserControl.OptionalButton.ToolTip = "יש לבחור פריט אחד לעדכון";
+                    this.TestsTabUserControl.UpdateButton.ToolTip = "יש לבחור פריט אחד לעריכה";
+                    this.TestsTabUserControl.AppealButton.ToolTip = "יש לבחור פריט אחד לערעור";
                 }
             }
+        }
 
-            private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-            {
-                if (e.WidthChanged)
-                    this.blankTabItem.Width = e.NewSize.Width - 100 * 3 - 65 - 30;
-            }
+        private void TestSendMailButton_Click(object sender, RoutedEventArgs e)
+        {
 
-            private void ToggleSwitch_Checked(object sender, RoutedEventArgs e)
+            if (!BE.Tools.IsInternetAvailable())
+                MessageBox.Show("בדוק את החיבור שלך לרשת", "אין חיבור לרשת", MessageBoxButton.OK,
+                                MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            else
             {
-                bl.SendTestsRemindersLoop();
-            }
-
-            private void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
-            {
-                BE.Configuration.EmailServerPasword = this.PasswordBox.Password;
+                if (new SendingEmail(bl.GetAllTests(t => t.TestID == selectedTests[0].TestID).First()).ShowDialog() == true)
+                {
+                    BackgroundWorker worker = new BackgroundWorker();
+                    worker.DoWork += DoWork_TestSendMail;
+                    worker.RunWorkerCompleted += Worker_TestSendingMailCompleted;
+                    worker.RunWorkerAsync();
+                }
             }
         }
-    } 
+
+        private void DoWork_TestSendMail(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                string mailAddress = bl.GetAllTrainees(t => t.ID == selectedTests[0].TraineeID).First().MailAddress;
+                e.Result = (BE.Tools.SendingEmail(mailAddress, "מועד הטסט שלך מתקרב", htmlText));
+            }
+            catch (Exception)
+            {
+                e.Result = false;
+            }
+        }
+        private void Worker_TestSendingMailCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            addNotification((bool)e.Result == true ? "המייל נשלח בהצלחה" : "המייל לא נשלח");
+        }
+
+        #endregion
+
+
+        private void TraineesDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "ID":
+                    e.Column.Header = "תעודת זהות";
+                    break;
+                case "FirstName":
+                    e.Column.Header = "שם פרטי";
+                    break;
+                case "LastName":
+                    e.Column.Header = "שם משפחה";
+                    break;
+                case "BirthDate":
+                    e.Column.Header = "תאריך לידה";
+                    break;
+                case "Gender":
+                    e.Column.Header = "מין";
+                    break;
+                case "PhoneNumber":
+                    e.Column.Header = "מספר טלפון";
+                    break;
+                case "MailAddress":
+                    e.Column.Header = "כתובת מייל";
+                    break;
+                case "Address":
+                    e.Column.Header = "כתובת";
+                    break;
+                case "Vehicle":
+                    e.Column.Header = "סוג רשיון";
+                    break;
+                case "gearBoxType":
+                    e.Column.Header = "תיבת\nהילוכים";
+                    break;
+                case "DrivingSchoolName":
+                    e.Column.Header = "שם\nבית הספר";
+                    break;
+                case "TeacherName":
+                    e.Column.Header = "שם\nהמורה";
+                    break;
+                case "NumOfDrivingLessons":
+                    e.Column.Header = "מספר\nשיעורים";
+                    break;
+                case "Experience":
+                    e.Column.Header = "שנות נסיון";
+                    break;
+                case "MaxTestsInWeek":
+                    e.Column.Header = "מסקסימום\nטסטים לשבוע";
+                    break;
+                case "MaxDistanceInMeters":
+                    e.Column.Header = "מרחק\nמקסימלי";
+                    break;
+                case "TestID":
+                    e.Column.Header = "מספר טסט";
+                    break;
+                case "TesterID":
+                    e.Column.Header = "תעודת זהות\nבוחן";
+                    break;
+                case "TraineeID":
+                    e.Column.Header = "תעודת זהות\nתלמיד";
+                    break;
+                case "Passed":
+                    e.Column.Header = "עבר";
+                    break;
+                case "WorkHours":
+                    e.Cancel = true;
+                    break;
+                case "Time":
+                    e.Column.Header = "זמן";
+                    break;
+                case "TesterNotes":
+                    e.Column.Header = "הערות הבוחן";
+                    break;
+                case "AppealTest":
+                    e.Column.Header = "ערעור";
+                    break;
+                case "Indices":
+                    e.Cancel = true;
+                    break;
+                case "RemeinderEmailSent":
+                    e.Cancel = true;
+                    break;
+                case "SummaryEmailSent":
+                    e.Cancel = true;
+                    break;
+                case "OnlyMyGender":
+                    e.Cancel = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.WidthChanged)
+                this.blankTabItem.Width = e.NewSize.Width - 100 * 3 - 65 - 30;
+        }
+
+        private void ToggleSwitch_Checked(object sender, RoutedEventArgs e)
+        {
+            bl.SendTestsRemindersLoop();
+        }
+
+        private void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            BE.Configuration.EmailServerPasword = this.PasswordBox.Password;
+        }
+
+        #region Notifications
+
+        private void addNotification(string messege)
+        {
+            if (notificationsQueue.Count >= 4)
+                notificationsQueue.Dequeue();
+            notificationsQueue.Enqueue(messege);
+            refreshNotification();
+            timeOfLastNotification = DateTime.Now;
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += notificationCountDown;
+            worker.RunWorkerCompleted += Worker_notificationCountDownCompleted;
+            worker.RunWorkerAsync(argument: messege);
+
+        }
+
+        private void refreshNotification()
+        {
+            NotificationRow0StackPanel.Visibility = NotificationRow1StackPanel.Visibility = 
+                NotificationRow2StackPanel.Visibility = NotificationRow3StackPanel.Visibility = Visibility.Collapsed;
+            if (notificationsQueue.Count >= 1)
+            {
+                NotificationsRow3Label.Content = notificationsQueue.ElementAt(0);
+                NotificationRow3StackPanel.Visibility = Visibility.Visible;
+            }
+            if (notificationsQueue.Count >= 2)
+            {
+                NotificationsRow2Label.Content = notificationsQueue.ElementAt(1);
+                NotificationRow2StackPanel.Visibility = Visibility.Visible;
+            }
+            if (notificationsQueue.Count >= 3)
+            {
+                NotificationsRow1Label.Content = notificationsQueue.ElementAt(2);
+                NotificationRow1StackPanel.Visibility = Visibility.Visible;
+            }
+            if (notificationsQueue.Count >= 4)
+            {
+                NotificationsRow0Label.Content = notificationsQueue.ElementAt(3);
+                NotificationRow0StackPanel.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void notificationCountDown(object sender, DoWorkEventArgs e)
+        {
+            Thread.Sleep(7000);
+            e.Result = e.Argument;
+        }
+
+        private void Worker_notificationCountDownCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            notificationsQueue = new Queue<string>(notificationsQueue.Where(s => s != e.Result.ToString()));
+            refreshNotification();
+        }
+
+        private void NotificationRowLabel_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                Label label = (e.Source as Label);
+                notificationsQueue = new Queue<string>(notificationsQueue.Where(s => s != label.Content.ToString()));
+                refreshNotification();
+            }
+            catch (Exception) { }
+        }
+
+        private void NotificationStackPanel_MouseEnter(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                (e.Source as StackPanel).Opacity = 1;
+                //(e.Source as StackPanel).Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#5BA5CE"));
+            }
+            catch (Exception) { }
+        }
+
+        private void NotificationStackPanel_MouseLeave(object sender, MouseEventArgs e)
+        {
+            try { (e.Source as StackPanel).Opacity = 0.8;
+                //(e.Source as StackPanel).Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFCCE4F1"));
+            }
+            catch (Exception) {  }
+        }
+
+        private void NotificationLabel_MouseEnter(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                (e.Source as Label).Background = Brushes.Transparent;
+            }
+            catch (Exception) { }
+        }
+
+        private void NotificationLabel_MouseLeave(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                (e.Source as Label).Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFCCE4F1"));
+            }
+            catch (Exception) { }
+        }
+
+
+        #endregion
+
+        private void Viewbox_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+    }
+}

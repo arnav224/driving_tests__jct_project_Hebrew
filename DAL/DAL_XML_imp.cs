@@ -325,7 +325,7 @@ namespace DAL
                 t.Element("MailAddress").Value = trainee.MailAddress.ToString();
                 t.Element("Address").Value = trainee.Address;
                 t.Element("Vehicle").Value = trainee.Vehicle.ToString();
-                t.Element("gearBoxType").Value = trainee.GearBoxType.ToString();
+                t.Element("GearBoxType").Value = trainee.GearBoxType.ToString();
                 t.Element("DrivingSchoolName").Value = trainee.DrivingSchoolName;
                 t.Element("TeacherName").Value = trainee.TeacherName;
                 t.Element("NumOfDrivingLessons").Value = trainee.NumOfDrivingLessons.ToString();
@@ -335,7 +335,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                throw new KeyNotFoundException("לא נמצא תלמיד שמספרו " + trainee.ID);
+                throw new KeyNotFoundException("שגיאה בעדכון התלמיד " + trainee.ID);
             }
         }
 

@@ -45,12 +45,16 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
             try
             {
-                bl.AddTrainee(trainee);
                 this.Closing -= Window_Closing;
+                bl.AddTrainee(trainee);
+                DialogResult = true;
+
+                //todo messege  trainee added
                 this.Close();
             }
             catch (Exception ex)
             {
+                this.Closing += Window_Closing;
                 MessageBox.Show(ex.Message);
             }
         }
@@ -61,6 +65,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                 errorMessages.Add(e.Error.Exception.Message);
             else errorMessages.Remove(e.Error.Exception.Message);
         }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (this.trainee.ToString() != new BE.Trainee().ToString())
@@ -70,6 +75,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                 if (result == MessageBoxResult.No)
                     e.Cancel = true;
             }
+            DialogResult = false;
         }
 
         private void AddressPicker_TextChanged(object sender, EventArgs e)

@@ -47,20 +47,25 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            //loading gif
             dynamic doc = showEmailWebBrowser.Document;
-            var htmlText = doc.documentElement.InnerHtml;
-            if (BE.Tools.SendingEmail(trainee.MailAddress, "מועד הטסט שלך מתקרב", htmlText))
-            {
-                MessageBox.Show("המייל נשלח בהצלחה", "", MessageBoxButton.OK,
-                               MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
-                bl.UpdateEmailSendingTime(Test.TestID, null, DateTime.Now);
-            }
-            else
-            {
-                 MessageBox.Show("שגיאה בשליחת המייל", "", MessageBoxButton.OK,
-                          MessageBoxImage.Error, MessageBoxResult.No, MessageBoxOptions.RightAlign);
-            }
+            ((MainWindow)Application.Current.MainWindow).htmlText = doc.documentElement.InnerHtml;
+
+
+
+            //dynamic doc = showEmailWebBrowser.Document;
+            //var htmlText = doc.documentElement.InnerHtml;
+            //if (BE.Tools.SendingEmail(trainee.MailAddress, "מועד הטסט שלך מתקרב", htmlText))
+            //{
+            //    MessageBox.Show("המייל נשלח בהצלחה", "", MessageBoxButton.OK,
+            //                   MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
+            //    bl.UpdateEmailSendingTime(Test.TestID, null, DateTime.Now);
+            //}
+            //else
+            //{
+            //     MessageBox.Show("שגיאה בשליחת המייל", "", MessageBoxButton.OK,
+            //              MessageBoxImage.Error, MessageBoxResult.No, MessageBoxOptions.RightAlign);
+            //}
+            DialogResult = true;
             this.Close();
         }
     }
