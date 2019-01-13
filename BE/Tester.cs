@@ -112,6 +112,10 @@ namespace BE
         private DateTime experiencedSince;
         public DateTime ExperiencedSince
         {
+            get
+            {
+                return experiencedSince;
+            }
             set
             {
                 if (value > DateTime.Now || DateTime.Now.Year - value.Year > 75)

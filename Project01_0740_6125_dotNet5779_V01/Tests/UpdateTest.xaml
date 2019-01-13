@@ -11,7 +11,7 @@
         Title="UpdateTest" Height="270" Width="300" FlowDirection="RightToLeft">
     <Grid>
 
-        <Grid x:Name="grid1" VerticalAlignment="Top"  HorizontalAlignment="Center"  Validation.Error="validation_Error" Margin="15">
+        <Grid x:Name="grid1" VerticalAlignment="Top"  HorizontalAlignment="Center"  Validation.Error="Validation_Error" Margin="15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

@@ -22,6 +22,10 @@ namespace Project01_0740_6125_dotNet5779_V01
         BL.IBL bl;
         BE.Trainee trainee;
         List<string> errorMessages = new List<string>();
+
+        /// <summary>
+        /// Add Trainee ctor
+        /// </summary>
         public AddTrainee()
         {
             InitializeComponent();
@@ -33,6 +37,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.DataContext = trainee;
         }
 
+        /// <summary>
+        /// Add Button Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             if (errorMessages.Any())  
@@ -57,13 +66,23 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
-        private void validation_Error(object sender, ValidationErrorEventArgs e)
+        /// <summary>
+        /// Validation Error
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Validation_Error(object sender, ValidationErrorEventArgs e)
         {
             if (e.Action == ValidationErrorEventAction.Added)
                 errorMessages.Add(e.Error.Exception.Message);
             else errorMessages.Remove(e.Error.Exception.Message);
         }
 
+        /// <summary>
+        /// Window Closing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (this.trainee.ToString() != new BE.Trainee().ToString())
@@ -76,6 +95,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             DialogResult = false;
         }
 
+        /// <summary>
+        /// AddressPicker Text Changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddressPicker_TextChanged(object sender, EventArgs e)
         {
             trainee.Address = this.addressPicker.Address;

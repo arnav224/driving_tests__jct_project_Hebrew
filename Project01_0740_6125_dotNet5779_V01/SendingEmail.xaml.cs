@@ -24,6 +24,11 @@ namespace Project01_0740_6125_dotNet5779_V01
         string htmlFile = File.ReadAllText("emails/TestRemeinder.html");
         BE.Trainee trainee;
         BE.Test Test;
+
+        /// <summary>
+        /// SendingEmail ctor
+        /// </summary>
+        /// <param name="test"></param>
         public SendingEmail(BE.Test test)
         {
             InitializeComponent();
@@ -45,6 +50,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             });
         }
 
+        /// <summary>
+        /// SendButton Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
             dynamic doc = showEmailWebBrowser.Document;

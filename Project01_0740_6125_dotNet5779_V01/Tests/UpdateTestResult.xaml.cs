@@ -22,6 +22,10 @@ namespace Project01_0740_6125_dotNet5779_V01
         BL.IBL bl = BL.Factory.GetInstance();
         BE.Test test = ((MainWindow)System.Windows.Application.Current.MainWindow).selectedTests[0];
         List<string> errorMessages = new List<string>();
+
+        /// <summary>
+        /// UpdateTestResult ctor
+        /// </summary>
         public UpdateTestResult()
         {
             InitializeComponent();
@@ -54,6 +58,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// Button Click to save the Update Test Result
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             foreach (dynamic item in (from UIElement item in this.MeinGrid.Children where item is GridRow select item as GridRow))
@@ -75,6 +84,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.Close();
         }
 
+        /// <summary>
+        /// Window Closing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (this.test != bl.GetAllTests(t => t.TestID == test.TestID).FirstOrDefault())//@@יש למצוא דרך להשוות בלי tostring
