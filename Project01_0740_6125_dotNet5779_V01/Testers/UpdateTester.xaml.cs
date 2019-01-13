@@ -80,6 +80,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             {
                 bl.UpdateTester(tester);
                 this.Closing -= Window_Closing;
+                this.DialogResult = true;
                 this.Close();
             }
             catch (Exception ex)

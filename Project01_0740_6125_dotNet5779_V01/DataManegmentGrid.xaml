@@ -10,10 +10,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" MinHeight="60" Height="80" VerticalAlignment="Top"  HorizontalAlignment="Stretch" Background="#FFF1EAE1">
+        <Grid Grid.Row="0" MinHeight="60" Height="80" VerticalAlignment="Top"  HorizontalAlignment="Stretch" Background="#FFF3E8AC">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="10*"/>
@@ -23,13 +23,13 @@
                 <ColumnDefinition Width="45*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="AddButton" Content="הוסף" Grid.RowSpan="2" Grid.Column="0" HorizontalAlignment="Center" Margin="5" 
-                    VerticalAlignment="Center" FontSize="16" Width="110" Height="49" BorderBrush="Transparent" Background="#FFE7C09D"
+                    VerticalAlignment="Center" FontSize="16" Width="110" Height="49" BorderBrush="Transparent" Background="#FFF5C220"
                     FontFamily="Franklin Gothic Demi" Cursor="Hand" FontWeight="Bold" >
             </Button>
 
             <Button x:Name="ApealsWondow" Visibility="Collapsed" Content="ערעורים" Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Left" 
                     Margin="5,5,30,5"  VerticalAlignment="Center" FontSize="16" Width="110" Height="49" BorderBrush="Transparent"
-                    Background="#FFE7C09D" FontFamily="Franklin Gothic Demi" Cursor="Hand" FontWeight="Bold" >
+                    Background="#FFF5C220" FontFamily="Franklin Gothic Demi" Cursor="Hand" FontWeight="Bold" >
             </Button>
 
             <Grid Grid.Column="2" Grid.RowSpan="2" HorizontalAlignment="Right">
@@ -91,7 +91,7 @@
 
         <DataGrid x:Name="DataGrid" AutoGenerateColumns="True" Grid.Row="1" IsReadOnly="True" FlowDirection="RightToLeft" />
 
-        <Grid Grid.Row="2" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch"  Background="#FFF1EAE1" >
+        <Grid Grid.Row="2" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch"  Background="#FFF3E8AC" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="10*"/>
@@ -102,23 +102,23 @@
             </Grid.ColumnDefinitions>
 
             <Button x:Name="OptionalButton"  Content="עדכון תוצאות טסט" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                    Width="120" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" 
+                    Width="120" Height="30" BorderBrush="Transparent" Background="#FFF5C220" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" 
                     ToolTipService.ShowOnDisabled="True" ToolTip="בחר טסט כדי לעדכן תוצאות">
             </Button>
-            <Button x:Name="UpdateButton" Content="עדכן" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="25" 
-                    BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" 
+            <Button x:Name="UpdateButton" Content="עדכן" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" 
+                    BorderBrush="Transparent" Background="#FFF5C220" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" 
                     ToolTipService.ShowOnDisabled="True" ToolTip="בחר רשומות כדי לערוך">
             </Button>
-            <Button x:Name="DeleteButton" Content="מחק" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="25" 
-                    BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" 
+            <Button x:Name="DeleteButton" Content="מחק" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="30" 
+                    BorderBrush="Transparent" Background="#FFF5C220" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" 
                     ToolTipService.ShowOnDisabled="True" ToolTip="בחר רשומות כדי למחוק">
             </Button>
             <Button x:Name="AppealButton" Content="ערער על תוצאה" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                    Width="120" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" 
+                    Width="120" Height="30" BorderBrush="Transparent" Background="#FFF5C220" FontFamily="Segoe UI Semibold" Cursor="Hand" 
                     IsEnabled="False" ToolTipService.ShowOnDisabled="True" ToolTip="בחר טסט כדי לערער" Visibility="Collapsed">
             </Button>
             <Button x:Name="SendMailButton"  Content="שלח מייל תזכורת" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                    Width="120" Height="25" BorderBrush="Transparent" Background="#FFE7C09D" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False"
+                    Width="120" Height="30" BorderBrush="Transparent" Background="#FFF5C220" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False"
                     ToolTipService.ShowOnDisabled="True" Visibility="Collapsed" ToolTip="בחר טסט כדי לשלוח מייל">
             </Button>
 

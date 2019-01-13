@@ -139,11 +139,16 @@ namespace Project01_0740_6125_dotNet5779_V01
             else
             {
                 if (new AddTrainee().ShowDialog() == true)
-                    addNotification("תלמיד נוסף בהצלחה");
+                    AddNotification("תלמיד נוסף בהצלחה");
                 ApplyTraineesFiltering(this, new RoutedEventArgs());
             }
         }
-
+        
+        /// <summary>
+        /// Update Trainee ButtonClick
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateTraineeButton_Click(object sender, RoutedEventArgs e)
         {
             if (!BE.Tools.IsInternetAvailable())
@@ -152,11 +157,16 @@ namespace Project01_0740_6125_dotNet5779_V01
             else
             {
                 if (new UpdateTrainee().ShowDialog() == true)
-                    addNotification("תלמיד עודכן בהצלחה");
+                    AddNotification("התלמיד " + selectedTrainees[0].FirstName + ' ' + selectedTrainees[0].LastName + " עודכן בהצלחה");
                 ApplyTraineesFiltering(this, new RoutedEventArgs());
             }
         }
-
+        
+        /// <summary>
+        /// Add Test To the selected Trainee Button_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddTestToTraineeButton_Click(object sender, RoutedEventArgs e)
         {
             if (!BE.Tools.IsInternetAvailable())
@@ -164,11 +174,17 @@ namespace Project01_0740_6125_dotNet5779_V01
                                 MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
             else
             {
-                new AddTest(selectedTrainees[0].ID).ShowDialog();
+                if (new AddTest(selectedTrainees[0].ID).ShowDialog() == true)
+                    AddNotification("הטסט נוסף בהצלחה לתלמיד " + selectedTrainees[0].FirstName + ' ' + selectedTrainees[0].LastName);
                 ApplyTestsFiltering(this, e);
             }
         }
 
+        /// <summary>
+        /// Delete Trainee Button_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteTraineeButton_Click(object sender, RoutedEventArgs e)
         {
             int SumItemsToDisplay = SUMITEMSTODISPLY;
@@ -204,11 +220,21 @@ namespace Project01_0740_6125_dotNet5779_V01
                     }
                     bl.RemoveTrainee(TraineeItem.ID);
                 }
+                if (selectedTrainees.Count == 1)
+                    AddNotification("התלמיד " + selectedTrainees[0].FirstName + ' ' + selectedTrainees[0].LastName + " נמחק בהצלחה");
+                else
+                    //todo המספר מוצג בסוף המחרוזת
+                    AddNotification(selectedTrainees.Count.ToString() + " תלמידים נמחקו בהצלחה");
                 ApplyTraineesFiltering(this, e);
                 ApplyTestsFiltering(this, new RoutedEventArgs());
             }
         }
 
+        /// <summary>
+        /// Apply Trainees Filtering - update the Trainees data Grid by the selected Filtering
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ApplyTraineesFiltering(object sender, RoutedEventArgs e)
         {
             bool? passed;
@@ -252,6 +278,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// Trainees Reset Filters and show all Trainees
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TraineesResetFilters(object sender, RoutedEventArgs e)
         {
             this.TraineesTabUserControl.SearchTextBox.Text = "";
@@ -265,6 +296,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             ApplyTraineesFiltering(this, new RoutedEventArgs());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TraineesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.OriginalSource != null)
@@ -299,8 +335,9 @@ namespace Project01_0740_6125_dotNet5779_V01
                                 MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
             else
             {
-                new AddTester().ShowDialog();
-                ApplyTestersFiltering(this, new RoutedEventArgs());
+                if (new AddTester().ShowDialog() == true)
+                    //todo המספר מוצג בסוף המחרוזת
+                    AddNotification(selectedTrainees.Count.ToString() + " בוחנים נמחקו בהצלחה");
             }
         }
 
@@ -311,7 +348,8 @@ namespace Project01_0740_6125_dotNet5779_V01
                                 MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
             else
             {
-                new UpdateTester().ShowDialog();
+                if (new UpdateTester().ShowDialog() == true)
+                    AddNotification("הבוחן " + selectedTesters[0].FirstName + ' ' + selectedTesters[0].LastName + " עודכן בהצלחה");
                 ApplyTestersFiltering(this, new RoutedEventArgs());
                 ApplyTestsFiltering(this, new RoutedEventArgs());
             }
@@ -353,6 +391,11 @@ namespace Project01_0740_6125_dotNet5779_V01
                     }
                     bl.RemoveTester(TesterItem.ID);
                 }
+                if (selectedTesters.Count == 1)
+                    AddNotification("הבוחן " + selectedTesters[0].FirstName + ' ' + selectedTesters[0].LastName + " נמחק בהצלחה");
+                else
+                    //todo המספר מוצג בסוף המחרוזת
+                    AddNotification(selectedTesters.Count.ToString() + " בוחנים נמחקו בהצלחה");
                 ApplyTestersFiltering(this, new RoutedEventArgs());
                 ApplyTestsFiltering(this, new RoutedEventArgs());
             }
@@ -422,7 +465,8 @@ namespace Project01_0740_6125_dotNet5779_V01
         #region TestsTab
         private void AppealButton_Click(object sender, RoutedEventArgs e)
         {
-            new AppealRequest().ShowDialog();
+            if (new AppealRequest().ShowDialog() == true)
+                AddNotification("הערעור הוגש בהצלחה");
             ApplyTestsFiltering(this, new RoutedEventArgs());
             this.TestsTabUserControl.AppealButton.IsEnabled = false;
         }
@@ -432,6 +476,7 @@ namespace Project01_0740_6125_dotNet5779_V01
             new AppeaTests().ShowDialog();
             ApplyTestsFiltering(this, new RoutedEventArgs());
         }
+
         private void AddTestButton_Click(object sender, RoutedEventArgs e)
         {
             if (!BE.Tools.IsInternetAvailable())
@@ -439,8 +484,8 @@ namespace Project01_0740_6125_dotNet5779_V01
                                 MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
             else
             {
-                //this.TraineesTabUserControl.DataGrid.SelectedItems = null;
-                new AddTest().ShowDialog();
+                if (new AddTest().ShowDialog() == true)
+                    AddNotification("טסט נוסף");
                 ApplyTestsFiltering(this, e);
             }
         }
@@ -452,7 +497,8 @@ namespace Project01_0740_6125_dotNet5779_V01
                                 MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
             else
             {
-                new UpdateTest().ShowDialog();
+                if (new UpdateTest().ShowDialog() == true)
+                    AddNotification("טסט עודכן");
                 ApplyTestsFiltering(this, e);
                 this.TestsTabUserControl.DeleteButton.IsEnabled = false;
                 this.TestsTabUserControl.UpdateButton.IsEnabled = false;
@@ -462,7 +508,8 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void UpdateTestResultButton_Click(object sender, RoutedEventArgs e)
         {
-            new UpdateTestResult().ShowDialog();
+            if (new UpdateTestResult().ShowDialog() == true)
+                AddNotification("תוצאות הטסט עודכנו");
             ApplyTestsFiltering(this, e);
             this.TestsTabUserControl.DeleteButton.IsEnabled = false;
             this.TestsTabUserControl.UpdateButton.IsEnabled = false;
@@ -488,8 +535,15 @@ namespace Project01_0740_6125_dotNet5779_V01
                 foreach (var item in selectedTests)
                 {
                     bl.RemoveTest(item.TestID);
-                    Tools.TestCancelationSendEmail(item, bl.GetAllTrainees(t => t.ID == item.TraineeID).First());
+                    if (BE.Configuration.AutoSendingEmailsAboutAddingAndCancalation)
+                        Tools.TestCancelationSendEmail(item, bl.GetAllTrainees(t => t.ID == item.TraineeID).First());
                 }
+                if (selectedTests.Count == 1)
+                    AddNotification("טסט נמחק");
+                else
+                    //todo המספר מוצג בסוף המחרוזת
+                    AddNotification(selectedTests.Count.ToString() + " טסטים נמחקו");
+
                 ApplyTestsFiltering(this, e);
                 this.TestsTabUserControl.DeleteButton.IsEnabled = false;
                 this.TestsTabUserControl.UpdateButton.IsEnabled = false;
@@ -511,7 +565,6 @@ namespace Project01_0740_6125_dotNet5779_V01
                 switch (this.TestsTabUserControl.timeComboBox.SelectedIndex)
                 {
                     case 0: //this week
-                            //
                         this.TestsTabUserControl.FromTimeDatePicker.SelectedDate = now.AddDays(-(int)now.DayOfWeek).AddHours(-now.Hour).AddMinutes(-now.Minute);
                         this.TestsTabUserControl.ToTimeDatePicker.SelectedDate = now.AddDays((int)DayOfWeek.Saturday - (int)now.DayOfWeek);
                         break;
@@ -627,7 +680,6 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         private void TestSendMailButton_Click(object sender, RoutedEventArgs e)
         {
-
             if (!BE.Tools.IsInternetAvailable())
                 MessageBox.Show("בדוק את החיבור שלך לרשת", "אין חיבור לרשת", MessageBoxButton.OK,
                                 MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
@@ -636,32 +688,133 @@ namespace Project01_0740_6125_dotNet5779_V01
                 if (new SendingEmail(bl.GetAllTests(t => t.TestID == selectedTests[0].TestID).First()).ShowDialog() == true)
                 {
                     BackgroundWorker worker = new BackgroundWorker();
-                    worker.DoWork += DoWork_TestSendMail;
-                    worker.RunWorkerCompleted += Worker_TestSendingMailCompleted;
+                    worker.DoWork += (se, args) =>
+                    {
+                        try
+                        {
+                            string mailAddress = bl.GetAllTrainees(t => t.ID == selectedTests[0].TraineeID).First().MailAddress;
+                            args.Result = (BE.Tools.SendingEmail(mailAddress, "מועד הטסט שלך מתקרב", htmlText));
+                        }
+                        catch (Exception)
+                        {
+                            args.Result = false;
+                        }
+                    };
+                    worker.RunWorkerCompleted += (s, arg) =>
+                    {
+                        AddNotification((bool)arg.Result == true ? "המייל נשלח בהצלחה" : "המייל לא נשלח");
+                    };
                     worker.RunWorkerAsync();
                 }
             }
         }
 
-        private void DoWork_TestSendMail(object sender, DoWorkEventArgs e)
+        #endregion
+
+
+        #region Notifications
+        private void AddNotification(string messege)
+        {
+            if (notificationsQueue.Count >= 4)
+                notificationsQueue.Dequeue();
+            notificationsQueue.Enqueue(messege);
+            RefreshNotification();
+            timeOfLastNotification = DateTime.Now;
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += (sender, e)=> { Thread.Sleep(7000); e.Result = messege; };
+            worker.RunWorkerCompleted += (s, arg) =>
+            {
+                notificationsQueue = new Queue<string>(notificationsQueue.Where(m => m != arg.Result.ToString()));
+                RefreshNotification();
+            };
+            worker.RunWorkerAsync(argument: messege);
+
+        }
+
+        private void RefreshNotification()
+        {
+            NotificationRow0StackPanel.Visibility = NotificationRow1StackPanel.Visibility =
+                NotificationRow2StackPanel.Visibility = NotificationRow3StackPanel.Visibility = Visibility.Collapsed;
+            if (notificationsQueue.Count >= 1)
+            {
+                NotificationsRow3Label.Content = notificationsQueue.ElementAt(0);
+                NotificationRow3StackPanel.Visibility = Visibility.Visible;
+            }
+            if (notificationsQueue.Count >= 2)
+            {
+                NotificationsRow2Label.Content = notificationsQueue.ElementAt(1);
+                NotificationRow2StackPanel.Visibility = Visibility.Visible;
+            }
+            if (notificationsQueue.Count >= 3)
+            {
+                NotificationsRow1Label.Content = notificationsQueue.ElementAt(2);
+                NotificationRow1StackPanel.Visibility = Visibility.Visible;
+            }
+            if (notificationsQueue.Count >= 4)
+            {
+                NotificationsRow0Label.Content = notificationsQueue.ElementAt(3);
+                NotificationRow0StackPanel.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void NotificationStackPanel_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            //todo 
+            //try
+            //{
+            //    dynamic parent = e.Source;
+            //    while (parent.GetType() != typeof(Viewbox) && parent.GetType() != typeof(StackPanel))
+            //        parent = parent.Parent;
+            //    if (parent.GetType() == typeof(Viewbox))    //if the 'X' icon is pressed, remove the notification.
+            //    {
+            //        StackPanel stackPanel = parent.Parent as StackPanel;
+            //        Label label = (from dynamic item in stackPanel.Children where item is Label select item as Label).First();
+            //        notificationsQueue = new Queue<string>(notificationsQueue.Where(s => s != label.Content.ToString()));
+            //        RefreshNotification();
+            //    }
+            //}
+            //catch (Exception) { }
+
+            try
+            {
+                dynamic parent = e.Source;
+                while (parent.GetType() != typeof(Viewbox) && parent.GetType() != typeof(Canvas) && parent.GetType() != typeof(StackPanel))
+                    parent = parent.Parent;
+                if (parent.GetType() == typeof(Viewbox) || parent.GetType() == typeof(Canvas))
+                {
+                    while (parent.GetType() != typeof(StackPanel))
+                        parent = parent.Parent;
+                    StackPanel stackPanel = parent as StackPanel;
+                    Label label = (from dynamic item in stackPanel.Children where item is Label select item as Label).First();
+                    notificationsQueue = new Queue<string>(notificationsQueue.Where(s => s != label.Content.ToString()));
+                    RefreshNotification();
+                }
+            }
+            catch (Exception) { }
+        }
+
+        private void NotificationStackPanel_MouseEnter(object sender, MouseEventArgs e)
         {
             try
             {
-                string mailAddress = bl.GetAllTrainees(t => t.ID == selectedTests[0].TraineeID).First().MailAddress;
-                e.Result = (BE.Tools.SendingEmail(mailAddress, "מועד הטסט שלך מתקרב", htmlText));
+                (e.Source as StackPanel).Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF6596F5" /*"#FF5BA5CE"*/));
+                (e.Source as StackPanel).Opacity = 1;
+                (from dynamic item in (e.Source as StackPanel).Children where item is Viewbox select item as Viewbox).First().Opacity = 0.75;
             }
-            catch (Exception)
-            {
-                e.Result = false;
-            }
+            catch (Exception) { }
         }
-        private void Worker_TestSendingMailCompleted(object sender, RunWorkerCompletedEventArgs e)
+
+        private void NotificationStackPanel_MouseLeave(object sender, MouseEventArgs e)
         {
-            addNotification((bool)e.Result == true ? "המייל נשלח בהצלחה" : "המייל לא נשלח");
+            try
+            {
+                (e.Source as StackPanel).Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFCCE4F1"));
+                (e.Source as StackPanel).Opacity = 0.8;
+                (from dynamic item in (e.Source as StackPanel).Children where item is Viewbox select item as Viewbox).First().Opacity = 0.0;
+            }
+            catch (Exception) { }
         }
-
         #endregion
-
 
         private void TraineesDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
@@ -759,7 +912,7 @@ namespace Project01_0740_6125_dotNet5779_V01
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (e.WidthChanged)
-                this.blankTabItem.Width = e.NewSize.Width - 100 * 3 - 65 - 30;
+                this.blankTabItem.Width = e.NewSize.Width - 120 * 3 - 70 - 30;
         }
 
         private void ToggleSwitch_Checked(object sender, RoutedEventArgs e)
@@ -771,114 +924,5 @@ namespace Project01_0740_6125_dotNet5779_V01
         {
             BE.Configuration.EmailServerPasword = this.PasswordBox.Password;
         }
-
-        #region Notifications
-
-        private void addNotification(string messege)
-        {
-            if (notificationsQueue.Count >= 4)
-                notificationsQueue.Dequeue();
-            notificationsQueue.Enqueue(messege);
-            refreshNotification();
-            timeOfLastNotification = DateTime.Now;
-            BackgroundWorker worker = new BackgroundWorker();
-            worker.DoWork += notificationCountDown;
-            worker.RunWorkerCompleted += Worker_notificationCountDownCompleted;
-            worker.RunWorkerAsync(argument: messege);
-
-        }
-
-        private void refreshNotification()
-        {
-            NotificationRow0StackPanel.Visibility = NotificationRow1StackPanel.Visibility = 
-                NotificationRow2StackPanel.Visibility = NotificationRow3StackPanel.Visibility = Visibility.Collapsed;
-            if (notificationsQueue.Count >= 1)
-            {
-                NotificationsRow3Label.Content = notificationsQueue.ElementAt(0);
-                NotificationRow3StackPanel.Visibility = Visibility.Visible;
-            }
-            if (notificationsQueue.Count >= 2)
-            {
-                NotificationsRow2Label.Content = notificationsQueue.ElementAt(1);
-                NotificationRow2StackPanel.Visibility = Visibility.Visible;
-            }
-            if (notificationsQueue.Count >= 3)
-            {
-                NotificationsRow1Label.Content = notificationsQueue.ElementAt(2);
-                NotificationRow1StackPanel.Visibility = Visibility.Visible;
-            }
-            if (notificationsQueue.Count >= 4)
-            {
-                NotificationsRow0Label.Content = notificationsQueue.ElementAt(3);
-                NotificationRow0StackPanel.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void notificationCountDown(object sender, DoWorkEventArgs e)
-        {
-            Thread.Sleep(7000);
-            e.Result = e.Argument;
-        }
-
-        private void Worker_notificationCountDownCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            notificationsQueue = new Queue<string>(notificationsQueue.Where(s => s != e.Result.ToString()));
-            refreshNotification();
-        }
-
-        private void NotificationRowLabel_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                Label label = (e.Source as Label);
-                notificationsQueue = new Queue<string>(notificationsQueue.Where(s => s != label.Content.ToString()));
-                refreshNotification();
-            }
-            catch (Exception) { }
-        }
-
-        private void NotificationStackPanel_MouseEnter(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                (e.Source as StackPanel).Opacity = 1;
-                //(e.Source as StackPanel).Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#5BA5CE"));
-            }
-            catch (Exception) { }
-        }
-
-        private void NotificationStackPanel_MouseLeave(object sender, MouseEventArgs e)
-        {
-            try { (e.Source as StackPanel).Opacity = 0.8;
-                //(e.Source as StackPanel).Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFCCE4F1"));
-            }
-            catch (Exception) {  }
-        }
-
-        private void NotificationLabel_MouseEnter(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                (e.Source as Label).Background = Brushes.Transparent;
-            }
-            catch (Exception) { }
-        }
-
-        private void NotificationLabel_MouseLeave(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                (e.Source as Label).Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFCCE4F1"));
-            }
-            catch (Exception) { }
-        }
-
-
-        #endregion
-
-        private void Viewbox_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
     }
-}
+} 

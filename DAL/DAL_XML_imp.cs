@@ -31,6 +31,12 @@ namespace DAL
             {
                 traineesRoot = new XElement("trainees");
                 traineesRoot.Save(traineesPath);
+
+                //todo זמני
+                foreach (var item in DS.DataSource.trainees)
+                {
+                    AddTrainee(item);
+                }
             }
             if (!File.Exists(testersPath))
                 SaveToXML<List<Tester>>(new List<Tester>(), testersPath);

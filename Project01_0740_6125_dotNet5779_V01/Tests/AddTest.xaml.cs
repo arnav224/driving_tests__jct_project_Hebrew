@@ -78,6 +78,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                 test.Time = test.Time.AddHours(Hour);
                 bl.AddTest(test);
                 this.Closing -= Window_Closing;
+                this.DialogResult = true;
                 this.Close();
             }
             catch (Exception ex)
@@ -91,8 +92,6 @@ namespace Project01_0740_6125_dotNet5779_V01
             if (e.Action == ValidationErrorEventAction.Added)
                 errorMessages.Add(e.Error.Exception.Message);
             else errorMessages.Remove(e.Error.Exception.Message);
-
-
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
