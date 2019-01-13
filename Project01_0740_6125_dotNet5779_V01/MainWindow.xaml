@@ -28,7 +28,8 @@
             <StackPanel x:Name="NotificationRow0StackPanel" Grid.Row="3" Height="26"  Background="#FF5BA5CE" Opacity="0.8" Margin="3"
                         Visibility="Collapsed" MouseEnter="NotificationStackPanel_MouseEnter" MouseLeave="NotificationStackPanel_MouseLeave"  MouseUp="NotificationStackPanel_MouseUp">
                 <Label x:Name="NotificationsRow0Label" Content="" HorizontalAlignment="Center"  HorizontalContentAlignment="Right"  VerticalAlignment="Stretch" FlowDirection="RightToLeft" ></Label>
-                <Viewbox Width="26" Height="26" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-25, 0,0" Opacity="0">
+                <DatePicker x:Name="NotificationsRow0DatePicker" Visibility="Collapsed"></DatePicker>
+                <Viewbox Width="26" Height="26" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-25, 0,0" Opacity="0" MouseUp="Viewbox_MouseUp">
                     <Canvas Width="24" Height="24">
                         <Path Data="M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V5H19V19M17,8.4L13.4,12L17,15.6L15.6,17L12,13.4L8.4,17L7,15.6L10.6,12L7,8.4L8.4,7L12,10.6L15.6,7L17,8.4Z" Fill="Black" />
                     </Canvas>
@@ -37,26 +38,29 @@
             <StackPanel x:Name="NotificationRow1StackPanel" Grid.Row="2" Height="26"  Background="#FF5BA5CE" Opacity="0.8" Margin="3"
                         Visibility="Collapsed" MouseEnter="NotificationStackPanel_MouseEnter" MouseLeave="NotificationStackPanel_MouseLeave"  MouseUp="NotificationStackPanel_MouseUp">
                 <Label x:Name="NotificationsRow1Label" Content="" HorizontalAlignment="Center"  HorizontalContentAlignment="Right"  VerticalAlignment="Stretch"  FlowDirection="RightToLeft"></Label>
-                <Viewbox Width="26" Height="26" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-25, 0,0" Opacity="0">
+                <DatePicker x:Name="NotificationsRow1DatePicker" Visibility="Collapsed"></DatePicker>
+                <Viewbox Width="26" Height="26" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-25, 0,0" Opacity="0" MouseUp="Viewbox_MouseUp">
                     <Canvas Width="24" Height="24">
                         <Path Data="M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V5H19V19M17,8.4L13.4,12L17,15.6L15.6,17L12,13.4L8.4,17L7,15.6L10.6,12L7,8.4L8.4,7L12,10.6L15.6,7L17,8.4Z" Fill="Black" />
                     </Canvas>
                 </Viewbox>
             </StackPanel>
             <StackPanel x:Name="NotificationRow2StackPanel" Grid.Row="1" Height="26"  Background="#FF5BA5CE" Opacity="0.8" Margin="3"
-                        Visibility="Collapsed" MouseEnter="NotificationStackPanel_MouseEnter" MouseLeave="NotificationStackPanel_MouseLeave"  MouseUp="NotificationStackPanel_MouseUp">
+                        Visibility="Collapsed" MouseEnter="NotificationStackPanel_MouseEnter" MouseLeave="NotificationStackPanel_MouseLeave" MouseUp="NotificationStackPanel_MouseUp">
                 <Label x:Name="NotificationsRow2Label" Content="" HorizontalAlignment="Center"  HorizontalContentAlignment="Right"  VerticalAlignment="Stretch"  FlowDirection="RightToLeft"></Label>
-                <Viewbox Width="26" Height="26" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-25, 0,0" Opacity="0">
+                <DatePicker x:Name="NotificationsRow2DatePicker" Visibility="Collapsed"></DatePicker>
+                <Viewbox Width="26" Height="26" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-25, 0,0" Opacity="0" MouseUp="Viewbox_MouseUp">
                     <Canvas Width="24" Height="24">
                         <Path Data="M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V5H19V19M17,8.4L13.4,12L17,15.6L15.6,17L12,13.4L8.4,17L7,15.6L10.6,12L7,8.4L8.4,7L12,10.6L15.6,7L17,8.4Z" Fill="Black" />
                     </Canvas>
                 </Viewbox>
             </StackPanel>
             <StackPanel x:Name="NotificationRow3StackPanel" Grid.Row="0" Height="26"  Background="#FF5BA5CE" Opacity="0.8" Margin="3"
-                        Visibility="Collapsed" MouseEnter="NotificationStackPanel_MouseEnter" MouseLeave="NotificationStackPanel_MouseLeave"  MouseUp="NotificationStackPanel_MouseUp">
+                        Visibility="Collapsed" MouseEnter="NotificationStackPanel_MouseEnter" MouseLeave="NotificationStackPanel_MouseLeave" MouseUp="NotificationStackPanel_MouseUp">
                 <Label x:Name="NotificationsRow3Label" Content="" HorizontalAlignment="Center"  HorizontalContentAlignment="Right"  VerticalAlignment="Stretch" FlowDirection="RightToLeft"></Label>
+                <DatePicker x:Name="NotificationsRow3DatePicker" Visibility="Collapsed"></DatePicker>
                 <Viewbox Width="26" Height="26" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-25, 0,0" Opacity="0" MouseUp="Viewbox_MouseUp">
-                    <Canvas Width="24" Height="24">
+                    <Canvas Width="24" Height="24"  Background="#FF8265F5" MouseLeftButtonUp="Viewbox_MouseUp">
                         <Path Data="M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V5H19V19M17,8.4L13.4,12L17,15.6L15.6,17L12,13.4L8.4,17L7,15.6L10.6,12L7,8.4L8.4,7L12,10.6L15.6,7L17,8.4Z" Fill="Black" />
                     </Canvas>
                 </Viewbox>
@@ -95,9 +99,9 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="263*"/>
+                        <ColumnDefinition Width="200*"/>
                         <ColumnDefinition Width="33*"/>
-                        <ColumnDefinition Width="48*"/>
+                        <ColumnDefinition Width="90*"/>
                         <ColumnDefinition Width="136*"/>
                         <ColumnDefinition Width="263*"/>
                         <ColumnDefinition Width="1*"/>

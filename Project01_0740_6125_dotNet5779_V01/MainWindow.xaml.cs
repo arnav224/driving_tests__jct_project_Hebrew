@@ -28,9 +28,8 @@ namespace Project01_0740_6125_dotNet5779_V01
         public List<Trainee> selectedTrainees = new List<Trainee>();
         public List<Tester> selectedTesters = new List<Tester>();
         public List<Test> selectedTests = new List<Test>();
-        //Queue<string> notificationsQueue = new Queue<string>();
         Queue<KeyValuePair<string, DateTime>> notificationsQueue = new Queue<KeyValuePair<string, DateTime>>();
-        readonly static int SUMITEMSTODISPLY = 7;
+        readonly static int NumOfDisplayItems = 7;
         public dynamic htmlText;
         DateTime timeOfLastNotification;
         public MainWindow()
@@ -188,8 +187,9 @@ namespace Project01_0740_6125_dotNet5779_V01
         /// <param name="e"></param>
         private void DeleteTraineeButton_Click(object sender, RoutedEventArgs e)
         {
-            int SumItemsToDisplay = SUMITEMSTODISPLY;
+            int SumItemsToDisplay = NumOfDisplayItems;
             string Trainees = "";
+            // print the trainees Designated for deletion:
             foreach (var TraineeItem in selectedTrainees)
             {
                 Trainees += TraineeItem.ToString();
@@ -207,11 +207,12 @@ namespace Project01_0740_6125_dotNet5779_V01
                     break;
             }
             string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + selectedTrainees.Count + (selectedTrainees.Count == 1 ? " התלמיד שנבחר\n\n" : " התלמידים שנבחרו\n\n") + Trainees
-                 + (selectedTrainees.Count > SUMITEMSTODISPLY ? "רשימה חלקית.\n\n" : "");
+                 + (selectedTrainees.Count > NumOfDisplayItems ? "רשימה חלקית.\n\n" : "");
             MessageBoxResult result = MessageBox.Show(messegeBody, "אישור מחיקה", MessageBoxButton.YesNo,
                                                       MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
             if (result == MessageBoxResult.Yes)
             {
+                // Remove the Trainee and his tests:
                 foreach (var TraineeItem in selectedTrainees)
                 {
                     List<Test> testsOfOne = bl.GetAllTests(t => t.TraineeID == TraineeItem.ID).ToList();
@@ -221,6 +222,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                     }
                     bl.RemoveTrainee(TraineeItem.ID);
                 }
+                // Notification:
                 if (selectedTrainees.Count == 1)
                     AddNotification("התלמיד " + selectedTrainees[0].FirstName + ' ' + selectedTrainees[0].LastName + " נמחק בהצלחה");
                 else
@@ -297,7 +299,7 @@ namespace Project01_0740_6125_dotNet5779_V01
         }
 
         /// <summary>
-        /// 
+        /// Trainees DataGrid SelectionChanged
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -328,6 +330,11 @@ namespace Project01_0740_6125_dotNet5779_V01
         #endregion
 
         #region TestersTab
+        /// <summary>
+        /// Add Tester Button_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddTesterButton_Click(object sender, RoutedEventArgs e)
         {
             if (!BE.Tools.IsInternetAvailable())
@@ -340,6 +347,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// Update Tester Button_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateTesterButton_Click(object sender, RoutedEventArgs e)
         {
             if (!BE.Tools.IsInternetAvailable())
@@ -354,10 +366,16 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// Delete Tester Button_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteTesterButton_Click(object sender, RoutedEventArgs e)
         {
-            int SumItemsToDisplay = SUMITEMSTODISPLY;
+            int SumItemsToDisplay = NumOfDisplayItems;
             string Testers = "";
+            // print the Testers Designated for deletion:
             foreach (var TesterItem in selectedTesters)
             {
                 Testers += TesterItem.ToString() + "\n";
@@ -375,11 +393,12 @@ namespace Project01_0740_6125_dotNet5779_V01
                     break;
             }
             string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + selectedTesters.Count + (selectedTesters.Count == 1 ? " הבוחן שנבחר\n\n" : " הבוחנים שנבחרו\n\n") + Testers
-                 + (selectedTesters.Count > SUMITEMSTODISPLY ? "רשימה חלקית.\n\n" : "");
+                 + (selectedTesters.Count > NumOfDisplayItems ? "רשימה חלקית.\n\n" : "");
             MessageBoxResult result = MessageBox.Show(messegeBody, "אישור מחיקה", MessageBoxButton.YesNo,
                                                       MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
             if (result == MessageBoxResult.Yes)
             {
+                // Remove the Tester and his tests:
                 foreach (var TesterItem in selectedTesters)
                 {
                     List<Test> testsOfOne = bl.GetAllTests(t => t.TesterID == TesterItem.ID && t.Time > DateTime.Now).ToList();
@@ -390,6 +409,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                     }
                     bl.RemoveTester(TesterItem.ID);
                 }
+                // Notification:
                 if (selectedTesters.Count == 1)
                     AddNotification("הבוחן " + selectedTesters[0].FirstName + ' ' + selectedTesters[0].LastName + " נמחק בהצלחה");
                 else
@@ -399,6 +419,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// Apply Testers Filtering - update the Testers Data Grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ApplyTestersFiltering(object sender, RoutedEventArgs e)
         {
             this.TestersTabUserControl.DataGrid.ItemsSource = from item in bl.GetAllTesters(
@@ -427,6 +452,11 @@ namespace Project01_0740_6125_dotNet5779_V01
                                                               };
         }
 
+        /// <summary>
+        /// Testers Reset Filters and show all Testers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TestersResetFilters(object sender, RoutedEventArgs e)
         {
             this.TestersTabUserControl.SearchTextBox.Text = "";
@@ -439,6 +469,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             ApplyTestersFiltering(this, new RoutedEventArgs());
         }
 
+        /// <summary>
+        /// Testers DataGrid SelectionChanged event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TestersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Type type = e.OriginalSource.GetType();
@@ -457,10 +492,14 @@ namespace Project01_0740_6125_dotNet5779_V01
                 this.TestersTabUserControl.DeleteButton.Content = selectedTesters.Count > 1 ? "מחק בוחנים" : "מחק בוחן";
             }
         }
-
         #endregion
 
         #region TestsTab
+        /// <summary>
+        /// Appeal Button_Click - add Appeal request
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AppealButton_Click(object sender, RoutedEventArgs e)
         {
             if (new AppealRequest().ShowDialog() == true)
@@ -469,12 +508,22 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestsTabUserControl.AppealButton.IsEnabled = false;
         }
 
+        /// <summary>
+        /// open Apeals Wondow
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ApealsWondow_Click(object sender, RoutedEventArgs e)
         {
             new AppeaTests().ShowDialog();
             ApplyTestsFiltering(this, new RoutedEventArgs());
         }
 
+        /// <summary>
+        /// Add Test Button_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddTestButton_Click(object sender, RoutedEventArgs e)
         {
             if (!BE.Tools.IsInternetAvailable())
@@ -488,6 +537,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// Update Test Button_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateTestButton_Click(object sender, RoutedEventArgs e)
         {
             if (!BE.Tools.IsInternetAvailable())
@@ -504,6 +558,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// Update Test Result Button_Click - the tester report about the test
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateTestResultButton_Click(object sender, RoutedEventArgs e)
         {
             if (new UpdateTestResult().ShowDialog() == true)
@@ -514,9 +573,14 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.TestsTabUserControl.OptionalButton.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Delete Test Button_Click - Only future tests can be deleted
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteTestButton_Click(object sender, RoutedEventArgs e)
         {
-            int SumItemsToDisplay = SUMITEMSTODISPLY;
+            int SumItemsToDisplay = NumOfDisplayItems;
             string Teste = "";
             foreach (var item in selectedTests)
             {
@@ -525,7 +589,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                     break;
             }
             string messegeBody = "?אתה בטוח שאתה רוצה למחוק את " + selectedTests.Count + (selectedTests.Count == 1 ? " הטסטים שנבחר\n\n" : " הטסטים שנבחרו\n\n") + Teste
-                + (selectedTests.Count > SUMITEMSTODISPLY ? "רשימה חלקית.\n\n" : "") + " הודעה במייל תישלח לתלמיד על הביטול";
+                + (selectedTests.Count > NumOfDisplayItems ? "רשימה חלקית.\n\n" : "") + " הודעה במייל תישלח לתלמיד על הביטול";
             MessageBoxResult result = MessageBox.Show(messegeBody, "אישור מחיקה", MessageBoxButton.YesNo,
                                                       MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.RightAlign);
             if (result == MessageBoxResult.Yes)
@@ -548,12 +612,22 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// From Time DatePicker and To Time DatePicker LostFocus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FromAndToTimeDatePicker_LostFocus(object sender, RoutedEventArgs e)
         {
             this.TestsTabUserControl.timeComboBox.SelectedIndex = -1;
             ApplyTestsFiltering(this, e);
         }
 
+        /// <summary>
+        /// Apply Tests Filtering - update the Tests Data Grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ApplyTestsFiltering(object sender, RoutedEventArgs e)
         {
             if (this.TestsTabUserControl.timeComboBox.SelectedIndex != -1)
@@ -599,6 +673,11 @@ namespace Project01_0740_6125_dotNet5779_V01
                                                             };
         }
 
+        /// <summary>
+        /// Tests Reset Filters and show all Tests
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TestsResetFilters(object sender, RoutedEventArgs e)
         {
             this.TestsTabUserControl.FromTimeDatePicker.SelectedDate = null;
@@ -609,6 +688,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             ApplyTestsFiltering(this, e);
         }
 
+        /// <summary>
+        /// Tests DataGrid SelectionChanged
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TestsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             this.TestsTabUserControl.SendMailButton.IsEnabled = false;
@@ -675,6 +759,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// Test Send Mail Button_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TestSendMailButton_Click(object sender, RoutedEventArgs e)
         {
             if (!BE.Tools.IsInternetAvailable())
@@ -705,57 +794,79 @@ namespace Project01_0740_6125_dotNet5779_V01
                 }
             }
         }
-
         #endregion
 
 
         #region Notifications
+        /// <summary>
+        /// Add Notification 
+        /// </summary>
+        /// <param name="messege"></param>
         private void AddNotification(string messege)
         {
-            DateTime time = DateTime.Now;
+            KeyValuePair<string, DateTime> pair = new KeyValuePair<string, DateTime>(messege, DateTime.Now);
             if (notificationsQueue.Count >= 4)
                 notificationsQueue.Dequeue();
-            //notificationsQueue.Enqueue(messege);
-            notificationsQueue.Enqueue(new KeyValuePair<string, DateTime>(messege, time));
+            notificationsQueue.Enqueue(pair);
             RefreshNotification();
             timeOfLastNotification = DateTime.Now;
             BackgroundWorker worker = new BackgroundWorker();
-            worker.DoWork += (sender, e)=> { Thread.Sleep(7000); e.Result = new KeyValuePair<string, DateTime>(messege, time); };
+            worker.DoWork += (sender, e)=> { Thread.Sleep(10000); e.Result = pair; };
             worker.RunWorkerCompleted += (s, arg) =>
             {
-                //notificationsQueue = new Queue<string>(notificationsQueue.Where(m => m != (((KeyValuePair<string, DateTime>)arg.Result).Key.ToString())));
-                RefreshNotification();
+                RemoveNotification(pair);
             };
             worker.RunWorkerAsync(argument: messege);
-
         }
 
+        /// <summary>
+        /// Remove Notification
+        /// </summary>
+        /// <param name="pair"></param>
+        private void RemoveNotification(KeyValuePair<string, DateTime> pair)
+        {
+            notificationsQueue = new Queue<KeyValuePair<string, DateTime>>(notificationsQueue.Where(p => !p.Equals(pair))); 
+            RefreshNotification();
+        }
+
+        /// <summary>
+        /// Refresh Notification
+        /// </summary>
         private void RefreshNotification()
         {
             NotificationRow0StackPanel.Visibility = NotificationRow1StackPanel.Visibility =
                 NotificationRow2StackPanel.Visibility = NotificationRow3StackPanel.Visibility = Visibility.Collapsed;
             if (notificationsQueue.Count >= 1)
             {
-                NotificationsRow3Label.Content = notificationsQueue.ElementAt(0);
+                NotificationsRow3Label.Content = notificationsQueue.ElementAt(0).Key;
+                NotificationsRow3DatePicker.SelectedDate = notificationsQueue.ElementAt(0).Value;
                 NotificationRow3StackPanel.Visibility = Visibility.Visible;
             }
             if (notificationsQueue.Count >= 2)
             {
-                NotificationsRow2Label.Content = notificationsQueue.ElementAt(1);
+                NotificationsRow2Label.Content = notificationsQueue.ElementAt(1).Key;
+                NotificationsRow2DatePicker.SelectedDate = notificationsQueue.ElementAt(1).Value;
                 NotificationRow2StackPanel.Visibility = Visibility.Visible;
             }
             if (notificationsQueue.Count >= 3)
             {
-                NotificationsRow1Label.Content = notificationsQueue.ElementAt(2);
+                NotificationsRow1Label.Content = notificationsQueue.ElementAt(2).Key;
+                NotificationsRow1DatePicker.SelectedDate = notificationsQueue.ElementAt(2).Value;
                 NotificationRow1StackPanel.Visibility = Visibility.Visible;
             }
             if (notificationsQueue.Count >= 4)
             {
-                NotificationsRow0Label.Content = notificationsQueue.ElementAt(3);
+                NotificationsRow0Label.Content = notificationsQueue.ElementAt(3).Key;
+                NotificationsRow0DatePicker.SelectedDate = notificationsQueue.ElementAt(3).Value;
                 NotificationRow0StackPanel.Visibility = Visibility.Visible;
             }
         }
 
+        /// <summary>
+        /// Notification StackPanel MouseUp
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NotificationStackPanel_MouseUp(object sender, MouseButtonEventArgs e)
         {
             //todo 
@@ -792,6 +903,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             catch (Exception) { }
         }
 
+        /// <summary>
+        /// Notification StackPanel MouseEnter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NotificationStackPanel_MouseEnter(object sender, MouseEventArgs e)
         {
             try
@@ -803,6 +919,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             catch (Exception) { }
         }
 
+        /// <summary>
+        /// Notification StackPanel MouseLeave
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NotificationStackPanel_MouseLeave(object sender, MouseEventArgs e)
         {
             try
@@ -814,6 +935,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             catch (Exception) { }
         }
 
+        /// <summary>
+        /// Viewbox MouseUp - Remove Notification
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Viewbox_MouseUp(object sender, MouseButtonEventArgs e)
         {
             try
@@ -821,14 +947,20 @@ namespace Project01_0740_6125_dotNet5779_V01
                 dynamic parent = e.Source;
                 while (parent.GetType() != typeof(StackPanel))
                     parent = parent.Parent;
-                    Label label = (from dynamic item in (parent as StackPanel).Children where item is Label select item as Label).First();
-                    //todo notificationsQueue = new Queue<string>(notificationsQueue.Where(s => s != label.Content.ToString()));
-                    RefreshNotification();
+                string messege = (string)(from dynamic item in (parent as StackPanel).Children where item is Label select item as Label).First().Content;
+                DateTime time = (DateTime)(from dynamic item in (parent as StackPanel).Children where item is DatePicker select item as DatePicker).First().SelectedDate;
+                RemoveNotification(new KeyValuePair<string, DateTime>(messege, time));
+                RefreshNotification();
             }
             catch (Exception) { }
         }
         #endregion
 
+        /// <summary>
+        /// Trainees DataGrid AutoGeneratingColumn - give Neme to columns
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TraineesDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             switch (e.PropertyName)
@@ -860,7 +992,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                 case "Vehicle":
                     e.Column.Header = "סוג רשיון";
                     break;
-                case "gearBoxType":
+                case "GearBoxType":
                     e.Column.Header = "תיבת\nהילוכים";
                     break;
                 case "DrivingSchoolName":
@@ -922,21 +1054,35 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// Window SizeChanged event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (e.WidthChanged)
                 this.blankTabItem.Width = e.NewSize.Width - 120 * 3 - 70 - 30;
         }
 
+        /// <summary>
+        /// Toggle Switch Checked event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ToggleSwitch_Checked(object sender, RoutedEventArgs e)
         {
             bl.SendTestsRemindersLoop();
         }
 
+        /// <summary>
+        /// Password Box LostFocus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
         {
             BE.Configuration.EmailServerPasword = this.PasswordBox.Password;
         }
-
     }
 } 

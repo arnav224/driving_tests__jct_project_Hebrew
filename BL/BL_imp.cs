@@ -45,13 +45,13 @@ namespace BL
                 throw new Exception("מועד הטסט חלף");
             if (test.Time != NextWorkTime(test.Time))
                 throw new Exception("מועד הטסט מחוץ לשעות העבודה. \nשעות העבודה בימי השבוע הם: " + BE.Configuration.WorkStartHour + " עד " + BE.Configuration.WorkEndHour);
-
+            
             BE.Tester tester = (from item in GetAllTesters(test.Time)
                                 where item.Vehicle == trainee.Vehicle
                                 && BE.Tools.Maps_DrivingDistance(item.Address, test.Address) < item.MaxDistanceInMeters
                                 && (!trainee.OnlyMyGender || item.Gender == trainee.Gender)
                                 && item.GearBoxType == trainee.GearBoxType
-                                && NumOfTestsInWeek(item, test.Time) < item.MaxTestsInWeek // @
+                                && NumOfTestsInWeek(item, test.Time) < item.MaxTestsInWeek
                                 select item).FirstOrDefault();
             DateTime time = test.Time;
             if (tester == null)
@@ -71,7 +71,7 @@ namespace BL
                     throw new Exception("הזמן המבוקש תפוס. לא קיים זמן פנוי בשלושת החודשים הקרובים.");
                 else
                     throw new Exception("הזמן המבוקש תפוס, אבל יש לנו זמן אחר להציע לך: " + time.Day + '/' + time.Month + '/'
-                        + time.Year + ' ' + time.Hour + ':' + time.Minute);// time.ToString("MM/dd/yyyy HH:mm"));
+                        + time.Year + ' ' + time.Hour + ':' + time.Minute);
             }
             test.TesterID = tester.ID;
             IDAL.AddTest(test);
@@ -449,7 +449,9 @@ namespace BL
             return IDAL.GetAllTests(test => test.Passed != null && test.TraineeID == TrayneeId).Any();
         }
 
-        // Note: In development
+        /// <summary>
+        /// Send Tests Reminders emails
+        /// </summary>
         public void SendTestsRemindersLoop()
         {
             new Thread(() =>
@@ -542,7 +544,7 @@ namespace BL
                                         && BE.Tools.Maps_DrivingDistance(item.Address, test.Address) < item.MaxDistanceInMeters
                                         && (!trainee.OnlyMyGender || item.Gender == trainee.Gender)
                                         && item.GearBoxType == trainee.GearBoxType
-                                        && NumOfTestsInWeek(item, test.Time) < item.MaxTestsInWeek // @
+                                        && NumOfTestsInWeek(item, test.Time) < item.MaxTestsInWeek
                                         select item).FirstOrDefault();
                     if (tester == null)
                     {
@@ -582,7 +584,7 @@ namespace BL
                                         && BE.Tools.Maps_DrivingDistance(item.Address, test.Address) < item.MaxDistanceInMeters
                                         && (!trainee.OnlyMyGender || item.Gender == trainee.Gender)
                                         && item.GearBoxType == trainee.GearBoxType
-                                        && NumOfTestsInWeek(item, test.Time) < item.MaxTestsInWeek // @
+                                        && NumOfTestsInWeek(item, test.Time) < item.MaxTestsInWeek
                                         select item).FirstOrDefault();
                     if (tester == null)
                     {

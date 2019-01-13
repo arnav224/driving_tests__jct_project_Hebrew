@@ -374,16 +374,22 @@ namespace DAL
         {
             BE.Test test = GetTest(TestID);
             BE.Trainee trainee = GetTrainee(test.TraineeID);
-
-            string messege = '!' + trainee.FirstName + (trainee.Gender == BE.Gender.זכר ? " היקר " : " היקרה ") + @"<p> רק רצינו להזכיר לך שמועד הטסט שלך מתקרב</p>"
-+ @".הטסט שלך יתקיים בתאריך <b>" + test.Time.ToString("dd/MM/yyyy") + "</b> בשעה <b>" + test.Time.ToString("mm:HH") + "</b><br>" +
-".המיקום שנקבע לטסט הוא: <b>" + test.Address + "</b>"
-+ "<p></p>!בהצלחה";
-            string URL = "https://www.google.com/maps/search/" + test.Address/*.Replace(' ', '+').Replace(',', '%')*/;
-
             return RemeinderEmailHTML
-                .Replace("@@Text@@", messege + "<p>" + NoteToAdd.Replace("\n", "<br>") + "</p>")
-                .Replace("@@LINK@@", URL);
+            .Replace("@@Name@@", trainee.FirstName + (trainee.Gender == BE.Gender.זכר ? " היקר " : " היקרה "))
+            .Replace("@@DATE@@", test.Time.ToString("dd/MM/yyyy"))
+            .Replace("@@TIME@@", test.Time.ToString("mm:HH"))
+            .Replace("@@ADDRESS@@", test.Address)
+            .Replace("@@LINK@@", "https://www.google.com/maps/search/" + test.Address);
+
+            //            string messege = '!' + trainee.FirstName + (trainee.Gender == BE.Gender.זכר ? " היקר " : " היקרה ") + @"<p> רק רצינו להזכיר לך שמועד הטסט שלך מתקרב</p>"
+            //+ @".הטסט שלך יתקיים בתאריך <b>" + test.Time.ToString("dd/MM/yyyy") + "</b> בשעה <b>" + test.Time.ToString("mm:HH") + "</b><br>" +
+            //".המיקום שנקבע לטסט הוא: <b>" + test.Address + "</b>"
+            //+ "<p></p>!בהצלחה";
+            //            string URL = "https://www.google.com/maps/search/" + test.Address/*.Replace(' ', '+').Replace(',', '%')*/;
+
+            //            return RemeinderEmailHTML
+            //                .Replace("@@Text@@", messege + "<p>" + NoteToAdd.Replace("\n", "<br>") + "</p>")
+            //                .Replace("@@LINK@@", URL);
         }
 
         public void UpdateEmailSendingTime(int testID, DateTime? SummaryEmailSent = null, DateTime? RemeinderEmailSent = null)
