@@ -45,6 +45,9 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// UpdateTest ctor
+        /// </summary>
         public UpdateTest()
         {
             InitializeComponent();
@@ -56,6 +59,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.addressPicker.Address = test.Address;
         }
 
+        /// <summary>
+        /// Button Click to save the test
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (errorMessages.Any())
@@ -83,13 +91,23 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         }
 
-        private void validation_Error(object sender, ValidationErrorEventArgs e)
+        /// <summary>
+        /// validation Error
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Validation_Error(object sender, ValidationErrorEventArgs e)
         {
             if (e.Action == ValidationErrorEventAction.Added)
                 errorMessages.Add(e.Error.Exception.Message);
             else errorMessages.Remove(e.Error.Exception.Message);
         }
 
+        /// <summary>
+        /// Window Closing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (this.test.ToString() != bl.GetAllTests(t => t.TestID == test.TestID).FirstOrDefault().ToString())
@@ -101,11 +119,21 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// AddressPicker Text Changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddressPicker_TextChanged(object sender, EventArgs e)
         {
             test.Address = this.addressPicker.Address;
         }
 
+        /// <summary>
+        /// Time Got Focus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Time_GotFocus(object sender, RoutedEventArgs e)
         {
             var t = e.OriginalSource as TextBox;

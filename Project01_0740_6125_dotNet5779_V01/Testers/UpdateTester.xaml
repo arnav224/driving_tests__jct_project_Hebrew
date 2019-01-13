@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project01_0740_6125_dotNet5779_V01"
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="Project01_0740_6125_dotNet5779_V01.UpdateTester"
-        Validation.Error="validation_Error"
+        Validation.Error="Validation_Error"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Closing="Window_Closing"
@@ -89,7 +89,7 @@
             <local:AddressPicker x:Name="addressPicker" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="4,6,4,0" Grid.Row="5" Grid.RowSpan="4" VerticalAlignment="Top" TextChanged="AddressPicker_TextChanged" />
 
         </Grid>
-        <Grid x:Name="WorkHoursGrid" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10" Validation.Error="time_validation_Error">
+        <Grid x:Name="WorkHoursGrid" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10" Validation.Error="Time_validation_Error">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

@@ -28,11 +28,12 @@ namespace Project01_0740_6125_dotNet5779_V01
             {
                 TexBoxAddress.TextChanged -= TexBoxAddress_TextChanged;
                 TexBoxAddress.Text = (value != null) ? value.ToString() : "";
+                //new Thread for Google Address Suggestions 
                 new Thread(() =>
                 {
                     try
                     {
-                        generateNewToken();
+                        GenerateNewToken();
                         //var text = BE.Tools.Maps_GetPlaceAutoComplete(value.ToString())[0];
                         var text = BE.Tools.GetAddressSuggestionsGoogle(value.ToString(), token).First();
                         Action action = () =>
@@ -56,13 +57,23 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
             get => TexBoxAddress.Text;
         }
+
+        /// <summary>
+        /// Address Picker ctor
+        /// </summary>
         public AddressPicker()
         {
             InitializeComponent();
-            generateNewToken();
+            GenerateNewToken();
         }
 
         public event EventHandler TextChanged;
+
+        /// <summary>
+        /// TexBox Address Text Changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TexBoxAddress_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
@@ -71,6 +82,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                 {
 
                     var text = TexBoxAddress.Text;
+                    //new Thread for Google Address Suggestions
                     new Thread(() =>
                     {
                         try
@@ -105,6 +117,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             catch { }
         }
 
+        /// <summary>
+        /// User Control Lost Focus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UserControl_LostFocus(object sender, RoutedEventArgs e)
         {
             ListBoxSuggestions.Visibility = Visibility.Collapsed;
@@ -122,17 +139,25 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// List Box Suggestions Selection Changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListBoxSuggestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ListBoxSuggestions.SelectedItem != null)
             {
                 TexBoxAddress.Text = (string)ListBoxSuggestions.SelectedItem;
                 ListBoxSuggestions.Visibility = Visibility.Collapsed;
-                generateNewToken();
+                GenerateNewToken();
             }
         }
 
-        private void generateNewToken()
+        /// <summary>
+        /// Generate New Token to google service
+        /// </summary>
+        private void GenerateNewToken()
         {
             token = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("=", "").Replace("+", "")
                 .Replace(@"\", "").Replace("/", "").Replace(".", "").Replace(":", "");

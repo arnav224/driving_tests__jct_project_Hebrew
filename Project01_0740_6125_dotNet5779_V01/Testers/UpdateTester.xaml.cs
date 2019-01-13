@@ -28,6 +28,10 @@ namespace Project01_0740_6125_dotNet5779_V01
         List<BE.Test> TestsToRemove2;
         List<BE.Test> TestsToRemain;
         List<BE.TimePeriod> timePeriodsToRemove = new List<BE.TimePeriod>();
+
+        /// <summary>
+        /// UpdateTester ctor
+        /// </summary>
         public UpdateTester()
         {
             try
@@ -51,6 +55,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.addressPicker.Address = tester.Address;
         }
 
+        /// <summary>
+        /// Button Click to save the tester
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             TestsToRemain = bl.GetAllTests(test => test.Time > DateTime.Now && tester.WorkHours.Any(t => tester.ID == test.TesterID
@@ -90,7 +99,12 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         }
 
-        private void validation_Error(object sender, ValidationErrorEventArgs e)
+        /// <summary>
+        /// Validation Error
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Validation_Error(object sender, ValidationErrorEventArgs e)
         {
             if (e.Action == ValidationErrorEventAction.Added)
                 errorMessages.Add(e.Error.Exception.Message);
@@ -100,6 +114,7 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         TimeSpan StartTime = new TimeSpan();
         TimeSpan EndTime = new TimeSpan();
+
         public int HourStart
         {
             get { return StartTime.Hours; }
@@ -110,6 +125,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                 StartTime = new TimeSpan((int)Day, value, MinuteStart, 00);
             }
         }
+
         public int MinuteStart
         {
             get { return StartTime.Minutes; }
@@ -155,6 +171,11 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         public List<Test> TestsToRemove11 { get => TestsToRemove1; set => TestsToRemove1 = value; }
 
+        /// <summary>
+        /// Add TimePeriod Button Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddTimePeriodButton_Click(object sender, RoutedEventArgs e)
         {
             if (timeErrorMessages.Any())
@@ -187,15 +208,24 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.WorkHoursDataGrid.ItemsSource = (from item in tester.WorkHours select new { OnetimePeriod = item.ToString() });
         }
 
-
         #endregion
 
+        /// <summary>
+        /// WorkHours DataGrid Auto Generating Column
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WorkHoursDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if (e.PropertyName == "OnetimePeriod")
                 e.Column.Header = "זמני עבודה";
         }
 
+        /// <summary>
+        /// WorkHours DataGrid Selection Changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WorkHoursDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             foreach (dynamic item in e.AddedItems)
@@ -213,6 +243,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             {}
         }
 
+        /// <summary>
+        /// RemoveTimePeriod Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveTimePeriod_Click(object sender, RoutedEventArgs e)
         {
             string RemovingTimePeriods = "";
@@ -246,6 +281,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                 //MessageBox.Show("לא ניתן להסיר זמני עבודה שכבר שמורים לטסטים", "שגיאה - זמן העבודה שמור לטסט", MessageBoxButton.OK, MessageBoxImage.Error);
                 //return;
             }
+            //removes WorkHours
             foreach (var item in timePeriodsToRemove)
             {
                 tester.WorkHours.Remove(item);
@@ -254,14 +290,23 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.WorkHoursDataGrid.ItemsSource = (from item in tester.WorkHours select new { OnetimePeriod = item.ToString() });
         }
 
-        private void time_validation_Error(object sender, ValidationErrorEventArgs e)
+        /// <summary>
+        /// Time validation Error
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Time_validation_Error(object sender, ValidationErrorEventArgs e)
         {
             if (e.Action == ValidationErrorEventAction.Added && e.Error.Exception != null)
                 timeErrorMessages.Add(e.Error.Exception.Message);
             else timeErrorMessages.Remove(e.Error.Exception.Message);
         }
 
-
+        /// <summary>
+        /// WindowClosing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (this.tester.ToString() != bl.GetAllTesters(t=> t.ID == tester.ID).FirstOrDefault().ToString())
@@ -273,11 +318,21 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// AddressPicker Text Changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddressPicker_TextChanged(object sender, EventArgs e)
         {
             tester.Address = this.addressPicker.Address;
         }
 
+        /// <summary>
+        /// Time Got Focus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Time_GotFocus(object sender, RoutedEventArgs e)
         {
             var t = e.OriginalSource as TextBox;

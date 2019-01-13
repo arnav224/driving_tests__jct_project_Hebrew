@@ -48,6 +48,10 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// Add Test ctor
+        /// </summary>
+        /// <param name="TraineeID"></param>
         public AddTest(string TraineeID = null)
         {
             InitializeComponent();
@@ -60,6 +64,11 @@ namespace Project01_0740_6125_dotNet5779_V01
                 this.TraineeIDComboBox.SelectedItem = TraineeID;
         }
 
+        /// <summary>
+        /// Ad dButton Click to save the test
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             if (errorMessages.Any())
@@ -87,13 +96,23 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
-        private void validation_Error(object sender, ValidationErrorEventArgs e)
+        /// <summary>
+        /// Validation Error
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Validation_Error(object sender, ValidationErrorEventArgs e)
         {
             if (e.Action == ValidationErrorEventAction.Added)
                 errorMessages.Add(e.Error.Exception.Message);
             else errorMessages.Remove(e.Error.Exception.Message);
         }
 
+        /// <summary>
+        /// Window Closing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (this.test.Address != null || this.test.Time != new DateTime() || this.test.TraineeID != null)
@@ -105,16 +124,31 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// AddressPicker Text Changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddressPicker_TextChanged(object sender, EventArgs e)
         {
             test.Address = this.addressPicker.Address;
         }
 
+        /// <summary>
+        /// TraineeIDComboBox Selection Changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TraineeIDComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             test.TraineeID = this.TraineeIDComboBox.SelectedItem.ToString();
         }
 
+        /// <summary>
+        /// AddressPicker Lost Focus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddressPicker_LostFocus(object sender, RoutedEventArgs e)
         {
             if (this.addressPicker.Address != null && this.TraineeIDComboBox.SelectedItem != null)
@@ -133,6 +167,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// Time Got Focus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Time_GotFocus(object sender, RoutedEventArgs e)
         {
             var t = e.OriginalSource as TextBox;

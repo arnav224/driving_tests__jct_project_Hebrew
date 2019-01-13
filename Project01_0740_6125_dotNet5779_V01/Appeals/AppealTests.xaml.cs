@@ -17,12 +17,15 @@ namespace Project01_0740_6125_dotNet5779_V01
     /// <summary>
     /// Interaction logic for AppeaTests.xaml
     /// </summary>
-    public partial class AppeaTests 
+    public partial class AppealTests 
     {
         BL.IBL bl = BL.Factory.GetInstance();
         public List<BE.Test> selectedTests = new List<BE.Test>();
 
-        public AppeaTests()
+        /// <summary>
+        /// AppealTests ctor
+        /// </summary>
+        public AppealTests()
         {
             InitializeComponent();
             ApplyFiltering(this, new RoutedEventArgs());
@@ -36,6 +39,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.StatusComboBox.ItemsSource = Enum.GetValues(typeof(BE.AppealStatus));
         }
 
+        /// <summary>
+        /// Reset Filters Button Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ResetFiltersButton_Click(object sender, RoutedEventArgs e)
         {
             this.FromTimeDatePicker.SelectedDate = null;
@@ -45,6 +53,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             ApplyFiltering(this, e);
         }
 
+        /// <summary>
+        /// Desision Button Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DesisionButton_Click(object sender, RoutedEventArgs e)
         {
             new AppealDecision(selectedTests[0]).ShowDialog();
@@ -52,6 +65,11 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         }
 
+        /// <summary>
+        /// Appeals DataGrid Selection Changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AppealsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.OriginalSource != null)
@@ -90,27 +108,36 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// Apply Filtering
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ApplyFiltering(object sender, RoutedEventArgs e)
         {
-            int parsResult;
-            int.TryParse(this.SearchTextBox.Text, out parsResult);
+            int.TryParse(this.SearchTextBox.Text, out int parsResult);
 
             this.AppealsDataGrid.ItemsSource = from item in bl.GetAllAppealTests(this.SearchTextBox.Text, this.FromTimeDatePicker.SelectedDate, this.ToTimeDatePicker.SelectedDate,
                                                                      (StatusComboBox.SelectedIndex != -1 ? (BE.AppealStatus)this.StatusComboBox.SelectedItem : default(BE.AppealStatus)))
                                         select new
                                         {
-                                            TestID = item.TestID,
-                                            TraineeID = item.TraineeID,
-                                            TesterID = item.TesterID,
+                                            item.TestID,
+                                            item.TraineeID,
+                                            item.TesterID,
                                             RequestTime = item.AppealTest.RequestTime.ToString("dd/MM/yyyy HH:mm"),
-                                            DecisionTime = (item.AppealTest.appealStatus != BE.AppealStatus.ממתין ? item.AppealTest.DecisionTime.ToString("dd/MM/yyyy HH:mm") : "טרם טופל"),
+                                            DecisionTime = item.AppealTest.appealStatus != BE.AppealStatus.ממתין ? item.AppealTest.DecisionTime.ToString("dd/MM/yyyy HH:mm") : "טרם טופל",
                                             AppealStatus = item.AppealTest.appealStatus,
-                                            TraineeNotes = item.AppealTest.TraineeNotes,
-                                            Decision = item.AppealTest.Decision
+                                            item.AppealTest.TraineeNotes,
+                                            item.AppealTest.Decision
                                         };
 
         }
 
+        /// <summary>
+        /// Appeals DataGrid Auto Generating Column
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AppealsDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             switch (e.PropertyName)

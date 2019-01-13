@@ -21,6 +21,10 @@ namespace Project01_0740_6125_dotNet5779_V01
     {
         BL.IBL bl = BL.Factory.GetInstance();
         BE.Test test = ((MainWindow)Application.Current.MainWindow).selectedTests[0];
+
+        /// <summary>
+        /// AppealRequest ctor
+        /// </summary>
         public AppealRequest()
         {
             InitializeComponent();
@@ -50,6 +54,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             + ", שמירה על הימין - " + test.Indices["שמירה על הימין"] + '.';
         }
 
+        /// <summary>
+        /// AppealTextBox Selection Changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AppealTextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
             if (this.AppealTextBox.Text != "" && this.AppealTextBox.Text != null)
@@ -59,6 +68,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// Button Click to save the request
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             test.AppealTest.appealStatus = BE.AppealStatus.ממתין;
@@ -77,6 +91,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// Window Closing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (this.AppealTextBox.Text != "" && this.AppealTextBox.Text != null)

@@ -8,7 +8,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Closing="Window_Closing"
-        Validation.Error="validation_Error"
+        Validation.Error="Validation_Error"
         Title="הוספת טסט" Height="270" Width="300" FlowDirection="RightToLeft">
     <Grid>
         <Grid x:Name="grid1" HorizontalAlignment="Center"  Margin="20"  VerticalAlignment="Top">

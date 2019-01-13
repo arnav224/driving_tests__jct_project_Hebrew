@@ -9,7 +9,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Closing="Window_Closing"
-        Validation.Error="validation_Error"  
+        Validation.Error="Validation_Error"  
         Title="הוספת תלמיד" Height="530" MinHeight="520" Width="310" MinWidth="280">
     <Grid >
         <Grid x:Name="grid1" HorizontalAlignment="Center"  Margin="10" VerticalAlignment="Top" FlowDirection="RightToLeft">

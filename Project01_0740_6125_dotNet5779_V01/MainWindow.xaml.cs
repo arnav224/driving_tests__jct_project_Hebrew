@@ -435,20 +435,20 @@ namespace Project01_0740_6125_dotNet5779_V01
                                         this.TestersTabUserControl.ToTimeDatePicker.SelectedDate)
                                                               select new
                                                               {
-                                                                  FirstName = item.FirstName,
-                                                                  LastName = item.LastName,
-                                                                  ID = item.ID,
-                                                                  Gender = item.Gender,
+                                                                  item.FirstName,
+                                                                  item.LastName,
+                                                                  item.ID,
+                                                                  item.Gender,
                                                                   BirthDate = item.BirthDate.ToString("dd/MM/yyyy"),
-                                                                  PhoneNumber = item.PhoneNumber,
-                                                                  Address = item.Address,
-                                                                  MailAddress = item.MailAddress,
-                                                                  Vehicle = item.Vehicle,
-                                                                  gearBoxType = item.GearBoxType,
-                                                                  Experience = item.Experience,
-                                                                  MaxTestsInWeek = item.MaxTestsInWeek,
-                                                                  WorkHours = item.WorkHours,
-                                                                  MaxDistanceInMeters = item.MaxDistanceInMeters
+                                                                  item.PhoneNumber,
+                                                                  item.Address,
+                                                                  item.MailAddress,
+                                                                  item.Vehicle,
+                                                                  item.GearBoxType,
+                                                                  item.Experience,
+                                                                  item.MaxTestsInWeek,
+                                                                  item.WorkHours,
+                                                                  item.MaxDistanceInMeters
                                                               };
         }
 
@@ -515,7 +515,7 @@ namespace Project01_0740_6125_dotNet5779_V01
         /// <param name="e"></param>
         private void ApealsWondow_Click(object sender, RoutedEventArgs e)
         {
-            new AppeaTests().ShowDialog();
+            new AppealTests().ShowDialog();
             ApplyTestsFiltering(this, new RoutedEventArgs());
         }
 

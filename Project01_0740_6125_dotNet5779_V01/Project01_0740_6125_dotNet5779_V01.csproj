@@ -73,8 +73,8 @@
     <Compile Include="Appeals\AppealRequest.xaml.cs">
       <DependentUpon>AppealRequest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Appeals\AppeaTests.xaml.cs">
-      <DependentUpon>AppeaTests.xaml</DependentUpon>
+    <Compile Include="Appeals\AppealTests.xaml.cs">
+      <DependentUpon>AppealTests.xaml</DependentUpon>
     </Compile>
     <Compile Include="Experimental.xaml.cs">
       <DependentUpon>Experimental.xaml</DependentUpon>
@@ -118,7 +118,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Appeals\AppeaTests.xaml">
+    <Page Include="Appeals\AppealTests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

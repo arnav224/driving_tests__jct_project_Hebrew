@@ -22,6 +22,10 @@ namespace Project01_0740_6125_dotNet5779_V01
         BL.IBL bl;
         BE.Trainee trainee = ((MainWindow)Application.Current.MainWindow).selectedTrainees[0];
         List<string> errorMessages = new List<string>();
+
+        /// <summary>
+        /// Update Trainee ctor
+        /// </summary>
         public UpdateTrainee()
         {
             InitializeComponent();
@@ -33,6 +37,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.addressPicker.Address = trainee.Address;
         }
 
+        /// <summary>
+        /// Button Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (errorMessages.Any())  
@@ -57,13 +66,23 @@ namespace Project01_0740_6125_dotNet5779_V01
 
         }
 
-        private void validation_Error(object sender, ValidationErrorEventArgs e)
+        /// <summary>
+        /// Validation Error
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Validation_Error(object sender, ValidationErrorEventArgs e)
         {
             if (e.Action == ValidationErrorEventAction.Added)
                 errorMessages.Add(e.Error.Exception.Message);
             else errorMessages.Remove(e.Error.Exception.Message);
         }
 
+        /// <summary>
+        /// Window Closing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (this.trainee.ToString() != bl.GetAllTrainees(t => t.ID == trainee.ID).FirstOrDefault().ToString())
@@ -75,6 +94,11 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
         }
 
+        /// <summary>
+        /// AddressPicker Text Changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddressPicker_TextChanged(object sender, EventArgs e)
         {
             trainee.Address = this.addressPicker.Address;
