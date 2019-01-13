@@ -25,7 +25,7 @@ namespace DAL
 
         internal DAL_XML_imp()
         {
-            DS.DataSource.Initializer(); //todo זמני - צריך למחוק אחרי בניית DAL
+            //DS.DataSource.Initializer(); //todo זמני - צריך למחוק אחרי בניית DAL
 
             if (!File.Exists(traineesPath))
             {

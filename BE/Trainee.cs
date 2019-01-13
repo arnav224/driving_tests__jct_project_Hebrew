@@ -46,9 +46,9 @@ namespace BE
             get { return id; }
             set
             {
-                Regex r = new Regex("^[0-9]{8,10}$");
-                if (!r.IsMatch(value))
-                    throw new Exception("תעודת זהות צריכה להכיל 8-10 ספרות.");
+                value = Tools.ActiveValidateID(value);//todo זמני
+                if (!Tools.ValidateID(value))
+                    throw new Exception("תעודת זהות לא תקינה.");
                 id = value;
             }
         }

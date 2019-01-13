@@ -232,7 +232,56 @@ namespace BE
                 return (T)formatter.Deserialize(stream);
             }
         }
+        public static bool ValidateID(string IDNum)
+        {
+            // Validate correct input
+            if (!System.Text.RegularExpressions.Regex.IsMatch(IDNum, @"^\d{5,9}$"))
+                return false;
 
+            // The number is too short - add leading 0000
+            while (IDNum.Length < 9)
+                IDNum = '0' + IDNum;
+
+            // CHECK THE ID NUMBER
+            int mone = 0;
+            int incNum;
+            for (int i = 0; i < 9; i++)
+            {
+                incNum = Convert.ToInt32(IDNum[i].ToString()) * ((i % 2) + 1);
+                if (incNum > 9)
+                    incNum -= 9;
+                mone += incNum;
+            }
+            return (mone % 10 == 0);
+        }
+
+        //todo זמני
+        public static string ActiveValidateID(string IDNum)
+        {
+            // Validate correct input
+            //if (!System.Text.RegularExpressions.Regex.IsMatch(IDNum, @"^\d{5,9}$"))
+            //    return false;
+
+            // The number is too short - add leading 0000
+            while (IDNum.Length < 9)
+                IDNum = '0' + IDNum;
+
+            // CHECK THE ID NUMBER
+            int mone = 0;
+            int incNum;
+            for (int i = 0; i < 9; i++)
+            {
+                incNum = Convert.ToInt32(IDNum[i].ToString()) * ((i % 2) + 1);
+                if (incNum > 9)
+                    incNum -= 9;
+                mone += incNum;
+            }
+            string result = "";
+            for (int i = 0; i < 8; i++)
+                result += IDNum[i];
+            return result + ((10 - (mone % 10) + Convert.ToInt32(IDNum[8].ToString())) % 10 ).ToString();
+            //(IDNum[8]) = (10 - (mone % 10) + Convert.ToInt32(IDNum[8].ToString()) % 10).ToString());// (== 0);
+        }
 
     }
 }

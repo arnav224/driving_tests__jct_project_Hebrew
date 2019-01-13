@@ -48,8 +48,6 @@ namespace Project01_0740_6125_dotNet5779_V01
                 this.Closing -= Window_Closing;
                 bl.AddTrainee(trainee);
                 DialogResult = true;
-
-                //todo messege  trainee added
                 this.Close();
             }
             catch (Exception ex)
