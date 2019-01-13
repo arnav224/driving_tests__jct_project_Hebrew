@@ -280,7 +280,6 @@ namespace BE
             for (int i = 0; i < 8; i++)
                 result += IDNum[i];
             return result + ((10 - (mone % 10) + Convert.ToInt32(IDNum[8].ToString())) % 10 ).ToString();
-            //(IDNum[8]) = (10 - (mone % 10) + Convert.ToInt32(IDNum[8].ToString()) % 10).ToString());// (== 0);
         }
 
     }

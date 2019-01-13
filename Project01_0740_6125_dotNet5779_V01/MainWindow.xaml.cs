@@ -814,6 +814,20 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
             catch (Exception) { }
         }
+
+        private void Viewbox_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                dynamic parent = e.Source;
+                while (parent.GetType() != typeof(StackPanel))
+                    parent = parent.Parent;
+                    Label label = (from dynamic item in (parent as StackPanel).Children where item is Label select item as Label).First();
+                    notificationsQueue = new Queue<string>(notificationsQueue.Where(s => s != label.Content.ToString()));
+                    RefreshNotification();
+            }
+            catch (Exception) { }
+        }
         #endregion
 
         private void TraineesDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -924,5 +938,6 @@ namespace Project01_0740_6125_dotNet5779_V01
         {
             BE.Configuration.EmailServerPasword = this.PasswordBox.Password;
         }
+
     }
 } 

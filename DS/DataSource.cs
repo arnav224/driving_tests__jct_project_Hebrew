@@ -87,7 +87,7 @@ namespace DS
                 "פתח תקווה", 5, 25, BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, WorkHours3, 50000));
             testers.Add(new BE.Tester("10000001", "מוטי", "דגן", new DateTime(1965, 11, 05), BE.Gender.זכר, "0510000001", "aaa@g.com",
                 "קרני שומרון", 5, 25, BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, WorkHours, 30000));
-            testers.Add(new BE.Tester("10000002", "שמוליק", "קידן", new DateTime(1972, 05, 02), BE.Gender.זכר, "0510000002", "aaa@g.com",
+            testers.Add(new BE.Tester("10042002", "שמוליק", "קידן", new DateTime(1972, 05, 02), BE.Gender.זכר, "0510000002", "aaa@g.com",
                     "מבוא הישיבה 1 בית אל", 5, 25, BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, WorkHours, 5000));
 
 
@@ -97,15 +97,15 @@ namespace DS
             trainees = new List<BE.Trainee>();
             trainees.Add(new BE.Trainee("122121534", "משה", "גונן", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
                 "avraham224@gmail.com", "תל דפנה", BE.Vehicle.דו_גלגלי, BE.GearBoxType.ידני, "הדרכים", "שמוליק", 38));
-            trainees.Add(new BE.Trainee("123232222", "דוד", "הכהן", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
+            trainees.Add(new BE.Trainee("128842222", "דוד", "הכהן", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
                 "avraham224@gmail.com", "עכו", BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "סוללים לך עתיד", "שמשון", 38));
-            trainees.Add(new BE.Trainee("123242222", "חיים", "אבירם", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
+            trainees.Add(new BE.Trainee("123333222", "חיים", "אבירם", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
                 "avraham224@gmail.com", "כפר יונה", BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "רמזור", "דנה", 38));
-            trainees.Add(new BE.Trainee("123252222", "יענקי", "שפירא", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
+            trainees.Add(new BE.Trainee("123222522", "יענקי", "שפירא", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
                 "avraham224@gmail.com", "גבעת אולגה", BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "שבתאי", "רחל", 38));
-            trainees.Add(new BE.Trainee("126322222", "ירמיהו", "מלאכי", new DateTime(2001, 09, 05), BE.Gender.נקבה, "0527560201",
+            trainees.Add(new BE.Trainee("120022222", "ירמיהו", "מלאכי", new DateTime(2001, 09, 05), BE.Gender.נקבה, "0527560201",
                 "avraham224@gmail.com", "המסגר 32 רעננה", BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "עוז", "תרצה", 38));
-            trainees.Add(new BE.Trainee("123272222", "ישעיהו", "רוסקוביץ'", new DateTime(2001, 09, 05), BE.Gender.נקבה, "0527560201",
+            trainees.Add(new BE.Trainee("120172222", "ישעיהו", "רוסקוביץ'", new DateTime(2001, 09, 05), BE.Gender.נקבה, "0527560201",
                 "avraham224@gmail.com", "רבי לוי יצחק יקנעם", BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "יחדיו", "דניאל", 38));
             trainees.Add(new BE.Trainee("12322222", "מושיקו", "הלוי", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
                     "avraham224@gmail.com", "רבבה", BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "הסולל", "מיכאלה", 38));
@@ -124,9 +124,9 @@ namespace DS
                 "avraham224@gmail.com", "רבי לוי יצחק יקנעם", BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "יחדיו", "דניאל", 38));
             trainees.Add(new BE.Trainee("12322922", "מושי", "לוי", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
                     "avraham224@gmail.com", "מבוא חורון", BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "הסולל", "מיכאלה", 38));
-            trainees.Add(new BE.Trainee("122121534", "משה", "מועלם", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
+            trainees.Add(new BE.Trainee("155121534", "משה", "מועלם", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
     "avraham224@gmail.com", "מעלה אדומים", BE.Vehicle.דו_גלגלי, BE.GearBoxType.אוטומטי, "הדרכים", "שמוליק", 38));
-            trainees.Add(new BE.Trainee("123742222", "דוד", "אילוז", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
+            trainees.Add(new BE.Trainee("131302222", "דוד", "אילוז", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
                 "avraham224@gmail.com", "כוכב השחר", BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "סוללים לך עתיד", "שמשון", 38));
             trainees.Add(new BE.Trainee("173242222", "חיים", "אינגדשט", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
                 "avraham224@gmail.com", "פתח תקוה", BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "רמזור", "דנה", 38));
@@ -138,13 +138,13 @@ namespace DS
                 "avraham224@gmail.com", "נתניה", BE.Vehicle.פרטי, BE.GearBoxType.ידני, "יחדיו", "דניאל", 38));
             trainees.Add(new BE.Trainee("19922222", "מושיקו", "אלאלוף", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
                     "avraham224@gmail.com", "תל אביב", BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "הסולל", "מיכאלה", 38));
-            trainees.Add(new BE.Trainee("122121534", "משה", "חיון", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
+            trainees.Add(new BE.Trainee("122721534", "משה", "חיון", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
     "avraham224@gmail.com", "ירושלים", BE.Vehicle.דו_גלגלי, BE.GearBoxType.ידני, "הדרכים", "שמוליק", 38));
-            trainees.Add(new BE.Trainee("123232222", "דוד", "חיטובסקי", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
+            trainees.Add(new BE.Trainee("123848422", "דוד", "חיטובסקי", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
                 "avraham224@gmail.com", "עכו", BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "סוללים לך עתיד", "שמשון", 38));
-            trainees.Add(new BE.Trainee("123242222", "חיים", "חכים", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
+            trainees.Add(new BE.Trainee("123245422", "חיים", "חכים", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
                 "avraham224@gmail.com", "כפר יונה", BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "רמזור", "דנה", 38));
-            trainees.Add(new BE.Trainee("123252222", "יענקי", "חכמוביץ", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
+            trainees.Add(new BE.Trainee("145252222", "יענקי", "חכמוביץ", new DateTime(2001, 09, 05), BE.Gender.זכר, "0527560201",
                 "avraham224@gmail.com", "גבעת אולגה", BE.Vehicle.פרטי, BE.GearBoxType.אוטומטי, "שבתאי", "רחל", 38));
             trainees.Add(new BE.Trainee("126322222", "ירמיהו", "חמו", new DateTime(2001, 09, 05), BE.Gender.נקבה, "0527560201",
                 "avraham224@gmail.com", "קריית עקרון", BE.Vehicle.פרטי, BE.GearBoxType.ידני, "עוז", "תרצה", 38));
@@ -167,8 +167,8 @@ namespace DS
 
             tests = new List<BE.Test>()
             {
-                new BE.Test() {Address = "ירושלים", TesterID = "10000001", Time = new DateTime(2018, 10, 22, 10, 30, 0), TraineeID = "122121534", },
-                new BE.Test() {Address = "ירושלים", TesterID = "10000002", Time = new DateTime(2019, 01, 25, 10, 30, 0), TraineeID = "122121534", },
+                new BE.Test() {Address = "ירושלים", TesterID = "10600001", Time = new DateTime(2018, 10, 22, 10, 30, 0), TraineeID = "122121534", },
+                new BE.Test() {Address = "ירושלים", TesterID = "10050002", Time = new DateTime(2019, 01, 25, 10, 30, 0), TraineeID = "122121534", },
                 new BE.Test() {Address = "באר שבע", TesterID = "10076543", Time = new DateTime(2019, 01, 12, 07, 30, 0), TraineeID = "123232222", },
                 new BE.Test() {Address = "ירושלים", TesterID = "335344444", Time = new DateTime(2019, 01, 01, 10, 30, 0), TraineeID = "123242222", },
                 new BE.Test() {Address = "ירושלים", TesterID = "100456678", Time = new DateTime(2019, 02, 4, 10, 30, 0), TraineeID = "123272222", },
