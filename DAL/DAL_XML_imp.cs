@@ -19,13 +19,13 @@ namespace DAL
         private readonly string testersPath = @"testers.xml";
         private readonly string testsPath = @"tests.xml";
         public static List<BE.Trainee> trainees;
-        public static List<BE.Tester> testers;
-        public static List<BE.Test> tests;
+        public static List<BE.Tester> testers = new List<Tester>();
+        public static List<BE.Test> tests = new List<Test>();
         bool traineesListChainged = true;
 
         internal DAL_XML_imp()
         {
-            //DS.DataSource.Initializer(); //todo זמני - צריך למחוק אחרי בניית DAL
+            DS.DataSource.Initializer(); //todo זמני - צריך למחוק אחרי בניית DAL
 
             if (!File.Exists(traineesPath))
             {
@@ -39,9 +39,25 @@ namespace DAL
                 }
             }
             if (!File.Exists(testersPath))
+            {
                 SaveToXML<List<Tester>>(new List<Tester>(), testersPath);
+                //todo זמני
+                foreach (var item in DS.DataSource.testers)
+                {
+                    AddTester(item);
+                }
+
+            }
             if (!File.Exists(testsPath))
+            {
                 SaveToXML<List<Test>>(new List<Test>(), testsPath);
+                //todo זמני
+                foreach (var item in DS.DataSource.tests)
+                {
+                    AddTest(item);
+                }
+
+            }
             traineesRoot = XElement.Load(traineesPath);
 
             testers = LoadFromXML<List<Tester>>(testersPath);
