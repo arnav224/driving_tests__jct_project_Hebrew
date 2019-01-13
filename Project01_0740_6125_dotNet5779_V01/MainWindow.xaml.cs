@@ -28,7 +28,8 @@ namespace Project01_0740_6125_dotNet5779_V01
         public List<Trainee> selectedTrainees = new List<Trainee>();
         public List<Tester> selectedTesters = new List<Tester>();
         public List<Test> selectedTests = new List<Test>();
-        Queue<string> notificationsQueue = new Queue<string>();
+        //Queue<string> notificationsQueue = new Queue<string>();
+        Queue<KeyValuePair<string, DateTime>> notificationsQueue = new Queue<KeyValuePair<string, DateTime>>();
         readonly static int SUMITEMSTODISPLY = 7;
         public dynamic htmlText;
         DateTime timeOfLastNotification;
@@ -223,7 +224,6 @@ namespace Project01_0740_6125_dotNet5779_V01
                 if (selectedTrainees.Count == 1)
                     AddNotification("התלמיד " + selectedTrainees[0].FirstName + ' ' + selectedTrainees[0].LastName + " נמחק בהצלחה");
                 else
-                    //todo המספר מוצג בסוף המחרוזת
                     AddNotification(selectedTrainees.Count.ToString() + " תלמידים נמחקו בהצלחה");
                 ApplyTraineesFiltering(this, e);
                 ApplyTestsFiltering(this, new RoutedEventArgs());
@@ -336,7 +336,6 @@ namespace Project01_0740_6125_dotNet5779_V01
             else
             {
                 if (new AddTester().ShowDialog() == true)
-                    //todo המספר מוצג בסוף המחרוזת
                     AddNotification(selectedTrainees.Count.ToString() + " בוחנים נמחקו בהצלחה");
             }
         }
@@ -394,7 +393,6 @@ namespace Project01_0740_6125_dotNet5779_V01
                 if (selectedTesters.Count == 1)
                     AddNotification("הבוחן " + selectedTesters[0].FirstName + ' ' + selectedTesters[0].LastName + " נמחק בהצלחה");
                 else
-                    //todo המספר מוצג בסוף המחרוזת
                     AddNotification(selectedTesters.Count.ToString() + " בוחנים נמחקו בהצלחה");
                 ApplyTestersFiltering(this, new RoutedEventArgs());
                 ApplyTestsFiltering(this, new RoutedEventArgs());
@@ -541,7 +539,6 @@ namespace Project01_0740_6125_dotNet5779_V01
                 if (selectedTests.Count == 1)
                     AddNotification("טסט נמחק");
                 else
-                    //todo המספר מוצג בסוף המחרוזת
                     AddNotification(selectedTests.Count.ToString() + " טסטים נמחקו");
 
                 ApplyTestsFiltering(this, e);
@@ -715,16 +712,18 @@ namespace Project01_0740_6125_dotNet5779_V01
         #region Notifications
         private void AddNotification(string messege)
         {
+            DateTime time = DateTime.Now;
             if (notificationsQueue.Count >= 4)
                 notificationsQueue.Dequeue();
-            notificationsQueue.Enqueue(messege);
+            //notificationsQueue.Enqueue(messege);
+            notificationsQueue.Enqueue(new KeyValuePair<string, DateTime>(messege, time));
             RefreshNotification();
             timeOfLastNotification = DateTime.Now;
             BackgroundWorker worker = new BackgroundWorker();
-            worker.DoWork += (sender, e)=> { Thread.Sleep(7000); e.Result = messege; };
+            worker.DoWork += (sender, e)=> { Thread.Sleep(7000); e.Result = new KeyValuePair<string, DateTime>(messege, time); };
             worker.RunWorkerCompleted += (s, arg) =>
             {
-                notificationsQueue = new Queue<string>(notificationsQueue.Where(m => m != arg.Result.ToString()));
+                //notificationsQueue = new Queue<string>(notificationsQueue.Where(m => m != (((KeyValuePair<string, DateTime>)arg.Result).Key.ToString())));
                 RefreshNotification();
             };
             worker.RunWorkerAsync(argument: messege);
@@ -786,7 +785,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                         parent = parent.Parent;
                     StackPanel stackPanel = parent as StackPanel;
                     Label label = (from dynamic item in stackPanel.Children where item is Label select item as Label).First();
-                    notificationsQueue = new Queue<string>(notificationsQueue.Where(s => s != label.Content.ToString()));
+                    //todo notificationsQueue = new Queue<string>(notificationsQueue.Where(s => s != label.Content.ToString()));
                     RefreshNotification();
                 }
             }
@@ -823,7 +822,7 @@ namespace Project01_0740_6125_dotNet5779_V01
                 while (parent.GetType() != typeof(StackPanel))
                     parent = parent.Parent;
                     Label label = (from dynamic item in (parent as StackPanel).Children where item is Label select item as Label).First();
-                    notificationsQueue = new Queue<string>(notificationsQueue.Where(s => s != label.Content.ToString()));
+                    //todo notificationsQueue = new Queue<string>(notificationsQueue.Where(s => s != label.Content.ToString()));
                     RefreshNotification();
             }
             catch (Exception) { }
