@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -20,33 +21,9 @@ namespace Project01_0740_6125_dotNet5779_V01
     public partial class AddTest 
     {
         BL.IBL bl = BL.Factory.GetInstance();
-        BE.Test test = new BE.Test();
-        SortedSet<DateTime> avalibleDateTimes;
+        BE.Test test = new BE.Test() {Time = DateTime.Now };
+        //SortedSet<DateTime> avalibleDateTimes;
         List<string> errorMessages = new List<string>();
-        private int hour;
-        public int Hour
-        {
-            get { return hour; }
-            set
-            {
-                if (value < 0 || value > 24)
-                    throw new Exception("השעה לא תקינה");
-                if (value < BE.Configuration.WorkStartHour || value > BE.Configuration.WorkEndHour)
-                    throw new Exception("השעה המבוקשת מחוץ לשעות הפעילות");
-                hour = value;
-            }
-        }
-        private int minute;
-        public int Minute
-        {
-            get { return minute; }
-            set
-            {
-                if (value < 0 || value > 60)
-                    throw new Exception("השעה לא תקינה");
-                minute = value;
-            }
-        }
 
         /// <summary>
         /// Add Test ctor
@@ -56,14 +33,13 @@ namespace Project01_0740_6125_dotNet5779_V01
         {
             InitializeComponent();
             this.DataContext = test;
-            this.Time_hour.DataContext = this;
-            this.Time_minutes.DataContext = this;
             this.addressPicker.Address = test.Address;
             this.TraineeIDComboBox.ItemsSource = from item in bl.GetAllTrainees() select item.ID;
-            if (TraineeID != null )
+            if (TraineeID != null)
                 this.TraineeIDComboBox.SelectedItem = TraineeID;
+            this.DateTimePicker.DisplayDateStart = DateTime.Today;
+            this.DateTimePicker.DisplayDateEnd = DateTime.Today.AddMonths(3);
         }
-
         /// <summary>
         /// Ad dButton Click to save the test
         /// </summary>
@@ -81,10 +57,6 @@ namespace Project01_0740_6125_dotNet5779_V01
             }
             try
             {
-                test.Time = test.Time.AddMinutes(-test.Time.Minute);
-                test.Time = test.Time.AddMinutes(Minute);
-                test.Time = test.Time.AddHours(-test.Time.Hour);
-                test.Time = test.Time.AddHours(Hour);
                 bl.AddTest(test);
                 this.Closing -= Window_Closing;
                 this.DialogResult = true;
@@ -153,17 +125,32 @@ namespace Project01_0740_6125_dotNet5779_V01
         {
             if (this.addressPicker.Address != null && this.TraineeIDComboBox.SelectedItem != null)
             {
+                //todo
+                //BackgroundWorker worker = new BackgroundWorker();
+                //worker.DoWork += (sender, e) => { Thread.Sleep(10000); e.Result = pair; };
+                //worker.RunWorkerCompleted += (s, arg) =>
+                //{
+                //    RemoveNotification(pair);
+                //};
+                //worker.RunWorkerAsync(argument: messege);
+
                 //this.dateDatePicker.
                 //this.avalibleDateTimes = bl.avalibleDateTimes(test);
                 //new Thread(() => { this.avalibleDateTimes = bl.avalibleDateTimes(test); }).Start();
 
-                this.dateDatePicker.IsEnabled = true;
-                this.dateDatePicker.ToolTip = null;
+                //this.DateTimePicker.IsEnabled = true;
+                //this.DateTimePicker.ToolTip = null;
+                //this.dateDatePicker.IsEnabled = true;
+                //this.dateDatePicker.ToolTip = null;
             }
             else
             {
-                this.dateDatePicker.IsEnabled = false;
-                this.dateDatePicker.ToolTip = "יש לבחור תלמיד וכתובת תחילה";
+                //this.DateTimePicker.IsEnabled = false;
+                //this.DateTimePicker.ToolTip = "יש לבחור תלמיד וכתובת תחילה";
+
+                //todo
+                //this.dateDatePicker.IsEnabled = false;
+                //this.dateDatePicker.ToolTip = "יש לבחור תלמיד וכתובת תחילה";
             }
         }
 
