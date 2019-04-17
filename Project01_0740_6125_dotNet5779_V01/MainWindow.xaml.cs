@@ -126,16 +126,23 @@ namespace Project01_0740_6125_dotNet5779_V01
             this.ApplyTestsFiltering(this, new RoutedEventArgs());
             #endregion
 
-            if (Configuration.GoogleMapsApiKey == "" || Configuration.EmailServerPasword == "" || Configuration.SenderEmailAddress == "")
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += (s, e) => { Thread.Sleep(2000); };
+            worker.RunWorkerCompleted += (s, e) =>
             {
-                var result =  MessageBox.Show(( (Configuration.EmailServerPasword == "" || Configuration.SenderEmailAddress == "") ? ".כדי לשלוח מיילים עליך להכניס הגדרות מייל\n" : "" )
-                    + ((Configuration.GoogleMapsApiKey == "") ? "כדי להשתמש במפות גוגל (השלמה אוטומטית, חישוב מרחקים)\n.Developer key עליך להכניס" : "" ) 
-                    + "\n\n?לעבור לטאב ההגדרות"
-                    , "הגדרות אופציונאליות חסרות", MessageBoxButton.YesNo,
-                                MessageBoxImage.Information, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
-                if (result == MessageBoxResult.Yes)
-                    this.TabControl.SelectedIndex = 4;
-            }
+                if (Configuration.GoogleMapsApiKey == "" || Configuration.EmailServerPasword == "" || Configuration.SenderEmailAddress == "")
+                {
+                    var result = MessageBox.Show(((Configuration.EmailServerPasword == "" || Configuration.SenderEmailAddress == "") ? ".כדי לשלוח מיילים עליך להכניס הגדרות מייל\n" : "")
+                        + ((Configuration.GoogleMapsApiKey == "") ? "כדי להשתמש במפות גוגל (השלמה אוטומטית, חישוב מרחקים)\n.Developer key עליך להכניס" : "")
+                        + "\n\n?לעבור לטאב ההגדרות"
+                        , "חסרות הגדרות אופציונאליות", MessageBoxButton.YesNo,
+                                    MessageBoxImage.Information, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                    if (result == MessageBoxResult.Yes)
+                        this.TabControl.SelectedIndex = 4;
+                }
+
+            };
+            worker.RunWorkerAsync();
         }
 
 
