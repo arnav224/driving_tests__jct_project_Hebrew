@@ -1,8 +1,8 @@
 # driving_tests__jct_project_Hebrew
 #
-Educational project - Software for management of the system of driving tests,
-examiners and students, appeals management,
-good user interface (Hebrew only, sorry), which includes filtering search and Push messages.
-With the Google Maps API (distances, autocomplete, navigation links),
-emails (sending automatic and manual reminders).
+management system for driving tests, examiners, students and appeals.
+Written in C #, with a WPF user interface that includes filtering for search and push messages. 
+Using the Google Maps API (distances, autocomplete, navigation links), 
+and emails (sending automatic and manual reminders).
 
+This project is the outstanding project of the Academic Center Lev for 2018!
