@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<ArrayOfTest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Test>
+    <TestID>10000014</TestID>
+    <TesterID>335344446</TesterID>
+    <TraineeID>173245457</TraineeID>
+    <Time>2019-01-16T11:45:52</Time>
+    <Address>לוד, ישראל</Address>
+    <Passed>true</Passed>
+    <TesterNotes />
+    <IndicesToString>בטיחות,עבר;שליטה בהגה,עבר;שליטה בהילוכים,עבר;הסתכלות במראות,נכשל;מתן זכות קדימה,עבר;מהירות,עבר;איתות,עבר;האצה והאטה בבטחה,עבר;ציות לתמרורים,נכשל;שמירה רווח,עבר;בטיחות הולכי רגל,רע;עקיפות,עבר;חנייה,רע;פניות,עבר;השתלבות בתנועה,רע;אביזרי בטיחות,עבר;נסיעה לאחור,נכשל;שמירה על הימין,רע_מאוד</IndicesToString>
+    <AppealTest>
+      <RequestTime>2019-01-16T18:35:33.969146+02:00</RequestTime>
+      <DecisionTime>2019-01-16T18:42:57.8273402+02:00</DecisionTime>
+      <appealStatus>התקבל</appealStatus>
+      <TraineeNotes>דווקא נסעתי יפה</TraineeNotes>
+      <Decision>סע בזהירות.</Decision>
+    </AppealTest>
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000015</TestID>
+    <TesterID>335344446</TesterID>
+    <TraineeID>128000023</TraineeID>
+    <Time>2019-01-17T12:31:53</Time>
+    <Address>צפת, ישראל</Address>
+    <Passed>false</Passed>
+    <TesterNotes />
+    <IndicesToString>בטיחות,עבר;שליטה בהגה,עבר;שליטה בהילוכים,עבר;הסתכלות במראות,עבר;מתן זכות קדימה,עבר;מהירות,עבר;איתות,עבר;האצה והאטה בבטחה,עבר;ציות לתמרורים,עבר;שמירה רווח,עבר;בטיחות הולכי רגל,עבר;עקיפות,עבר;חנייה,נכשל;פניות,עבר;השתלבות בתנועה,עבר;אביזרי בטיחות,עבר;נסיעה לאחור,עבר;שמירה על הימין,עבר</IndicesToString>
+    <AppealTest>
+      <RequestTime>2019-01-18T12:42:08.0237028+02:00</RequestTime>
+      <DecisionTime>0001-01-01T00:00:00</DecisionTime>
+      <appealStatus>ממתין</appealStatus>
+      <TraineeNotes>אני מבקש לבחון שוב את התוצאה כי הבוחן בלם ביחד איתי</TraineeNotes>
+    </AppealTest>
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000016</TestID>
+    <TesterID>012230215</TesterID>
+    <TraineeID>012324224</TraineeID>
+    <Time>2019-01-16T12:32:30</Time>
+    <Address>תל אביב יפו, ישראל</Address>
+    <Passed>false</Passed>
+    <TesterNotes />
+    <IndicesToString>בטיחות,עבר;שליטה בהגה,נכשל;שליטה בהילוכים,עבר;הסתכלות במראות,עבר;מתן זכות קדימה,עבר;מהירות,עבר;איתות,עבר;האצה והאטה בבטחה,עבר;ציות לתמרורים,עבר;שמירה רווח,עבר;בטיחות הולכי רגל,עבר;עקיפות,עבר;חנייה,רע_מאוד;פניות,רע_מאוד;השתלבות בתנועה,עבר;אביזרי בטיחות,רע_מאוד;נסיעה לאחור,רע;שמירה על הימין,רע_מאוד</IndicesToString>
+    <AppealTest>
+      <RequestTime>2019-01-16T18:39:43.6956919+02:00</RequestTime>
+      <DecisionTime>2019-01-16T18:40:39.0099493+02:00</DecisionTime>
+      <appealStatus>נדחה</appealStatus>
+      <TraineeNotes>אני חושב שאני נהג אחלה פיצוץ!</TraineeNotes>
+      <Decision>על פי נתוני המצלמות טענות הבוחן מוצדקות. בהצלחה בטסט הבא.</Decision>
+    </AppealTest>
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000018</TestID>
+    <TesterID>335344446</TesterID>
+    <TraineeID>128000023</TraineeID>
+    <Time>2019-01-30T12:44:18</Time>
+    <Address>רעננה, ישראל</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000025</TestID>
+    <TesterID>012230215</TesterID>
+    <TraineeID>191207000</TraineeID>
+    <Time>2019-01-30T13:00:05</Time>
+    <Address>כפר סבא, ישראל</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent>2019-01-18T12:29:51.4439725+02:00</RemeinderEmailSent>
+  </Test>
+  <Test>
+    <TestID>10000027</TestID>
+    <TesterID>335344446</TesterID>
+    <TraineeID>012324224</TraineeID>
+    <Time>2019-02-11T15:01:36</Time>
+    <Address>בני ברק, ישראל</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000017</TestID>
+    <TesterID>011122314</TesterID>
+    <TraineeID>191207000</TraineeID>
+    <Time>2019-01-17T12:42:46</Time>
+    <Address>רמת גן, ישראל</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000026</TestID>
+    <TesterID>012230215</TesterID>
+    <TraineeID>012324224</TraineeID>
+    <Time>2019-02-21T13:00:36</Time>
+    <Address>רעננה דרום, כפר סבא</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000029</TestID>
+    <TesterID>012230215</TesterID>
+    <TraineeID>012324224</TraineeID>
+    <Time>2019-01-28T12:47:05</Time>
+    <Address>קדומים</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000029</TestID>
+    <TesterID>001223213</TesterID>
+    <TraineeID>183264217</TraineeID>
+    <Time>2019-01-21T12:53:28+02:00</Time>
+    <Address>מעלה אדומים</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000030</TestID>
+    <TesterID>012230215</TesterID>
+    <TraineeID>196122022</TraineeID>
+    <Time>2019-06-22T12:53:56</Time>
+    <Address>זיתן, ישראל</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+</ArrayOfTest>

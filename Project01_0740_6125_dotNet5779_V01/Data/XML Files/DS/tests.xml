@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<ArrayOfTest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Test>
+    <TestID>10000000</TestID>
+    <TesterID>010600005</TesterID>
+    <TraineeID>122121536</TraineeID>
+    <Time>2018-10-22T10:30:00</Time>
+    <Address>ירושלים</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000001</TestID>
+    <TesterID>010050003</TesterID>
+    <TraineeID>122121536</TraineeID>
+    <Time>2019-01-25T10:30:00</Time>
+    <Address>ירושלים</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000002</TestID>
+    <TesterID>010076545</TesterID>
+    <TraineeID>123232225</TraineeID>
+    <Time>2019-01-12T07:30:00</Time>
+    <Address>באר שבע</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000003</TestID>
+    <TesterID>335344446</TesterID>
+    <TraineeID>123242224</TraineeID>
+    <Time>2019-01-01T10:30:00</Time>
+    <Address>ירושלים</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000004</TestID>
+    <TesterID>100456672</TesterID>
+    <TraineeID>123272221</TraineeID>
+    <Time>2019-02-04T10:30:00</Time>
+    <Address>ירושלים</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000005</TestID>
+    <TesterID>010000008</TesterID>
+    <TraineeID>123252223</TraineeID>
+    <Time>2019-01-01T12:00:00</Time>
+    <Address>גבעת אולגה, מבצע עזרא, חדרה, ישראל</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000006</TestID>
+    <TesterID>010000008</TesterID>
+    <TraineeID>123232225</TraineeID>
+    <Time>2019-01-01T12:00:00</Time>
+    <Address>וייצמן, עכו, ישראל</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000007</TestID>
+    <TesterID>010000008</TesterID>
+    <TraineeID>126322221</TraineeID>
+    <Time>2019-01-02T09:00:00</Time>
+    <Address>המסגר, רעננה, ישראל</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000008</TestID>
+    <TesterID>010000008</TesterID>
+    <TraineeID>123272221</TraineeID>
+    <Time>2019-02-26T09:00:00</Time>
+    <Address>יקנעם, ישראל</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000009</TestID>
+    <TesterID>335344446</TesterID>
+    <TraineeID>122121536</TraineeID>
+    <Time>2019-02-01T09:45:00</Time>
+    <Address>חיפה - חוף הכרמל, חיפה, ישראל</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000010</TestID>
+    <TesterID>010076545</TesterID>
+    <TraineeID>126398221</TraineeID>
+    <Time>2019-01-15T11:35:00</Time>
+    <Address>דוד רזיאל, רעננה, ישראל</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000011</TestID>
+    <TesterID>335344446</TesterID>
+    <TraineeID>123982225</TraineeID>
+    <Time>2019-01-13T15:00:00</Time>
+    <Address>העמק, יקנעם, ישראל</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+  <Test>
+    <TestID>10000012</TestID>
+    <TesterID>335344446</TesterID>
+    <TraineeID>012322921</TraineeID>
+    <Time>2019-01-14T14:00:00</Time>
+    <Address>מכבים, מודיעין מכבים רעות</Address>
+    <Passed xsi:nil="true" />
+    <RemeinderEmailSent xsi:nil="true" />
+  </Test>
+</ArrayOfTest>

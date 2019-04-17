@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <LastTestId>10000000</LastTestId>
+  <MinimumTaineeAge>17</MinimumTaineeAge>
+  <MinimumTesterAge>45</MinimumTesterAge>
+  <MaximumTestsInWeek>40</MaximumTestsInWeek>
+  <MaximumTesterAge>70</MaximumTesterAge>
+  <MinimumDaysBetweenTests>7</MinimumDaysBetweenTests>
+  <MinimumDrivingLessons>20</MinimumDrivingLessons>
+  <PassingGrade>70</PassingGrade>
+  <TestTimeSpanInMinutes>30</TestTimeSpanInMinutes>
+  <WorkStartHour>7</WorkStartHour>
+  <WorkEndHour>19</WorkEndHour>
+  <FridayWorkEndHour>14</FridayWorkEndHour>
+  <SenderEmailAddress>avraham224@gmail.com</SenderEmailAddress>
+  <EmailServerPasword>hluuarmauvxfpzfs</EmailServerPasword>
+  <GoogleMapsApiKey>AIzaSyBzz5Hd1UJW7NKf27JvD4HB0nBfLM4qfJQ</GoogleMapsApiKey>
+  <SMTP_Server>smtp.gmail.com</SMTP_Server>
+  <SMTP_Port>587</SMTP_Port>
+  <AutoSendingEmails>false</AutoSendingEmails>
+  <SendingEmails_DaysInAdvance>3</SendingEmails_DaysInAdvance>
+  <AutoSendingEmailsAboutAddingAndCancalation>true</AutoSendingEmailsAboutAddingAndCancalation>
+</config>

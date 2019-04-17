@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<trainees>
+  <Trainee>
+    <ID>122121536</ID>
+    <FirstName>משה</FirstName>
+    <LastName>גונן</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>תל דפנה</Address>
+    <Vehicle>דו_גלגלי</Vehicle>
+    <GearBoxType>ידני</GearBoxType>
+    <DrivingSchoolName>הדרכים</DrivingSchoolName>
+    <TeacherName>שמוליק</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>128000023</ID>
+    <FirstName>דוד</FirstName>
+    <LastName>הכהן</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>עכו</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>סוללים לך עתיד</DrivingSchoolName>
+    <TeacherName>שמשון</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>123355216</ID>
+    <FirstName>חיים</FirstName>
+    <LastName>אבירם</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>כפר יונה</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>רמזור</DrivingSchoolName>
+    <TeacherName>דנה</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>123222523</ID>
+    <FirstName>יענקי</FirstName>
+    <LastName>שפירא</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>גבעת אולגה</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>שבתאי</DrivingSchoolName>
+    <TeacherName>רחל</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>120020128</ID>
+    <FirstName>עמליה</FirstName>
+    <LastName>מלאכי</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>נקבה</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>המסגר 32 רעננה</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>עוז</DrivingSchoolName>
+    <TeacherName>תרצה</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>120172226</ID>
+    <FirstName>שרה</FirstName>
+    <LastName>רוסקוביץ'</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>נקבה</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>רבי לוי יצחק יקנעם</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>יחדיו</DrivingSchoolName>
+    <TeacherName>דניאל</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>012324224</ID>
+    <FirstName>מושיקו</FirstName>
+    <LastName>הלוי</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>רבבה</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>הסולל</DrivingSchoolName>
+    <TeacherName>מיכאלה</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>182121533</ID>
+    <FirstName>משה</FirstName>
+    <LastName>מוגרבי</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>חצור הגלילית</Address>
+    <Vehicle>דו_גלגלי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>הדרכים</DrivingSchoolName>
+    <TeacherName>שמוליק</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>012800223</ID>
+    <FirstName>דוד</FirstName>
+    <LastName>כהן</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>שלומי</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>סוללים לך עתיד</DrivingSchoolName>
+    <TeacherName>שמשון</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>123912024</ID>
+    <FirstName>חיים</FirstName>
+    <LastName>מויאל</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>יקנעם</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>רמזור</DrivingSchoolName>
+    <TeacherName>דנה</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>012810222</ID>
+    <FirstName>יענקי</FirstName>
+    <LastName>מולכו</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>חיפה</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>שבתאי</DrivingSchoolName>
+    <TeacherName>רחל</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>126398221</ID>
+    <FirstName>לאה</FirstName>
+    <LastName>מונטיפיורי</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>נקבה</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>המסגר 32 רעננה</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>ידני</GearBoxType>
+    <DrivingSchoolName>עוז</DrivingSchoolName>
+    <TeacherName>תרצה</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>123923229</ID>
+    <FirstName>תרצה</FirstName>
+    <LastName>אטיאס</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>נקבה</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>רבי לוי יצחק יקנעם</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>יחדיו</DrivingSchoolName>
+    <TeacherName>דניאל</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>012322921</ID>
+    <FirstName>מושי</FirstName>
+    <LastName>לוי</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>מבוא חורון</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>הסולל</DrivingSchoolName>
+    <TeacherName>מיכאלה</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>155121536</ID>
+    <FirstName>משה</FirstName>
+    <LastName>מועלם</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>מעלה אדומים</Address>
+    <Vehicle>דו_גלגלי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>הדרכים</DrivingSchoolName>
+    <TeacherName>שמוליק</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>131300121</ID>
+    <FirstName>דוד</FirstName>
+    <LastName>אילוז</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>כוכב השחר</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>סוללים לך עתיד</DrivingSchoolName>
+    <TeacherName>שמשון</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>173245457</ID>
+    <FirstName>חיים</FirstName>
+    <LastName>אינגדשט</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>פתח תקוה</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>רמזור</DrivingSchoolName>
+    <TeacherName>דנה</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>183264217</ID>
+    <FirstName>יענקי</FirstName>
+    <LastName>אינטרטור</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>רמת גן</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>ידני</GearBoxType>
+    <DrivingSchoolName>שבתאי</DrivingSchoolName>
+    <TeacherName>רחל</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>196122022</ID>
+    <FirstName>נחמה</FirstName>
+    <LastName>איציק</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>נקבה</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>דימונה</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>עוז</DrivingSchoolName>
+    <TeacherName>תרצה</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>166271478</ID>
+    <FirstName>קרן</FirstName>
+    <LastName>אלבו</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>נקבה</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>נתניה</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>ידני</GearBoxType>
+    <DrivingSchoolName>יחדיו</DrivingSchoolName>
+    <TeacherName>דניאל</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>191207000</ID>
+    <FirstName>מושיקו</FirstName>
+    <LastName>אלאלוף</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>תל אביב</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>הסולל</DrivingSchoolName>
+    <TeacherName>מיכאלה</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>122721533</ID>
+    <FirstName>משה</FirstName>
+    <LastName>חיון</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>ירושלים</Address>
+    <Vehicle>דו_גלגלי</Vehicle>
+    <GearBoxType>ידני</GearBoxType>
+    <DrivingSchoolName>הדרכים</DrivingSchoolName>
+    <TeacherName>שמוליק</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>123848426</ID>
+    <FirstName>דוד</FirstName>
+    <LastName>חיטובסקי</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>עכו</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>סוללים לך עתיד</DrivingSchoolName>
+    <TeacherName>שמשון</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>123245425</ID>
+    <FirstName>חיים</FirstName>
+    <LastName>חכים</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>כפר יונה</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>רמזור</DrivingSchoolName>
+    <TeacherName>דנה</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>145215224</ID>
+    <FirstName>יענקי</FirstName>
+    <LastName>חכמוביץ</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>זכר</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>גבעת אולגה</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>שבתאי</DrivingSchoolName>
+    <TeacherName>רחל</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>126321520</ID>
+    <FirstName>דנה</FirstName>
+    <LastName>חמו</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>נקבה</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>קריית עקרון</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>ידני</GearBoxType>
+    <DrivingSchoolName>עוז</DrivingSchoolName>
+    <TeacherName>תרצה</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>012327052</ID>
+    <FirstName>רחל</FirstName>
+    <LastName>חצרוני'</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>נקבה</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>קריית גת</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>יחדיו</DrivingSchoolName>
+    <TeacherName>דניאל</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+  <Trainee>
+    <ID>123206443</ID>
+    <FirstName>דנה</FirstName>
+    <LastName>שמשוני</LastName>
+    <BirthDate>05/09/2001 00:00:00</BirthDate>
+    <Gender>נקבה</Gender>
+    <PhoneNumber>0527560201</PhoneNumber>
+    <MailAddress>avraham224@gmail.com</MailAddress>
+    <Address>רבבה</Address>
+    <Vehicle>פרטי</Vehicle>
+    <GearBoxType>אוטומטי</GearBoxType>
+    <DrivingSchoolName>הסולל</DrivingSchoolName>
+    <TeacherName>מיכאלה</TeacherName>
+    <NumOfDrivingLessons>38</NumOfDrivingLessons>
+    <OnlyMyGender>False</OnlyMyGender>
+  </Trainee>
+</trainees>
