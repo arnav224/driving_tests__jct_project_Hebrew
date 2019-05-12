@@ -104,7 +104,9 @@
     <TraineeID>012324224</TraineeID>
     <Time>2019-01-28T12:47:05</Time>
     <Address>קדומים</Address>
-    <Passed xsi:nil="true" />
+    <Passed>true</Passed>
+    <TesterNotes />
+    <IndicesToString>בטיחות,עבר;שליטה בהגה,רע;שליטה בהילוכים,עבר;הסתכלות במראות,רע;מתן זכות קדימה,עבר;מהירות,רע;איתות,עבר;האצה והאטה בבטחה,עבר;ציות לתמרורים,עבר;שמירה רווח,עבר;בטיחות הולכי רגל,עבר;עקיפות,עבר;חנייה,רע_מאוד;פניות,עבר;השתלבות בתנועה,עבר;אביזרי בטיחות,עבר;נסיעה לאחור,רע_מאוד;שמירה על הימין,עבר</IndicesToString>
     <RemeinderEmailSent xsi:nil="true" />
   </Test>
   <Test>
@@ -123,6 +125,6 @@
     <Time>2019-06-22T12:53:56</Time>
     <Address>זיתן, ישראל</Address>
     <Passed xsi:nil="true" />
-    <RemeinderEmailSent xsi:nil="true" />
+    <RemeinderEmailSent>2019-05-12T10:43:10.9968201+03:00</RemeinderEmailSent>
   </Test>
 </ArrayOfTest>
